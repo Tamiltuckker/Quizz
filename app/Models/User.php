@@ -42,4 +42,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // relation
+
+    public function image()
+    {
+        return $this->morphOne(Attachment::class, 'attachmentable');
+    }
 }

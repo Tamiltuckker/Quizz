@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attachment;
 use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -44,8 +45,16 @@ class RegisteredUserController extends Controller
         $user->name            = $request->get('name');
         $user->email           = $request->get('email');
         $user->password        = Hash::make($request->get('password'));
-
         $user->save();
+        $id        = $user->id;
+
+        $attachment  = User::find($id);
+        $file        = new Attachment();
+        $imageName   = time().'.'.$request->image->getClientOriginalExtension();  
+        $imagestore  = $request->file('image')->storeAs('public/image', $imageName);
+        $file->image = $imageName;
+        $attachment->image()->save($file);
+
         $user->roles()->detach($user->roles);
         $user->assignRole(Role::USER);
 
