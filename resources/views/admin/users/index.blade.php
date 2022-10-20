@@ -42,21 +42,29 @@
                                             </div>
                                         </div>
                                     </td>
+                                  
                                     <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm bg-gradient-success">Online</span>
+                                        @if($user->active == \App\Models\User::ACTIVE)
+                                            <span class="badge badge-sm bg-gradient-success">Active</span>
+                                        @else
+                                            <span class="badge badge-sm bg-gradient-danger">InActive</span>
+                                        @endif
                                     </td>
+                                 
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-xs font-weight-bold"> {{ date('d-m-Y', strtotime($user->created_at)) }} </span>
                                     </td>
+
                                     <td class="align-middle">
-                                        <a href="javascript:;" class="btn bg-gradient-info font-weight-bold text-xs"
+                                        <a href="" class="btn bg-gradient-info font-weight-bold text-xs"
                                             data-toggle="tooltip" data-original-title="Edit user">
                                             Edit
                                         </a> &nbsp&nbsp
-                                        <a href="javascript:;" class="btn bg-gradient-danger font-weight-bold text-xs"
-                                        data-toggle="tooltip" data-original-title="Delete user">
-                                        Delete
-                                    </a>
+                                        <form method="POST" action="{{ route('users.destroy', $user->id) }}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <button type="submit" class="btn btn-xs btn-danger btn-flat show-alert-delete-box btn-sm" data-toggle="tooltip" title='Delete'>Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -67,4 +75,36 @@
             </div>
         </div>
     </div>
+    
+@push('css')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/5.0.7/sweetalert2.min.css" rel="stylesheet">
+@endpush
+
+@push('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+    $('.show-alert-delete-box').click(function(event){
+    var form =  $(this).closest("form");
+    var name = $(this).data("name");
+    event.preventDefault();
+    swal({
+        title: "Are you sure you want to delete this record?",
+        text: "If you delete this, it will be gone forever.",
+        icon: "warning",
+        type: "warning",
+        buttons: ["Cancel","Yes!"],
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((willDelete) => {
+        if (willDelete) {
+            form.submit();
+        }
+    });
+});
+</script>
+@endpush
+
 @endsection

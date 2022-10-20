@@ -13,6 +13,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
+    const ACTIVE    = '1';
+    const INACTIVE  = '0';
+
+    public static $status = [
+        Self::ACTIVE   => 'Active',
+        Self::INACTIVE => 'Inactive'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,6 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'active',
     ];
 
     /**
