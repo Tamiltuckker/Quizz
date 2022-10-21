@@ -55,15 +55,15 @@
                                         <span class="text-secondary text-xs font-weight-bold"> {{ date('d-m-Y', strtotime($user->created_at)) }} </span>
                                     </td>
 
-                                    <td class="align-middle">
-                                        <a href="" class="btn bg-gradient-info font-weight-bold text-xs"
+                                    <td class="align-middle text-center text-sm">
+                                        <form method="POST" action="{{ route('users.destroy', $user->id) }}">
+                                        <a href="{{ route('users.edit', $user->id) }}" class="btn bg-gradient-info font-weight-bold text-xs"
                                             data-toggle="tooltip" data-original-title="Edit user">
                                             Edit
-                                        </a> &nbsp&nbsp
-                                        <form method="POST" action="{{ route('users.destroy', $user->id) }}">
+                                        </a> 
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
-                                            <button type="submit" class="btn btn-xs btn-danger btn-flat show-alert-delete-box btn-sm" data-toggle="tooltip" title='Delete'>Delete</button>
+                                            <button type="submit" class="btn bg-gradient-danger font-weight-bold text-xs show-alert-delete-box" data-toggle="tooltip" title='Delete'>Delete</button>
                                         </form>
                                     </td>
                                 </tr>

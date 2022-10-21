@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -60,7 +63,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('admin.users.edit',compact('user'));
     }
 
     /**
@@ -72,7 +77,32 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'password' => 'same:confirm-password',
+        ]);
+        
+        $user = User::find($id);
+
+        $input = $request->all();
+
+        if(!empty($input['password'])){ 
+            $input['password'] = Hash::make($input['password']);
+        }else{
+            $input = Arr::except($input,array('password'));    
+        }
+
+        if ($request->active == 'on') {
+            $input['active'] = User::ACTIVE;
+        } else {
+            $input['active'] = User::INACTIVE;
+        }
+        
+        $user->update($input);
+    
+        return redirect()->route('users.index')->with('success','User updated successfully');
+
     }
 
     /**
