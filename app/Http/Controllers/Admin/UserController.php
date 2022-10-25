@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attachment;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -101,8 +102,17 @@ class UserController extends Controller
         
         $user->update($input);
     
-        return redirect()->route('users.index')->with('success','User updated successfully');
+        if ($uplaodImage = $input['image']) {
+            Attachment::where('attachmentable_id', $user->id)->delete();
+            $file        = new Attachment();
+            $imageName   = time().'.'.$request->image->getClientOriginalExtension();  
+            $imagestore  = $uplaodImage->storeAs('public/image', $imageName);
+            $file->image = $imageName;
+            $user->image()->save($file);
+       
+        }
 
+        return redirect()->route('users.index')->with('success','User updated successfully');
     }
 
     /**
