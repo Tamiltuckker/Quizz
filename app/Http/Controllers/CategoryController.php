@@ -29,6 +29,7 @@ class CategoryController extends Controller
     { 
         $category = new Category();
         $status = Category::$status;
+
         return view('admin.categories.create',compact('status'));
     }
 
@@ -47,13 +48,13 @@ class CategoryController extends Controller
     
         $category = new Category();
         $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
-
+        $category->slug = $request->name; 
+       
         if ($request->active == 'on') {
-            $category->active = 1;
+            $category->active = Category::ACTIVE;
         } else {
-            $category->active = 0;
-        }    
+            $category->active = Category::INACTIVE;
+        }   
 
         $category->save();
 
@@ -61,19 +62,18 @@ class CategoryController extends Controller
         ->with('success', 'Category created successfully');         
     }   
 
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
-     */     
+     */  
+   
+    public function edit($id)
+    { 
+    $category=Category::find($id);
 
-    public function edit(Category $category)
-    {        
-        $categories=  Category::pluck('name', 'id');
-
-        return view('admin.categories.edit', compact('category'));
+    return view('admin.categories.edit',compact('category'));
     }
 
     /**
@@ -83,19 +83,21 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Category $category)
+    public function update(Request $request,$id)
      {            
         $request->validate([
             'name' => 'required',          
         ]); 
-
-        $category->name = $request->name;
-        $category->slug = Str::slug($request->name);   
+        $category=Category::find($id);
+        
+        $category->name=$request->name;     
+       
+        $category->slug = $request->name;          
 
         if ($request->active == 'on') {
-            $category->active = 1;
+            $category->active = Category::ACTIVE;
         } else {
-            $category->active = 0;
+            $category->active = Category::INACTIVE;
         } 
 
         $category->save();
@@ -110,8 +112,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        $category = Category::findOrFail($id);
+        
         $category->delete();
 
         return redirect()->route('categories.index')

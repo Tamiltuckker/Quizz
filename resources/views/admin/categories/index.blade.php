@@ -46,7 +46,7 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                @if ($category->active == 1)
+                                                @if ($category->active ==  \App\Models\Category::ACTIVE)
                                                     <span class="badge badge-sm bg-gradient-success">active </span>
                                                 @else
                                                     <span class="badge badge-sm bg-gradient-danger">inactive</span>

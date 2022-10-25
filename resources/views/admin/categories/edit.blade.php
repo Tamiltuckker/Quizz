@@ -30,13 +30,13 @@
                                         <input class="form-control" name="name" type="text"
                                             value="{{ old('name', $category->name) }}">
                                     </div>
-                                </div><br>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Status</label>
                                         <div class="form-check form-switch ">
                                             <input type="hidden" value="{{ $category->id }}" name="categoryid">
-                                            @if ($category->active == 1)
+                                            @if ($category->active ==  \App\Models\Category::ACTIVE)
                                                 <input class="form-check-input" type="checkbox" name="active"
                                                     id="flexSwitchCheckDefault" checked data-toggle="toggle" data-on="1"
                                                     data-off="0">
