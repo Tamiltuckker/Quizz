@@ -108,11 +108,10 @@ class UserController extends Controller
             $imageName   = time().'.'.$request->image->getClientOriginalExtension();  
             $imagestore  = $uplaodImage->storeAs('public/image', $imageName);
             $file->image = $imageName;
-            $user->image()->save($file);
-       
+            $user->image()->save($file);       
         }
 
-        return redirect()->route('users.index')->with('success','User updated successfully');
+        return redirect()->route('users.index')->with('info','User updated successfully');
     }
 
     /**
@@ -123,8 +122,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-    
-        return back();
+        User::find($id)->delete();    
+        
+        return redirect()->route('users.index')
+            ->with('warning', 'Users deleted successfully');
     }
 }
