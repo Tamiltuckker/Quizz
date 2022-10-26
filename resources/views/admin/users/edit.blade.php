@@ -8,15 +8,9 @@
                 {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id],'files' => true ]) !!}
                     <div class="card">
                         <div class="card-header pb-0">
-                            @if (count($errors) > 0)
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li class="text-white" role="alert">{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+                            @include('flash-message')      
+                            @yield('content')    
+                                                       
                             <div class="d-flex align-items-center">
                                 <p class="mb-0">Edit Profile</p>
                                 <button action="{{ route('users.index') }}" class="btn btn-primary btn-sm ms-auto">Back</button>
@@ -70,16 +64,11 @@
                                                 id="flexSwitchCheckDefault" checked="">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
+                                </div>                               
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-sm btn-info mb-0 d-none d-lg-block">Save</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <a href="{{ route('users.index') }}"
-                                            class="btn btn-sm btn-danger float-right mb-0 d-none d-lg-block">Cancel</a>
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                        <button type="submit" class="btn btn-danger">Cancel</button>
                                     </div>
                                 </div>
                             </div>

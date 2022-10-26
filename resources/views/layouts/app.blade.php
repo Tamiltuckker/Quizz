@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
@@ -15,10 +16,12 @@
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
     @stack('css')
+    <!-- Flash-message Styles -->     
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>        
     <!-- Side bar -->
     @include('admin.partials.sidebar')
     <main class="main-content position-relative border-radius-lg ">
@@ -41,7 +44,9 @@
     @include('admin.partials.themeScript')
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
-    @stack('js')
+    @stack('js')   
+    <!-- Script for flash-message -->
+    <script src="/js/app.js"></script>
 </body>
 
 </html>
