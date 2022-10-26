@@ -47,11 +47,11 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-success">Save</button>
-                                            <button type="submit" class="btn btn-danger">Cancel</button>
-                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                        <button type="submit" class="btn btn-danger">Cancel</button>
                                     </div>
                                 </div>
                             </form>
