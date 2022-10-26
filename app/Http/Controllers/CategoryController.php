@@ -88,10 +88,8 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',          
         ]); 
-        $category=Category::find($id);
-        
-        $category->name=$request->name;     
-       
+        $category=Category::find($id);        
+        $category->name=$request->name;       
         $category->slug = $request->name;          
 
         if ($request->active == 'on') {
