@@ -25,7 +25,10 @@
         <!-- Navbar -->
         @include('admin.partials.header')
         <main>
-            @yield('content')
+            <div class="container-fluid py-4">
+                @yield('content')
+                @include('admin.partials.footer')
+            </div>
         </main>
     </main>
     @include('admin.partials.plugins')
