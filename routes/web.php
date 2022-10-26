@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\TopicController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -27,3 +28,4 @@ require __DIR__.'/auth.php';
 
 Route::resource('categories', CategoryController::class);
 Route::resource('users', UserController::class);
+Route::resource('topics', TopicController::class);

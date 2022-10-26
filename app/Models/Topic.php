@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
+use Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
 
-class Category extends Model
+class Topic extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name', 'slug', 'active'];
+
+    protected $fillable = ['category_id', 'name', 'slug', 'active'];
     
     const ACTIVE    = '1';
     const INACTIVE  = '0';
@@ -20,9 +20,15 @@ class Category extends Model
         Self::ACTIVE   =>'Active',
         Self::INACTIVE => 'Inactive'
     ];
-    
-    // Accessors and Mutators
 
+    // Accessors and Mutators 
+    
+    protected function Slug(): Attribute
+    {
+        return Attribute::make(           
+            set: fn ($value) => Str::slug($value),
+        );
+    }
     protected function Name(): Attribute
     {
         return Attribute::make(
@@ -30,18 +36,11 @@ class Category extends Model
             set: fn ($value) => strtolower($value),
         );
     }
-    protected function Slug(): Attribute
-    {
-        return Attribute::make(           
-            set: fn ($value) => Str::slug($value),
-        );
-    }
-
-    // Relationship start
     
-    public function topic()
-    {
-        return $this->belongsTo(Topic::class);
-    }
+    // Relationship start
 
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }
