@@ -25,6 +25,19 @@
                         <div class="card-body">
                             <p class="text-uppercase text-sm">Topic Information</p>
                             <div class="row">
+                                <div class="col-md-12 shadow">
+                                    <div class="form-group">
+                                        @if ($topic->image != null)
+                                            <img src="{{ asset('/storage/image/' . $topic->image->image) }}" class="rounded-circle img-fluid border border-2 border-red" style="width: 100px; height:100px;"> 
+                                        @elseif ($topic->image == null)
+                                            <img src="{{ asset('assets/img/team-2.jpg') }}" class="rounded-circle img-fluid border border-2 border-red"  style="width: 100px; height:100px;">
+                                        @endif
+                                        <span class="file-input btn-file edit-img-btn">
+                                            <i class="ni ni-camera-compact"></i> 
+                                        </span>
+                                    </div> 
+                                    <input type="file" name="image"  class="form-control form-group" accept="image/*">       
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="inputAddress">Categories *</label>

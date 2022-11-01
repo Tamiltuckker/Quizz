@@ -14,7 +14,7 @@
                         @endif  
                     @endif 
                     <div class="float-right">
-                        <a class="btn bg-gradient-success" href="{{ route('categories.create') }}">Create</a>
+                        <a class="btn bg-gradient-info font-weight-bold text-xs" href="{{ route('categories.create') }}">Create</a>
                     </div>
                     <h6>Categories table</h6>
                 </div>
@@ -49,16 +49,18 @@
                                             @else
                                                 <span class="badge badge-sm bg-gradient-danger">inactive</span>
                                             @endif
-                                        </td>
+                                        </td>                                    
+
                                         <td class="align-middle text-center text-sm">
-                                            {!! Form::open(['route' => ['categories.destroy', $category->id], 'method' => 'POST']) !!}
-                                                <div>
-                                                    <a class="btn btn-primary" href="{{ route('categories.edit', $category->id) }}">Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger show_confirm">Delete</button>
-                                                </div>
-                                            {!! Form::close() !!}
+                                            <form method="POST" action="{{ route('categories.destroy', $category->id) }}">
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="btn bg-gradient-info font-weight-bold text-xs"
+                                                data-toggle="tooltip" data-original-title="Edit category">
+                                                Edit
+                                            </a> 
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button type="submit" class="btn bg-gradient-danger font-weight-bold text-xs show-alert-delete-box" data-toggle="tooltip" title='Delete'>Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
