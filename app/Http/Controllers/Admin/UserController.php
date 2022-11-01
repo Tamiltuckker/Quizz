@@ -20,8 +20,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        
-        return view('admin.users.index',compact('users'));
+
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -66,7 +66,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        return view('admin.users.edit',compact('user'));
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -80,18 +80,18 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
+            'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
         ]);
-        
+
         $user = User::find($id);
 
         $input = $request->all();
 
-        if(!empty($input['password'])){ 
+        if (!empty($input['password'])) {
             $input['password'] = Hash::make($input['password']);
-        }else{
-            $input = Arr::except($input,array('password'));    
+        } else {
+            $input = Arr::except($input, array('password'));
         }
 
         if ($request->active == 'on') {
@@ -99,19 +99,22 @@ class UserController extends Controller
         } else {
             $input['active'] = User::INACTIVE;
         }
-        
+
         $user->update($input);
-    
-        if ($uplaodImage = $input['image']) {
+
+
+        if ($uplaodImage = $request->file('image')) {
             Attachment::where('attachmentable_id', $user->id)->delete();
             $file        = new Attachment();
-            $imageName   = time().'.'.$request->image->getClientOriginalExtension();  
+            $imageName   = time() . '.' . $request->image->getClientOriginalExtension();
             $imagestore  = $uplaodImage->storeAs('public/image', $imageName);
             $file->image = $imageName;
-            $user->image()->save($file);       
+            $user->image()->save($file);
+        } else {
+            unset($input['image']);
         }
 
-        return redirect()->route('users.index')->with('info','User updated successfully');
+        return redirect()->route('users.index')->with('info', 'User updated successfully');
     }
 
     /**
@@ -122,8 +125,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();    
-        
+        User::find($id)->delete();
+
         return redirect()->route('users.index')
             ->with('danger', 'Users deleted successfully');
     }

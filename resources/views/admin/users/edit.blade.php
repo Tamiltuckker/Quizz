@@ -9,8 +9,8 @@
                     <div class="card">
                         <div class="card-header pb-0">
                             @include('flash-message')      
-                            @yield('content')    
-                                                       
+                            @yield('content')  
+                                                     
                             <div class="d-flex align-items-center">
                                 <p class="mb-0">Edit Profile</p>
                                 <button action="{{ route('users.index') }}" class="btn btn-primary btn-sm ms-auto">Back</button>
@@ -67,8 +67,8 @@
                                 </div>                               
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success">Save</button>
-                                        <button type="submit" class="btn btn-danger">Cancel</button>
+                                        <button type="submit" class="btn bg-gradient-success font-weight-bold text-xs">Save</button>
+                                        <button type="submit" class="btn bg-gradient-danger font-weight-bold text-xs">Cancel</button>
                                     </div>
                                 </div>
                             </div>
