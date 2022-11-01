@@ -14,7 +14,7 @@
                     <div class="card-body"> 
                         <p class="text-uppercase text-sm">Topic Information</p>
                         <div class="row">
-                            <form method="POST" name="topics" action="{{ route('topics.store') }}">
+                            <form method="POST" name="topics" enctype="multipart/form-data" action="{{ route('topics.store') }}">
                                 @csrf
                                 <div class="col-md-6">
                                     <div class="form-group">

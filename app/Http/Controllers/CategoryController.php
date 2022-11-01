@@ -1,9 +1,18 @@
 <?php
 
+namespace App\Http\Controllers\Auth;
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Attachment;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
+
 
 class CategoryController extends Controller
 {
@@ -57,7 +66,17 @@ class CategoryController extends Controller
         }   
 
         $category->save();
+        $id        = $category->id;
 
+        $attachment  = Category::find($id);
+        // dd($attachment);
+        $file        = new Attachment();
+        $imageName   = time().'.'.$request->image->getClientOriginalExtension();  
+        $imagestore  = $request->file('image')->storeAs('public/image', $imageName);
+        $file->image = $imageName;
+        $attachment->image()->save($file);
+
+       
         return redirect()->route('categories.index')
         ->with('success', 'Category created successfully');         
     }   

@@ -15,6 +15,8 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Topic Image</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">topic
                                     </th>
                                     <th
@@ -28,19 +30,22 @@
                                 @foreach($topics as $topic)
                                 <tr>
                                     <td>
+                                        <div>
+                                            @if($topic->image != NULL)
+                                                <img src="{{asset('/storage/image/'.$topic->image->image)}}" class="avatar avatar-sm me-3" alt="topic1">
+                                            @elseif ($topic->image == NULL)
+                                                <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
+                                                alt="topic1">
+                                            @endif   
+                                        </div>
+                                    </td>
+                                    <td>
                                         <div class="d-flex px-2 py-1">
-                                            <div>
-                                                @if($topic->image != NULL)
-                                                    <img src="{{asset('/storage/image/'.$topic->image->image)}}" class="avatar avatar-sm me-3" alt="topic1">
-                                                @elseif ($topic->image == NULL)
-                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
-                                                    alt="topic1">
-                                                @endif   
-                                            </div>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm"> {{ $topic->name }} </h6>
+                                            <h6 class="mb-0 text-sm"> {{ $topic->name }} </h6>
                                             </div>
                                         </div>
+                                        
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         @if($topic->active == \App\Models\Topic::ACTIVE)

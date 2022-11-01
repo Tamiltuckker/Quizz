@@ -1,11 +1,18 @@
 <?php
 
+namespace App\Http\Controllers\Auth;
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Topic;
 use Illuminate\Http\Request;
+use App\Models\Attachment;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class TopicController extends Controller
 {
@@ -57,6 +64,15 @@ class TopicController extends Controller
             $topic->active = Topic::INACTIVE;
         }   
         $topic->save();
+        $id        = $topic->id;
+
+        $attachment  = Topic::find($id);
+        // dd($attachment);
+        $file        = new Attachment();
+        $imageName   = time().'.'.$request->image->getClientOriginalExtension();  
+        $imagestore  = $request->file('image')->storeAs('public/image', $imageName);
+        $file->image = $imageName;
+        $attachment->image()->save($file);
 
         return redirect()->route('topics.index')
         ->with('success', 'topic created successfully');  

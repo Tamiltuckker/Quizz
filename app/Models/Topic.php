@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
-use Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
-class Topic extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+
+class Topic extends Authenticatable
+
 {
     use HasFactory;
 
@@ -43,4 +49,10 @@ class Topic extends Model
     {
         return $this->hasMany(Category::class);
     }
+     // relation
+
+     public function image()
+     {
+         return $this->morphOne(Attachment::class, 'attachmentable');
+     }
 }

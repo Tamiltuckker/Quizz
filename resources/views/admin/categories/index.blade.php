@@ -24,6 +24,8 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Category Image</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Category</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -35,7 +37,17 @@
                             </thead>
                             <tbody>
                                 @foreach($categories as $category)
-                                    <tr>
+                                    <tr>  
+                                        <td>
+                                            <div>
+                                                @if($category->image != NULL)
+                                                    <img src="{{asset('/storage/image/'.$category->image->image)}}" class="avatar avatar-sm me-3" alt="category1">
+                                                @elseif ($category->image == NULL)
+                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
+                                                    alt="category1">
+                                                @endif   
+                                            </div>
+                                        </td>
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">

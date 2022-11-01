@@ -19,8 +19,15 @@
                     <div class="card-body">
                         <p class="text-uppercase text-sm">Category Information</p>
                         <div class="row">
-                            <form method="POST" name="categories" action="{{ route('categories.store') }}">
+                            <form method="POST" name="categories" enctype="multipart/form-data" action="{{ route('categories.store') }}">
                                 @csrf
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Category
+                                            image</label>                                       
+                                        <input type="file" name="image"  class="form-control form-group" accept="image/*">  
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Category
@@ -40,8 +47,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success">Save</button>
-                                        <button type="submit" class="btn btn-danger">Cancel</button>
+                                        <button type="submit" class="btn bg-gradient-success font-weight-bold text-xs">Save</button>
+                                        <button type="submit" class="btn bg-gradient-danger font-weight-bold text-xs">Cancel</button>
                                     </div>
                                 </div>
                             </form>
