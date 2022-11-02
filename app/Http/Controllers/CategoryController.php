@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
@@ -21,9 +22,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,Category $category)
-    {        
-        $categories = Category::latest()->paginate(5);        
+    public function index(Request $request, Category $category)
+    {
+        $categories = Category::latest()->paginate(5);
 
         return view('admin.categories.index', compact('categories'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -35,11 +36,11 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
+    {
         $category = new Category();
         $status = Category::$status;
 
-        return view('admin.categories.create',compact('status'));
+        return view('admin.categories.create', compact('status'));
     }
 
     /**
@@ -48,22 +49,22 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-  
+
     public function store(Request $request)
-     {       
+    {
         $request->validate([
-            'name' => 'required',                    
-        ]);  
-    
+            'name' => 'required',
+        ]);
+
         $category = new Category();
         $category->name = $request->name;
-        $category->slug = $request->name; 
-       
+        $category->slug = $request->name;
+
         if ($request->active == 'on') {
             $category->active = Category::ACTIVE;
         } else {
             $category->active = Category::INACTIVE;
-        }   
+        }
 
         $category->save();
         $id        = $category->id;
@@ -71,28 +72,27 @@ class CategoryController extends Controller
         $attachment  = Category::find($id);
         // dd($attachment);
         $file        = new Attachment();
-        $imageName   = time().'.'.$request->image->getClientOriginalExtension();  
+        $imageName   = time() . '.' . $request->image->getClientOriginalExtension();
         $imagestore  = $request->file('image')->storeAs('public/image', $imageName);
         $file->image = $imageName;
         $attachment->image()->save($file);
 
-       
         return redirect()->route('categories.index')
-        ->with('success', 'Category created successfully');         
-    }   
+            ->with('success', 'Category created successfully');
+    }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
-     */  
-   
-    public function edit($id)
-    { 
-    $category=Category::find($id);
+     */
 
-    return view('admin.categories.edit',compact('category'));
+    public function edit($id)
+    {
+        $category = Category::find($id);
+
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -102,22 +102,35 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
-     {            
-        $request->validate([
-            'name' => 'required',          
-        ]); 
-        $category=Category::find($id);        
-        $category->name=$request->name;       
-        $category->slug = $request->name;          
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $category = Category::find($id);
+
+        $input = $request->all();
+        // dd($input);  
 
         if ($request->active == 'on') {
-            $category->active = Category::ACTIVE;
+            $input['active'] = Category::ACTIVE;
         } else {
-            $category->active = Category::INACTIVE;
-        } 
+            $input['active'] = Category::INACTIVE;
+        }
 
-        $category->save();
+        $category->update($input);
+
+        if ($uplaodImage = $request->file('image')) {
+            Attachment::where('attachmentable_id', $category->id)->delete();
+            $file        = new Attachment();
+            $imageName   = time() . '.' . $request->image->getClientOriginalExtension();
+            $imagestore  = $uplaodImage->storeAs('public/image', $imageName);
+            $file->image = $imageName;
+            $category->image()->save($file);
+        } else {
+            unset($input['image']);
+        }
 
         return redirect()->route('categories.index')
             ->with('success', 'Category updated successfully');
@@ -132,10 +145,10 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
-        
+
         $category->delete();
 
         return redirect()->route('categories.index')
             ->with('success', 'Category deleted successfully');
-    } 
+    }
 }

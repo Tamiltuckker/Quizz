@@ -7,11 +7,8 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header pb-0">
-                        @if ($errors->any())
-                            @foreach ($errors->all() as $error)
-                                <p class="alert alert-danger text-white" role="alert">{{ $error }}</p>
-                            @endforeach
-                        @endif
+                        @include('flash-message')      
+                        @yield('content')  
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Edit Category</p>
                             <a class="btn btn-primary btn-sm ms-auto" href="{{ route('categories.index') }}">Back</a>
@@ -20,9 +17,22 @@
                     <div class="card-body">
                         <p class="text-uppercase text-sm">Edit-Category Information</p>
                         <div class="row">
-                            <form method="POST" name="categories" action="{{ route('categories.update', $category->id) }}">
+                            <form method="POST" name="categories" enctype="multipart/form-data" action="{{ route('categories.update', $category->id) }}">
                                 @csrf
                                 @method('PUT')
+                                <div class="col-md-12 shadow">
+                                    <div class="form-group">
+                                        @if ($category->image != null)
+                                            <img src="{{ asset('/storage/image/' . $category->image->image) }}" class="rounded-circle img-fluid border border-2 border-red" style="width: 100px; height:100px;"> 
+                                        @elseif ($category->image == null)
+                                            <img src="{{ asset('assets/img/team-2.jpg') }}" class="rounded-circle img-fluid border border-2 border-red"  style="width: 100px; height:100px;">
+                                        @endif
+                                        <span class="file-input btn-file edit-img-btn">
+                                            <i class="ni ni-camera-compact"></i> 
+                                        </span>
+                                    </div> 
+                                    <input type="file" name="image"  class="form-control form-group" accept="image/*">       
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Category
@@ -50,8 +60,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success">Save</button>
-                                        <button type="submit" class="btn btn-danger">Cancel</button>
+                                        <button type="submit" class="btn bg-gradient-success font-weight-bold text-xs">Save</button>
+                                        <button type="submit" class="btn bg-gradient-danger font-weight-bold text-xs">Cancel</button>
                                     </div>
                                 </div>
                             </form>

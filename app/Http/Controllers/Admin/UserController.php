@@ -85,7 +85,6 @@ class UserController extends Controller
         ]);
 
         $user = User::find($id);
-
         $input = $request->all();
 
         if (!empty($input['password'])) {
@@ -101,7 +100,6 @@ class UserController extends Controller
         }
 
         $user->update($input);
-
 
         if ($uplaodImage = $request->file('image')) {
             Attachment::where('attachmentable_id', $user->id)->delete();

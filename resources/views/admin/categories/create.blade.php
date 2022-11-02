@@ -6,11 +6,8 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header pb-0">
-                        @if ($errors->any())
-                            @foreach ($errors->all() as $error)
-                                <p class="alert alert-danger text-white" role="alert">{{ $error }}</p>
-                            @endforeach
-                        @endif
+                        @include('flash-message')      
+                        @yield('content')  
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Create Category</p>
                             <a class="btn btn-primary btn-sm ms-auto" href="{{ route('categories.index') }}">Back</a>

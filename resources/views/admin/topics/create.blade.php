@@ -6,32 +6,36 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header pb-0">
+                        @include('flash-message')
+                        @yield('content')
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Create Topic</p>
                             <a class="btn btn-primary btn-sm ms-auto" href="{{ route('topics.index') }}">Back</a>
                         </div>
                     </div>
-                    <div class="card-body"> 
+                    <div class="card-body">
                         <p class="text-uppercase text-sm">Topic Information</p>
                         <div class="row">
-                            <form method="POST" name="topics" enctype="multipart/form-data" action="{{ route('topics.store') }}">
+                            <form method="POST" name="topics" enctype="multipart/form-data"
+                                action="{{ route('topics.store') }}">
                                 @csrf
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Topic 
-                                            image</label>                                       
-                                        <input type="file" name="image"  class="form-control form-group" accept="image/*">  
+                                        <label for="example-text-input" class="form-control-label">Topic
+                                            image</label>
+                                        <input type="file" name="image" class="form-control form-group"
+                                            accept="image/*">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="inputAddress">Categories *</label>
-                                        {{ Form::select('category_id', @$categories, NULL, ['class' => 'form-control form-control-solid form-select mb-2', 'placeholder' => 'Select Category']) }}
+                                        {{ Form::select('category_id', @$categories, null, ['class' => 'form-control form-control-solid form-select mb-2', 'placeholder' => 'Select Category']) }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Topi Name</label>
+                                        <label for="example-text-input" class="form-control-label">Topic Name</label>
                                         <input class="form-control" name="name" type="text" placeholder="name">
                                     </div>
                                 </div>
@@ -47,8 +51,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <button type="submit" class="btn bg-gradient-success font-weight-bold text-xs">Save</button>
-                                        <button type="submit" class="btn bg-gradient-danger font-weight-bold text-xs">Cancel</button>
+                                        <button type="submit"
+                                            class="btn bg-gradient-success font-weight-bold text-xs">Save</button>
+                                        <button type="submit"
+                                            class="btn bg-gradient-danger font-weight-bold text-xs">Cancel</button>
                                     </div>
                                 </div>
                             </form>

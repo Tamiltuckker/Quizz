@@ -1,80 +1,85 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
-                {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id],'files' => true ]) !!}
-                    <div class="card">
-                        <div class="card-header pb-0">
-                            @include('flash-message')      
-                            @yield('content')  
-                                                     
-                            <div class="d-flex align-items-center">
-                                <p class="mb-0">Edit Profile</p>
-                                <button action="{{ route('users.index') }}" class="btn btn-primary btn-sm ms-auto">Back</button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p class="text-uppercase text-sm">User Information</p>
-                            <div class="row">
-                                <div class="col-md-12 shadow">
-                                    <div class="form-group">
-                                        @if ($user->image != null)
-                                            <img src="{{ asset('/storage/image/' . $user->image->image) }}" class="rounded-circle img-fluid border border-2 border-red" style="width: 100px; height:100px;"> 
-                                        @elseif ($user->image == null)
-                                            <img src="{{ asset('assets/img/team-2.jpg') }}" class="rounded-circle img-fluid border border-2 border-red"  style="width: 100px; height:100px;">
-                                        @endif
-                                        <span class="file-input btn-file edit-img-btn">
-                                            <i class="ni ni-camera-compact"></i> 
-                                        </span>
-                                    </div> 
-                                    <input type="file" name="image"  class="form-control form-group" accept="image/*">       
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Name</label>
-                                        {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-12 ">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Email address</label>
-                                        {!! Form::text('email', old('email'), ['placeholder' => 'Email', 'class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-12 ">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Password</label>
-                                        {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-12 ">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Confirm Password</label>
-                                        {!! Form::password('confirm-password', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Status</label>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox"  name='active'
-                                                id="flexSwitchCheckDefault" checked="">
-                                        </div>
-                                    </div>
-                                </div>                               
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn bg-gradient-success font-weight-bold text-xs">Save</button>
-                                        <button type="submit" class="btn bg-gradient-danger font-weight-bold text-xs">Cancel</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="horizontal dark">
+                {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id], 'files' => true]) !!}
+                <div class="card">
+                    <div class="card-header pb-0">
+                        @include('flash-message')
+                        @yield('content')
+
+                        <div class="d-flex align-items-center">
+                            <p class="mb-0">Edit Profile</p>
+                            <button action="{{ route('users.index') }}" class="btn btn-primary btn-sm ms-auto">Back</button>
                         </div>
                     </div>
+                    <div class="card-body">
+                        <p class="text-uppercase text-sm">User Information</p>
+                        <div class="row">
+                            <div class="col-md-12 shadow">
+                                <div class="form-group">
+                                    @if ($user->image != null)
+                                        <img src="{{ asset('/storage/image/' . $user->image->image) }}"
+                                            class="rounded-circle img-fluid border border-2 border-red"
+                                            style="width: 100px; height:100px;">
+                                    @elseif ($user->image == null)
+                                        <img src="{{ asset('assets/img/team-2.jpg') }}"
+                                            class="rounded-circle img-fluid border border-2 border-red"
+                                            style="width: 100px; height:100px;">
+                                    @endif
+                                    <span class="file-input btn-file edit-img-btn">
+                                        <i class="ni ni-camera-compact"></i>
+                                    </span>
+                                </div>
+                                <input type="file" name="image" class="form-control form-group" accept="image/*">
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Name</label>
+                                    {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Email address</label>
+                                    {!! Form::text('email', old('email'), ['placeholder' => 'Email', 'class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Password</label>
+                                    {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Confirm Password</label>
+                                    {!! Form::password('confirm-password', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Status</label>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name='active'
+                                            id="flexSwitchCheckDefault" checked="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button type="submit"
+                                        class="btn bg-gradient-success font-weight-bold text-xs">Save</button>
+                                    <button type="submit"
+                                        class="btn bg-gradient-danger font-weight-bold text-xs">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="horizontal dark">
+                    </div>
+                </div>
                 {!! Form::close() !!}
             </div>
             <div class="col-md-4">
@@ -87,7 +92,8 @@
                                     <img src="{{ asset('/storage/image/' . $user->image->image) }}"
                                         class="rounded-circle img-fluid border border-2 border-white" alt="user1">
                                 @elseif ($user->image == null)
-                                    <img src="{{ asset('assets/img/team-2.jpg') }}" class="rounded-circle img-fluid border border-2 border-white" alt="user1">
+                                    <img src="{{ asset('assets/img/team-2.jpg') }}"
+                                        class="rounded-circle img-fluid border border-2 border-white" alt="user1">
                                 @endif
                             </div>
                         </div>
@@ -141,5 +147,4 @@
             </div>
         </div>
     </div>
-
 @endsection

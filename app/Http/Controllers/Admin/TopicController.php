@@ -113,19 +113,30 @@ class TopicController extends Controller
     public function update(Request $request, $id)
     {
         // dd("hai",$request->name);
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required',          
         ]); 
         $topic       =  Topic::find($id);        
-        $topic->name =  $request->name;       
-        $topic->slug =  $request->name;          
+        $input = $request->all();  
 
         if ($request->active == 'on') {
-            $topic->active = Topic::ACTIVE;
+            $input['active'] = Topic::ACTIVE;
         } else {
-            $topic->active = Topic::INACTIVE;
-        } 
-        $topic->update();
+            $input['active'] = Topic::INACTIVE;
+        }
+
+        $topic->update($input);
+
+        if ($uplaodImage = $request->file('image')) {
+            Attachment::where('attachmentable_id', $topic->id)->delete();
+            $file        = new Attachment();
+            $imageName   = time() . '.' . $request->image->getClientOriginalExtension();
+            $imagestore  = $uplaodImage->storeAs('public/image', $imageName);
+            $file->image = $imageName;
+            $topic->image()->save($file);
+        } else {
+            unset($input['image']);
+        }
 
         return redirect()->route('topics.index')
             ->with('success', 'Topic updated successfully');

@@ -51,8 +51,8 @@ class Topic extends Authenticatable
     }
      // relation
 
-     public function image()
-     {
-         return $this->morphOne(Attachment::class, 'attachmentable');
-     }
+    public function image()
+    {
+        return $this->morphOne(Attachment::class, 'attachmentable');
+    }
 }
