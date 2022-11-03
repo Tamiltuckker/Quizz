@@ -1,24 +1,16 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
-
 class Topic extends Authenticatable
 
 {
     use HasFactory;
-
-    protected $fillable = ['category_id', 'name', 'slug', 'active'];
-    
+    protected $fillable = ['category_id', 'name', 'slug', 'active'];    
     const ACTIVE    = '1';
     const INACTIVE  = '0';
 

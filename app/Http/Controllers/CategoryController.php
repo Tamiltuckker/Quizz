@@ -1,20 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
-
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Attachment;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-
-
 class CategoryController extends Controller
 {
     /**
@@ -49,7 +39,6 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
     public function store(Request $request)
     {
         $request->validate([
@@ -65,12 +54,9 @@ class CategoryController extends Controller
         } else {
             $category->active = Category::INACTIVE;
         }
-
         $category->save();
         $id        = $category->id;
-
-        $attachment  = Category::find($id);
-        // dd($attachment);
+        $attachment  = Category::find($id);        
         $file        = new Attachment();
         $imageName   = time() . '.' . $request->image->getClientOriginalExtension();
         $imagestore  = $request->file('image')->storeAs('public/image', $imageName);
@@ -107,20 +93,15 @@ class CategoryController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-
         $category = Category::find($id);
-
-        $input = $request->all();
-        // dd($input);  
+        $input = $request->all();   
 
         if ($request->active == 'on') {
             $input['active'] = Category::ACTIVE;
         } else {
             $input['active'] = Category::INACTIVE;
         }
-
         $category->update($input);
-
         if ($uplaodImage = $request->file('image')) {
             Attachment::where('attachmentable_id', $category->id)->delete();
             $file        = new Attachment();
@@ -145,7 +126,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
-
         $category->delete();
 
         return redirect()->route('categories.index')

@@ -1,19 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Models\Attachment;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-
 class TopicController extends Controller
 {
     /**
@@ -57,7 +49,7 @@ class TopicController extends Controller
         $topic->name        = $request->name;
         $topic->category_id = $request->category_id;
         $topic->slug        = $request->name; 
-       
+
         if ($request->active == 'on') {
             $topic->active = Topic::ACTIVE;
         } else {
@@ -65,9 +57,7 @@ class TopicController extends Controller
         }   
         $topic->save();
         $id        = $topic->id;
-
-        $attachment  = Topic::find($id);
-        // dd($attachment);
+        $attachment  = Topic::find($id);        
         $file        = new Attachment();
         $imageName   = time().'.'.$request->image->getClientOriginalExtension();  
         $imagestore  = $request->file('image')->storeAs('public/image', $imageName);
@@ -111,8 +101,7 @@ class TopicController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        // dd("hai",$request->name);
+    {       
         $this->validate($request, [
             'name' => 'required',          
         ]); 
@@ -124,9 +113,7 @@ class TopicController extends Controller
         } else {
             $input['active'] = Topic::INACTIVE;
         }
-
         $topic->update($input);
-
         if ($uplaodImage = $request->file('image')) {
             Attachment::where('attachmentable_id', $topic->id)->delete();
             $file        = new Attachment();

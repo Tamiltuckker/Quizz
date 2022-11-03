@@ -9,7 +9,6 @@
                     <div class="card-header pb-0">
                         @include('flash-message')
                         @yield('content')
-
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Edit Profile</p>
                             <button action="{{ route('users.index') }}" class="btn btn-primary btn-sm ms-auto">Back</button>
