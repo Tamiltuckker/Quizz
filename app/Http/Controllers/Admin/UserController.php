@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Attachment;
 use App\Models\Role;
@@ -17,16 +18,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UsersDataTable $dataTable)
     {
-        $getUsers =  Role::with('users')->where('name', '!=', 'Admin')->get();
-
-        foreach($getUsers as $getUser)
-        {
-            $users['users'] = $getUser->users;
-        }
-
-        return view('admin.users.index', compact('users'));
+        return $dataTable->render('admin.users.index');
     }
 
     /**

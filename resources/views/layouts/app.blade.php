@@ -16,6 +16,14 @@
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
     @stack('css')
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+     <!-- ✅ Load CSS file for DataTables  -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css"/>
+    <!-- ✅ load jQuery ✅ -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- ✅ load DataTables ✅ -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
     <!-- Flash-message Styles -->     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
 </head>
@@ -44,6 +52,8 @@
     @include('admin.partials.themeScript')
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     @stack('js')   
     <!-- Script for flash-message -->
     <script src="/js/app.js"></script>
