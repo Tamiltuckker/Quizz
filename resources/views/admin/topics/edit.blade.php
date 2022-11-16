@@ -4,14 +4,14 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
-                {!! Form::model($topic, ['method' => 'PATCH', 'route' => ['topics.update', $topic->id], 'files' => true]) !!}
+                {!! Form::model($topic, ['method' => 'PATCH', 'route' => ['admin.topics.update', $topic->id], 'files' => true]) !!}
                 <div class="card">
                     <div class="card-header pb-0">
                         @include('flash-message')
                         @yield('content')
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Edit Profile</p>
-                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('topics.index') }}">Back</a>
+                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('admin.topics.index') }}">Back</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <a href="{{ route('topics.index') }}"
+                                    <a href="{{ route('admin.topics.index') }}"
                                         class="btn btn-sm btn-danger float-right mb-0 d-none d-lg-block">Cancel</a>
                                 </div>
                             </div>

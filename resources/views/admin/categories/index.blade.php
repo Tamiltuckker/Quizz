@@ -7,7 +7,7 @@
                 <div class="card-header pb-0">
                     <div class="float-right">
                         <a class="btn bg-gradient-info font-weight-bold text-xs"
-                            href="{{ route('categories.create') }}">Create</a>
+                            href="{{ route('admin.categories.create') }}">Create</a>
                     </div>
                     <h6>Categories table</h6>
                 </div>
@@ -59,8 +59,8 @@
                                             @endif
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <form method="POST" action="{{ route('categories.destroy', $category->id) }}">
-                                                <a href="{{ route('categories.edit', $category->id) }}"
+                                            <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}">
+                                                <a href="{{ route('admin.categories.edit', $category->id) }}"
                                                     class="btn bg-gradient-info font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit category">
                                                     Edit

@@ -10,13 +10,13 @@
                         @yield('content')  
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Create Category</p>
-                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('categories.index') }}">Back</a>
+                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('admin.categories.index') }}">Back</a>
                         </div>
                     </div>
                     <div class="card-body">
                         <p class="text-uppercase text-sm">Category Information</p>
                         <div class="row">
-                            <form method="POST" name="categories" enctype="multipart/form-data" action="{{ route('categories.store') }}">
+                            <form method="POST" name="categories" enctype="multipart/form-data" action="{{ route('admin.categories.store') }}">
                                 @csrf
                                 <div class="col-md-6">
                                     <div class="form-group">

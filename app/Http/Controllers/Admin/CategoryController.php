@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Category;
@@ -63,7 +64,7 @@ class CategoryController extends Controller
         $file->image = $imageName;
         $attachment->image()->save($file);
 
-        return redirect()->route('categories.index')
+        return redirect()->route('admin.categories.index')
             ->with('success', 'Category created successfully');
     }
 
@@ -113,7 +114,7 @@ class CategoryController extends Controller
             unset($input['image']);
         }
 
-        return redirect()->route('categories.index')
+        return redirect()->route('admin.categories.index')
             ->with('success', 'Category updated successfully');
     }
 
@@ -128,7 +129,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return redirect()->route('categories.index')
+        return redirect()->route('admin.categories.index')
             ->with('success', 'Category deleted successfully');
     }
 }

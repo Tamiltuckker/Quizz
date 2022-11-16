@@ -10,14 +10,14 @@
                         @yield('content')
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Create Topic</p>
-                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('topics.index') }}">Back</a>
+                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('admin.topics.index') }}">Back</a>
                         </div>
                     </div>
                     <div class="card-body">
                         <p class="text-uppercase text-sm">Topic Information</p>
                         <div class="row">
                             <form method="POST" name="topics" enctype="multipart/form-data"
-                                action="{{ route('topics.store') }}">
+                                action="{{ route('admin.topics.store') }}">
                                 @csrf
                                 <div class="col-md-6">
                                     <div class="form-group">

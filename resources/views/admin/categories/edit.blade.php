@@ -11,13 +11,13 @@
                         @yield('content')  
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Edit Category</p>
-                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('categories.index') }}">Back</a>
+                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('admin.categories.index') }}">Back</a>
                         </div>
                     </div>
                     <div class="card-body">
                         <p class="text-uppercase text-sm">Edit-Category Information</p>
                         <div class="row">
-                            <form method="POST" name="categories" enctype="multipart/form-data" action="{{ route('categories.update', $category->id) }}">
+                            <form method="POST" name="categories" enctype="multipart/form-data" action="{{ route('admin.categories.update', $category->id) }}">
                                 @csrf
                                 @method('PUT')
                                 <div class="col-md-12 shadow">

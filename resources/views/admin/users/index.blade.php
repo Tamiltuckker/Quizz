@@ -28,7 +28,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($users['users'] as $user)
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
@@ -62,8 +62,8 @@
                                         </td>
 
                                         <td class="align-middle text-center text-sm">
-                                            <form method="POST" action="{{ route('users.destroy', $user->id) }}">
-                                                <a href="{{ route('users.edit', $user->id) }}"
+                                            <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
+                                                <a href="{{ route('admin.users.edit', $user->id) }}"
                                                     class="btn bg-gradient-info font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit

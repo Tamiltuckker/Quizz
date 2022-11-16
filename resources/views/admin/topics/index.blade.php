@@ -6,7 +6,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <div class="float-right">
-                        <a class="btn btn-sm bg-gradient-success" href="{{ route('topics.create') }}">Create</a>
+                        <a class="btn btn-sm bg-gradient-success" href="{{ route('admin.topics.create') }}">Create</a>
                     </div>
                     <h6>Topics Table</h6>
                 </div>
@@ -58,8 +58,8 @@
                                             @endif
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <form method="POST" action="{{ route('topics.destroy', $topic->id) }}">
-                                                <a href="{{ route('topics.edit', $topic->id) }}"
+                                            <form method="POST" action="{{ route('admin.topics.destroy', $topic->id) }}">
+                                                <a href="{{ route('admin.topics.edit', $topic->id) }}"
                                                     class="btn bg-gradient-info font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit topic">
                                                     Edit

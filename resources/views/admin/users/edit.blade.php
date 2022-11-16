@@ -4,14 +4,14 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
-                {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id], 'files' => true]) !!}
+                {!! Form::model($user, ['method' => 'PATCH', 'route' => ['admin.users.update', $user->id], 'files' => true]) !!}
                 <div class="card">
                     <div class="card-header pb-0">
                         @include('flash-message')
                         @yield('content')
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Edit Profile</p>
-                            <button action="{{ route('users.index') }}" class="btn btn-primary btn-sm ms-auto">Back</button>
+                            <button action="{{ route('admin.users.index') }}" class="btn btn-primary btn-sm ms-auto">Back</button>
                         </div>
                     </div>
                     <div class="card-body">

@@ -19,7 +19,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $getUsers =  Role::with('users')->where('name', '!=', 'Admin')->get();
+
+        foreach($getUsers as $getUser)
+        {
+            $users['users'] = $getUser->users;
+        }
 
         return view('admin.users.index', compact('users'));
     }
@@ -112,7 +117,7 @@ class UserController extends Controller
             unset($input['image']);
         }
 
-        return redirect()->route('users.index')->with('info', 'User updated successfully');
+        return redirect()->route('admin.users.index')->with('info', 'User updated successfully');
     }
 
     /**
@@ -125,7 +130,7 @@ class UserController extends Controller
     {
         User::find($id)->delete();
 
-        return redirect()->route('users.index')
+        return redirect()->route('admin.users.index')
             ->with('danger', 'Users deleted successfully');
     }
 }

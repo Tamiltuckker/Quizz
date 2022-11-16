@@ -64,7 +64,7 @@ class TopicController extends Controller
         $file->image = $imageName;
         $attachment->image()->save($file);
 
-        return redirect()->route('topics.index')
+        return redirect()->route('admin.topics.index')
         ->with('success', 'topic created successfully');  
     }
 
@@ -125,7 +125,7 @@ class TopicController extends Controller
             unset($input['image']);
         }
 
-        return redirect()->route('topics.index')
+        return redirect()->route('admin.topics.index')
             ->with('success', 'Topic updated successfully');
     }
 
@@ -140,7 +140,7 @@ class TopicController extends Controller
         $topic = Topic::findOrFail($id);
         $topic->delete();
 
-        return redirect()->route('topics.index')
+        return redirect()->route('admin.topics.index')
             ->with('danger', 'Topic deleted successfully');
     }
 }
