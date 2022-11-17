@@ -17,7 +17,7 @@
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
     @stack('css')
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
      <!-- ✅ Load CSS file for DataTables  -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css"/>
     <!-- ✅ load jQuery ✅ -->
@@ -52,7 +52,7 @@
     @include('admin.partials.themeScript')
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
+    {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     @stack('js')   
     <!-- Script for flash-message -->

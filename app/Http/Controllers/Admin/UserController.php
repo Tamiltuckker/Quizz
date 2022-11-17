@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Attachment;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -123,8 +122,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-
-        return redirect()->route('admin.users.index')
-            ->with('danger', 'Users deleted successfully');
     }
 }

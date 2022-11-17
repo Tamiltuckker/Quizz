@@ -5,8 +5,6 @@ namespace App\DataTables;
 use App\Models\User;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class UsersDataTable extends DataTable
@@ -21,7 +19,21 @@ class UsersDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'users.action');
+            ->editColumn('active', function ($model) {
+                if($model->active == User::ACTIVE) {
+                    $btn_class  = '<span class="badge badge-sm bg-gradient-success">Active</span>';
+                } elseif($model->active == User::INACTIVE) {
+                    $btn_class    = '<span class="badge badge-sm bg-gradient-danger">InActive</span>';
+                }
+                return $btn_class;
+            })
+            ->addColumn('action', function($model) {
+                $btn = '';
+                $btn = '<a href="'.route('admin.users.edit', [$model->id]).'" class="btn bg-gradient-info font-weight-bold text-xs" title="Edit">Edit</a>';
+                $btn .= '&nbsp;<a href="javascript:void(0)" class="btn bg-gradient-danger font-weight-bold text-xs  btn-delete" title="Delete" data-delete-route="'.route('admin.users.destroy', $model->id).'">Delete</a>';
+                return $btn;
+            })
+            ->escapeColumns([]);
     }
 
     /**
@@ -46,7 +58,7 @@ class UsersDataTable extends DataTable
                     ->setTableId('users-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    ->dom('lBfrtip')
                     ->orderBy(1)
                     ->buttons(
                         Button::make('print'),
@@ -65,6 +77,7 @@ class UsersDataTable extends DataTable
         return [
             Column::make('name'),
             Column::make('email'),
+            Column::make('active'),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
