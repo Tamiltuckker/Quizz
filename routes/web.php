@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::ADMIN], 'as' => 
     Route::resource('users', UserController::class);
     Route::resource('topics', TopicController::class);
     Route::resource('quiztemplates', QuizTemplateController::class);
+    Route::resource('quizquestions',QuizQuestionController::class);
 });
 
 Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => 'user.', 'prefix' => 'user', 'namespace' => 'User'], function() {
