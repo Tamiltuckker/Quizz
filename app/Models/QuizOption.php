@@ -19,8 +19,8 @@ class QuizOption extends Authenticatable
 
     // Relationship start
 
-    public function quizquestion()
+    public function quiz_question()
     {
-        return $this->hasMany(QuizQuestion::class);
+        return $this->belongsTo(QuizQuestion::class);
     }
 }

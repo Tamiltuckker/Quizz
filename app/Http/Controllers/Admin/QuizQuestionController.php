@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\QuizQuestion;
 use App\Models\QuizTemplate;
-use App\Models\Attachment;
+use App\Models\QuizOption;
 
 class QuizQuestionController extends Controller
 {
@@ -17,7 +17,7 @@ class QuizQuestionController extends Controller
      */
     public function index()
      {    
-         $quizquestions =QuizQuestion::all();   
+        // $quizquestions = QuizQuestion::all();   
         return view('admin.quizquestions.index',);   
     }
 
@@ -28,32 +28,28 @@ class QuizQuestionController extends Controller
      */
     public function create()
     {
-        // $quizquestion = new QuizQuestion();  
-        $quiztemplates = QuizTemplate::pluck('name','id');  
+        $quizTemplates = QuizTemplate::pluck('name','id');  
 
-        return view('admin.quizquestions.create',compact('quiztemplates'));
+        return view('admin.quizquestions.create',compact('quizTemplates'));
     }
     public function store(Request $request)
     {
+        
     $request->validate([
         'question' => 'required', 
         'description' => 'required'                  
     ]);  
 
-    $question              = new QuizQuestion();
+    $question                   = new QuizQuestion();
     $question->quiz_template_id = $request->quiz_template_id;
-    $question->question    = $request->question;
-    $question->description  = $request->description;    
-    $question->option[]       = $request->option; 
-    
+    $question->question         = $request->question;
+    $question->description      = $request->description;        
     $question->save();
-    $id        = $question->id;
-    $attachment  = QuizQuestion::find($id);        
-    $file        = new Attachment();
-    $imageName   = time().'.'.$request->image->getClientOriginalExtension();  
-    $imagestore  = $request->file('image')->storeAs('public/image', $imageName);
-    $file->image = $imageName;
-    $attachment->image()->save($file);
+
+    $id                             = $question->id;
+    $quizOptions                    = QuizOption::find($id);  
+    $quizOptions->quiz_question_id  = $question->id;
+    // $quizOptions->quiz_question_id 
 
     return redirect()->route('admin.quizquestions.index')
     ->with('success', 'Question created successfully');  

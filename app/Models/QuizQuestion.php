@@ -14,15 +14,20 @@ class QuizQuestion extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'question','description'       
+        'quiz_template_id','question','description'       
     ];
     
      // Relationship start     
 
-     public function quizoptions()
-     {
-         return $this->belongsTo(QuizOption::class);
-     }
+     public function quiz_template()
+    {
+        return $this->belongsTo(QuizTemplate::class);
+    }
+
+    public function quiz_options()
+    {
+        return $this->hasMany(QuizOption::class);
+    }
       // relation
  
      public function image()

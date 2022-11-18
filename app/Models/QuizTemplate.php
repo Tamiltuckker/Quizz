@@ -25,4 +25,9 @@ class QuizTemplate extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function quiz_questions()
+    {
+        return $this->hasMany(QuizQuestion::class);
+    }
+
 }

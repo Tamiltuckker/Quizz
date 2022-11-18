@@ -14,15 +14,15 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        {{-- <p class="text-uppercase text-sm">Question Information</p> --}}
+                        <p class="text-uppercase text-sm">Question Information</p>
                         <div class="row">
                             <form method="POST" name="questions" enctype="multipart/form-data"
                                 action="{{ route('admin.quizquestions.store') }}">
                                 @csrf
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <div class="form-group">
                                         <label for="inputAddress">Choose Template *</label>
-                                        {{ Form::select('quiztemplate_id', @$quiztemplates , null, ['class' => 'form-control form-control-solid form-select mb-2', 'placeholder' => 'Select Template']) }}                                        
+                                        {{ Form::select('quiz_template_id', @$quizTemplates , null, ['class' => 'form-control form-control-solid form-select mb-2', 'placeholder' => 'Select Template']) }}                                        
                                     </div>
                                 </div>
                                 <div class="col-md-10">
@@ -41,7 +41,7 @@
 
                                 <div class>
                                     <div>
-                                    <label for="example-text-input" class="form-control-label">Options</label>
+                                        <label for="example-text-input" class="form-control-label">Options</label>
                                     </div>
                                 <div class="container">   
                                     <div class="row">
@@ -49,32 +49,20 @@
                                         <div class = "col-sm-8"><label for="example-text-input" class="form-control-label">Options</label> </div>
                                     </div>                                
                                     <div class="row">
-                                        <div class = "col-sm-2"><input type="radio"> </div>
+                                        <div class = "col-sm-2"><input type="radio" id="option1" name="is_correct[]"> </div>
                                         <div class = "col-sm-8"><input class="form-control" name="option[]" type="text" placeholder="option1"> </div>
                                     </div>
                                     <div class="row">
-                                        <div class = "col-sm-2"><input type="radio"> </div>
-                                        <div class = "col-sm-8"><input class="form-control" name="option[]" type="text" placeholder="option1"> </div>
+                                        <div class = "col-sm-2"><input type="radio" id="option2" name="is_correct[]"> </div>
+                                        <div class = "col-sm-8"><input class="form-control" name="option[]" type="text" placeholder="option2"> </div>
                                     </div>
                                     <div class="row">
-                                        <div class = "col-sm-2"><input type="radio"> </div>
-                                        <div class = "col-sm-8"><input class="form-control" name="option[]" type="text" placeholder="option1"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class = "col-sm-2"><input type="radio"> </div>
-                                        <div class = "col-sm-8"><input class="form-control" name="option[]" type="text" placeholder="option1"> </div>
+                                        <div class = "col-sm-2"><input type="radio" id="option3" name="is_correct[]"> </div>
+                                        <div class = "col-sm-8"><input class="form-control" name="option[]" type="text" placeholder="option3"> </div>
                                     </div>
                                 </div>
                                
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Question
-                                            image</label>
-                                        <input type="file" name="image" class="form-control form-group"
-                                            accept="image/*">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mt-2">
                                     <div class="form-group">
                                         <button type="submit"
                                             class="btn bg-gradient-success font-weight-bold text-xs">Save</button>

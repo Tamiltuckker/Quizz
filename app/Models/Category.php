@@ -43,7 +43,7 @@ class Category extends Authenticatable
         return $this->belongsTo(Topic::class);
     }
 
-    public function quiztemplates()
+    public function quiz_templates()
     {
         return $this->hasMany(QuizTemplate::class);
     }
