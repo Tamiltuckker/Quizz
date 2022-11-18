@@ -11,13 +11,18 @@ class QuizTemplate extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['category_id', 'name','slug'];
 
     protected function Slug(): Attribute
     {
         return Attribute::make(           
             set: fn ($value) => Str::slug($value),
         );
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
 }

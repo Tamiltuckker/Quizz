@@ -37,7 +37,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="inputAddress">Categories *</label>
-                                    {{ Form::select('category_id', @$categories, null, ['class' => 'form-control form-control-solid form-select mb-2', 'placeholder' => 'Select Category']) }}
+                                    {{ Form::select('category_id',@$categories, old('category_id'), ['class' => 'form-control form-control-solid form-select mb-2', 'placeholder' => 'Select Category']) }}
                                 </div>
                             </div>
                             <div class="col-md-12">

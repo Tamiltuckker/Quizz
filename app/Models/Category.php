@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -42,6 +41,11 @@ class Category extends Authenticatable
     public function topic()
     {
         return $this->belongsTo(Topic::class);
+    }
+
+    public function quiztemplates()
+    {
+        return $this->hasMany(QuizTemplate::class);
     }
 
      // relation

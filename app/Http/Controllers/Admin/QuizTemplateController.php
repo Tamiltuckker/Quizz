@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\QuizTemplate;
-use App\Models\Attachment;
 class QuizTemplateController extends Controller
 {
     /**
@@ -15,9 +14,9 @@ class QuizTemplateController extends Controller
      */
     public function index()
     {
-        $quiztemplates = QuizTemplate::latest()->paginate(5);
+        $quizTemplates = QuizTemplate::with('category')->get();
 
-        return view('admin.quiztemplates.index',compact('quiztemplates'));   
+        return view('admin.quiztemplates.index',compact('quizTemplates'));   
     }
 
     /**
@@ -27,9 +26,9 @@ class QuizTemplateController extends Controller
      */
     public function create()
     {
-        $quiztemplate = new QuizTemplate();
-        $quiztemplate = QuizTemplate::pluck('name','id');
-        return view('admin.quiztemplates.create');
+        $categories = Category::pluck('name','id');
+
+        return view('admin.quiztemplates.create',compact('categories'));
     }
 
     /**
@@ -40,15 +39,15 @@ class QuizTemplateController extends Controller
      */
     public function store(Request $request)
     {
-        // dd("hai");
         $request->validate([
             'name' => 'required',
         ]);
 
-        $quiztemplate = new QuizTemplate();
-        $quiztemplate->name = $request->name;
-        $quiztemplate->slug = $request->name;       
-        $quiztemplate->save();       
+        $quizTemplate              = new QuizTemplate();
+        $quizTemplate->category_id = $request->category_id;
+        $quizTemplate->name        = $request->name;
+        $quizTemplate->slug        = $request->name;       
+        $quizTemplate->save();       
 
         return redirect()->route('admin.quiztemplates.index')
             ->with('success', 'Category created successfully');
@@ -63,9 +62,10 @@ class QuizTemplateController extends Controller
 
     public function edit($id)
     {
-        $quiztemplate = QuizTemplate::find($id);
+        $quizTemplate = QuizTemplate::find($id);
+        $categories   = Category::pluck('name','id');
 
-        return view('admin.quiztemplates.edit', compact('quiztemplate'));
+        return view('admin.quiztemplates.edit', compact('quizTemplate','categories'));
     }
 
     /**
@@ -80,10 +80,11 @@ class QuizTemplateController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-        $quiztemplate = QuizTemplate::find($id);
-        $input = $request->all();        
-        $quiztemplate->update($input);
-        return redirect()->route('admin.quiztemplates.index',compact('quiztemplate'))
+        $quizTemplate = QuizTemplate::find($id);
+        $input        = $request->all();        
+        $quizTemplate->update($input);
+
+        return redirect()->route('admin.quiztemplates.index')
             ->with('success', 'Quiz updated successfully');
     }
 

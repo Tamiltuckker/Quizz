@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('quiz_templates', function (Blueprint $table) {
             $table->id();
+            $table->integer('category_id')->unsigned();
             $table->string('name');
             $table->string('slug');  
             $table->timestamps();

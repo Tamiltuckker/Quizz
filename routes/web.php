@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\QuizQuestionController;
+use App\Http\Controllers\Admin\QuizTemplateController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 
 /*

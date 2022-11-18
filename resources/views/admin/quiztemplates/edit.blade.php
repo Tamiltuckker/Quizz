@@ -17,26 +17,27 @@
                     <div class="card-body">
                         <p class="text-uppercase text-sm">Edit-Quiz Information</p>
                         <div class="row">
-                            <form method="POST" name="quiztemplates" action="{{ route('admin.quiztemplates.update', $quiztemplate->id) }}">
-                                @csrf
-                                @method('PUT')
-                               
-                                <div class="col-md-6">
+                            {!! Form::model($quizTemplate, ['method' => 'PATCH', 'route' => ['admin.quiztemplates.update', $quizTemplate->id]]) !!}
+                                <div class="col-md-10">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Quiz
-                                            name</label>
-                                        <input class="form-control" name="name" type="text"
-                                            value="{{ old('name', $quiztemplate->name) }}">
+                                        <label for="inputAddress">Categories *</label>
+                                        {{ Form::select('category_id',@$categories, old('category_id'), ['class' => 'form-control form-control-solid form-select mb-2', 'placeholder' => 'Select Category']) }}
                                     </div>
                                 </div>
-                                
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Template name</label>
+                                        <input class="form-control" name="name" type="text"
+                                            value="{{ old('name', $quizTemplate->name) }}">
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <button type="submit" class="btn bg-gradient-success font-weight-bold text-xs">Save</button>
                                         <button type="submit" class="btn bg-gradient-danger font-weight-bold text-xs">Cancel</button>
                                     </div>
                                 </div>
-                            </form>
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
