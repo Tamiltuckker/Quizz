@@ -43,6 +43,7 @@
 
                                         <td class="align-middle text-center text-sm">
                                             <form method="POST" action="{{ route('admin.quiztemplates.destroy', $quizTemplate->id) }}">
+                                                <a class="btn bg-gradient-warning font-weight-bold text-xs" href="{{ route('admin.quizquestions.index',$quizTemplate->id) }}">Manage Questions</a>
                                                 <a href="{{ route('admin.quiztemplates.edit', $quizTemplate->id) }}"
                                                     class="btn bg-gradient-info font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit category">

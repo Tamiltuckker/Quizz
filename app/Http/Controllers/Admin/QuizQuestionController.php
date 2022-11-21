@@ -15,10 +15,13 @@ class QuizQuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($quizTemplateId)
      {    
-        // $quizquestions = QuizQuestion::all();   
-        return view('admin.quizquestions.index',);   
+        $quizQuestions    = QuizQuestion::with('quiz_template')
+                                ->where('quiz_template_id', $quizTemplateId)
+                                ->get();
+
+        return view('admin.quizquestions.index',compact('quizQuestions','quizTemplateId'));   
     }
 
       /**
@@ -26,32 +29,83 @@ class QuizQuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($quizTemplateId)
     {
-        $quizTemplates = QuizTemplate::pluck('name','id');  
+        $quizTemplate = QuizTemplate::find($quizTemplateId);
 
-        return view('admin.quizquestions.create',compact('quizTemplates'));
+        return view('admin.quizquestions.create',compact('quizTemplate'));
     }
-    public function store(Request $request)
+    public function store(Request $request,$quizTemplateId)
     {
-        
-    $request->validate([
-        'question' => 'required', 
-        'description' => 'required'                  
-    ]);  
+    
+        $question                   = new QuizQuestion();
+        $question->quiz_template_id = $quizTemplateId;
+        $question->question         = $request->question;
+        $question->description      = $request->description;        
+        $question->save();
 
-    $question                   = new QuizQuestion();
-    $question->quiz_template_id = $request->quiz_template_id;
-    $question->question         = $request->question;
-    $question->description      = $request->description;        
-    $question->save();
+        $id        = $question->id;
 
-    $id                             = $question->id;
-    $quizOptions                    = QuizOption::find($id);  
-    $quizOptions->quiz_question_id  = $question->id;
-    // $quizOptions->quiz_question_id 
+        foreach($request->quiz_option as $option)
+        {
+            if(!is_null($id)) {
+            $quizOption = new QuizOption();
+                $quizOption->quiz_question_id = $id;
+                $quizOption->fill($option);
+                $quizOption->save();
+            }
+        }
 
-    return redirect()->route('admin.quizquestions.index')
-    ->with('success', 'Question created successfully');  
+        return redirect()->route('admin.quizquestions.index',$quizTemplateId)
+        ->with('success', 'Question created successfully');  
+
+    }
+
+        /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\ QuizTemplate $quiztemplate
+     * @return \Illuminate\Http\Response
+     */
+
+    public function edit($quizTemplateId, $quizQuestionId)
+    {
+        $quizQuestion  = QuizQuestion::find($quizQuestionId);
+        $quizTemplate  = QuizTemplate::find($quizTemplateId);
+
+        return view('admin.quizquestions.edit', compact('quizQuestion','quizTemplate'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\QuizTemplate $quiztemplate
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $quizTemplateId, $quizQuestionId)
+    {
+
+        $quizQuestion  = QuizQuestion::find($quizQuestionId);
+        $input        = $request->all();        
+        $quizQuestion->update($input);
+
+        return redirect()->route('admin.quizquestions.index',$quizTemplateId)
+            ->with('success', 'Quiz updated successfully');
+    }
+
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Topic  $topic
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($quizTemplateId, $quizQuestionId)
+    {
+        $quizQuestion = QuizQuestion::findOrFail($quizQuestionId);
+        $quizQuestion->delete();
+
+        return redirect()->route('admin.quizquestions.index',$quizTemplateId)
+            ->with('danger', 'Queston deleted successfully');
     }
 }

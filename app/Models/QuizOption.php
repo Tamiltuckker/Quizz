@@ -14,7 +14,7 @@ class QuizOption extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-     'option',  'is_correct'      
+     'quiz_question_id', 'option',  'is_correct'      
     ];
 
     // Relationship start

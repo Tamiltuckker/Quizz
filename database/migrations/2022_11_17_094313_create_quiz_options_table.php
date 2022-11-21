@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('quiz_options', function (Blueprint $table) {
             $table->id();
             $table->integer('quiz_question_id')->unsigned();
-            $table->boolean('option');
+            $table->string('option');
             $table->boolean('is_correct');
             $table->timestamps();
         });

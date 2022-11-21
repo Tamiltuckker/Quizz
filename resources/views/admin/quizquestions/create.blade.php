@@ -10,19 +10,19 @@
                         @yield('content')  
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Create Questions</p>
-                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('admin.quizquestions.index') }}">Back</a>
+                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('admin.quizquestions.index',$quizTemplate->id) }}">Back</a>
                         </div>
                     </div>
                     <div class="card-body">
                         <p class="text-uppercase text-sm">Question Information</p>
                         <div class="row">
                             <form method="POST" name="questions" enctype="multipart/form-data"
-                                action="{{ route('admin.quizquestions.store') }}">
+                                action="{{ route('admin.quizquestions.store', $quizTemplate->id) }}">
                                 @csrf
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <label for="inputAddress">Choose Template *</label>
-                                        {{ Form::select('quiz_template_id', @$quizTemplates , null, ['class' => 'form-control form-control-solid form-select mb-2', 'placeholder' => 'Select Template']) }}                                        
+                                        <label for="inputAddress">Template Name *</label>
+                                        <h4><b> {{ $quizTemplate->name }} </b></h4>
                                     </div>
                                 </div>
                                 <div class="col-md-10">
@@ -49,16 +49,31 @@
                                         <div class = "col-sm-8"><label for="example-text-input" class="form-control-label">Options</label> </div>
                                     </div>                                
                                     <div class="row">
-                                        <div class = "col-sm-2"><input type="radio" id="option1" name="is_correct[]"> </div>
-                                        <div class = "col-sm-8"><input class="form-control" name="option[]" type="text" placeholder="option1"> </div>
+                                        <div class = "col-sm-2">
+                                            {{ Form::hidden("quiz_option[0][is_correct]", '0') }}
+                                            {{ Form::radio("quiz_option[0][is_correct]", '1',null, ['class' => 'custom-control-input', 'id' => '0']) }}
+                                        </div>
+                                        <div class = "col-sm-8">
+                                             {{ Form::text("quiz_option[0][option]", null, ['class' => 'form-control custom-text-box']) }}
+                                        </div>
                                     </div>
-                                    <div class="row">
-                                        <div class = "col-sm-2"><input type="radio" id="option2" name="is_correct[]"> </div>
-                                        <div class = "col-sm-8"><input class="form-control" name="option[]" type="text" placeholder="option2"> </div>
+                                    <div class="row mt-2">
+                                        <div class = "col-sm-2">
+                                            {{ Form::hidden("quiz_option[1][is_correct]", '0') }}
+                                            {{ Form::radio("quiz_option[1][is_correct]", '1',null, ['class' => 'custom-control-input', 'id' => '1']) }}
+                                       </div>
+                                        <div class = "col-sm-8">
+                                            {{ Form::text("quiz_option[1][option]", null, ['class' => 'form-control custom-text-box']) }}
+                                        </div>
                                     </div>
-                                    <div class="row">
-                                        <div class = "col-sm-2"><input type="radio" id="option3" name="is_correct[]"> </div>
-                                        <div class = "col-sm-8"><input class="form-control" name="option[]" type="text" placeholder="option3"> </div>
+                                    <div class="row mt-2">
+                                        <div class = "col-sm-2">
+                                            {{ Form::hidden("quiz_option[2][is_correct]", '0') }}
+                                            {{ Form::radio("quiz_option[2][is_correct]", '1',null, ['class' => 'custom-control-input', 'id' => '2']) }}
+                                        </div>
+                                        <div class = "col-sm-8">
+                                             {{ Form::text("quiz_option[2][option]", null, ['class' => 'form-control custom-text-box']) }}
+                                        </div>
                                     </div>
                                 </div>
                                
