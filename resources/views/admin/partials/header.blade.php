@@ -1,3 +1,6 @@
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
     data-scroll="false">
     <div class="container-fluid py-1 px-3">
@@ -17,17 +20,20 @@
             </div>
             <ul class="navbar-nav  justify-content-end">
                 <li class="nav-item d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-                        <i class="fa fa-user me-sm-1"></i>
-                        <form method="POST" action="{{ route('logout') }}">
+                    <div class="w3-dropdown-hover">
+                        <button class="w3-button"> <i class="fa fa-user me-sm-1"></i></button>
+                        <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                          <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <x-responsive-nav-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                       this.closest('form').submit();">
-                                <span class="d-sm-inline d-none">Log out</span>
+                                    <span class ="w3-bar-item w3-button">logout </span>
                             </x-responsive-nav-link>
                         </form>
-                    </a>
+                          <a href="#" class="w3-bar-item w3-button">profile</a>
+                        </div>
+                      </div>
                 </li>
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
