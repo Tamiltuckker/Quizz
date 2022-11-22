@@ -39,4 +39,6 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::ADMIN], 'as' => 
 
 Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => 'user.', 'prefix' => 'user', 'namespace' => 'User'], function() {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard/templates', [UserDashboardController::class, 'gettemplates'])->name('dashboard.gettemplates');
+    Route::get('/dashboard/questions', [UserDashboardController::class, 'getquestions'])->name('dashboard.getquestions');
 });
