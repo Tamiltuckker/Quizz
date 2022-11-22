@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
+use App\Models\Category;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-class UsersDataTable extends DataTable
+class CategoriesDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -23,17 +23,17 @@ class UsersDataTable extends DataTable
                 return  $profileImage;
             })
             ->editColumn('active', function ($model) {
-                if($model->active == User::ACTIVE) {
+                if($model->active == Category::ACTIVE) {
                     $btn_class  = '<span class="badge badge-sm bg-gradient-success">Active</span>';
-                } elseif($model->active == User::INACTIVE) {
+                } elseif($model->active == Category::INACTIVE) {
                     $btn_class    = '<span class="badge badge-sm bg-gradient-danger">InActive</span>';
                 }
                 return $btn_class;
             })
             ->addColumn('action', function($model) {
                 $btn = '';
-                $btn = '<a href="'.route('admin.users.edit', [$model->id]).'" class="btn bg-gradient-info font-weight-bold text-xs" title="Edit">Edit</a>';
-                $btn .= '&nbsp;<a href="javascript:void(0)" class="btn bg-gradient-danger font-weight-bold text-xs  btn-delete" title="Delete" data-delete-route="'.route('admin.users.destroy', $model->id).'">Delete</a>';
+                $btn = '<a href="'.route('admin.categories.edit', [$model->id]).'" class="btn bg-gradient-info font-weight-bold text-xs" title="Edit">Edit</a>';
+                $btn .= '&nbsp;<a href="javascript:void(0)" class="btn bg-gradient-danger font-weight-bold text-xs  btn-delete" title="Delete" data-delete-route="'.route('admin.categories.destroy', $model->id).'">Delete</a>';
                 return $btn;
             })
             ->escapeColumns([]);
@@ -42,10 +42,10 @@ class UsersDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\User $model
+     * @param \App\Models\Category $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Category $model)
     {
         return $model->newQuery();
     }
@@ -58,7 +58,7 @@ class UsersDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('users-table')
+                    ->setTableId('categories-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('lBfrtip')
@@ -81,11 +81,10 @@ class UsersDataTable extends DataTable
             Column::computed('name')
             ->orderable(true)
             ->searchable(true),
-            Column::make('email'),
             Column::make('active'),
             Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
+            ->exportable(true)
+            ->printable(true)
             ->width(60)
             ->addClass('text-center'),
         ];
@@ -96,8 +95,5 @@ class UsersDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename() :string
-    {
-        return 'Users_' . date('YmdHis');
-    }
+
 }

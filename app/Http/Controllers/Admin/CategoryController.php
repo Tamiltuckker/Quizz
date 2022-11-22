@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Attachment;
+use App\DataTables\CategoriesDataTable;
 class CategoryController extends Controller
 {
     /**
@@ -13,14 +14,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Category $category)
+    public function index(CategoriesDataTable $dataTable)
     {
-        $categories = Category::latest()->paginate(5);
-
-        return view('admin.categories.index', compact('categories'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return $dataTable->render('admin.categories.index');
     }
-
     /**
      * Show the form for creating a new resource.
      *
