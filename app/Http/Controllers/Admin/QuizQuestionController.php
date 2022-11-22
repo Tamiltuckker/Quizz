@@ -17,9 +17,9 @@ class QuizQuestionController extends Controller
      */
     public function index($quizTemplateId)
      {    
-        $quizQuestions    = QuizQuestion::with('quiz_template')
-                                ->where('quiz_template_id', $quizTemplateId)
-                                ->get();
+        $quizQuestions = QuizQuestion::with('quiz_template')
+                            ->where('quiz_template_id', $quizTemplateId)
+                            ->get();
 
         return view('admin.quizquestions.index',compact('quizQuestions','quizTemplateId'));   
     }
@@ -37,7 +37,6 @@ class QuizQuestionController extends Controller
     }
     public function store(Request $request,$quizTemplateId)
     {
-    
         $question                   = new QuizQuestion();
         $question->quiz_template_id = $quizTemplateId;
         $question->question         = $request->question;
@@ -49,7 +48,7 @@ class QuizQuestionController extends Controller
         foreach($request->quiz_option as $option)
         {
             if(!is_null($id)) {
-            $quizOption = new QuizOption();
+                $quizOption = new QuizOption();
                 $quizOption->quiz_question_id = $id;
                 $quizOption->fill($option);
                 $quizOption->save();
@@ -73,7 +72,11 @@ class QuizQuestionController extends Controller
         $quizQuestion  = QuizQuestion::find($quizQuestionId);
         $quizTemplate  = QuizTemplate::find($quizTemplateId);
 
-        return view('admin.quizquestions.edit', compact('quizQuestion','quizTemplate'));
+        $quizOptions   = QuizOption::with('quiz_question')
+                        ->where('quiz_question_id', $quizQuestionId)
+                        ->get();
+
+        return view('admin.quizquestions.edit', compact('quizQuestion','quizTemplate','quizOptions'));
     }
 
     /**
@@ -85,10 +88,23 @@ class QuizQuestionController extends Controller
      */
     public function update(Request $request, $quizTemplateId, $quizQuestionId)
     {
+        $quizQuestion                   = QuizQuestion::find($quizQuestionId);
+        $quizQuestion->quiz_template_id = $quizTemplateId;
+        $quizQuestion->question         = $request->question;
+        $quizQuestion->description      = $request->description;        
+        $quizQuestion->update();
 
-        $quizQuestion  = QuizQuestion::find($quizQuestionId);
-        $input        = $request->all();        
-        $quizQuestion->update($input);
+        $id        = $quizQuestion->id;
+
+        foreach($request->quiz_option as $option)
+        {
+            if($option['option_id']) {
+                $quizOption = QuizOption::find($option['option_id']);
+                $quizOption->quiz_question_id = $id;
+                $quizOption->fill($option);
+                $quizOption->update();
+            }
+        }
 
         return redirect()->route('admin.quizquestions.index',$quizTemplateId)
             ->with('success', 'Quiz updated successfully');
@@ -103,8 +119,13 @@ class QuizQuestionController extends Controller
     public function destroy($quizTemplateId, $quizQuestionId)
     {
         $quizQuestion = QuizQuestion::findOrFail($quizQuestionId);
-        $quizQuestion->delete();
 
+                        QuizOption::with('quiz_question')
+                        ->where('quiz_question_id', $quizQuestion->id)
+                        ->delete();
+                        
+        $quizQuestion->delete();
+      
         return redirect()->route('admin.quizquestions.index',$quizTemplateId)
             ->with('danger', 'Queston deleted successfully');
     }
