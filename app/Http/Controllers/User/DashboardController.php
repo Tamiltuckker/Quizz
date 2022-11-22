@@ -11,9 +11,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $users = User::all();
         $categories = Category::pluck('name','id');
-        // dd($categories);        
+
         return view('users.dashboard',compact('categories'));
     }
 
