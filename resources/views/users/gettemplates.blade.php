@@ -13,22 +13,33 @@
         </div>   
 
         <div class="row mt-2 ">
-          <div class="card mx-auto text-center col-md-8">            
-            <h4 class="mt-2">2022-Jan HTML Quiz
-              <a class="btn btn-warning btn-md ms-auto mt-2" href="{{ route('user.dashboard.getquestions') }}">Start
-                Quiz</a>                              
-            </h4>
-          </div>
+          <div class="card mx-auto text-left col-md-8"> 
+            <div class="row">   
+              <div class="col-md-10">          
+                <h4 class="mt-2">2022-Nov-HTML Quiz  </h4>
+              </div>
+              <div class="col-md-2">
+                <a class="btn btn-warning btn-md mt-1" href="{{ route('user.dashboard.getquestions') }}">Start
+                Quiz</a>  
+              </div>    
+            </div>
+          </div>         
         </div>  
 
         <div class="row mt-2 ">
-          <div class="card mx-auto text-center col-md-8">            
-            <h4 class="mt-2">2022-Feb Html Quiz
-              <a class="btn btn-warning btn-md ms-auto mt-2" href="{{ route('user.dashboard.getquestions') }}">Start
-                Quiz</a>                              
-            </h4>
-          </div>
-        </div> 
+          <div class="card mx-auto text-left col-md-8"> 
+            <div class="row">   
+              <div class="col-md-10">          
+                <h4 class="mt-2">2022-Dec-HTML Quiz  </h4>
+              </div>
+              <div class="col-md-2">
+                <a class="btn btn-warning btn-md mt-1" href="{{ route('user.dashboard.getquestions') }}">Start
+                Quiz</a>  
+              </div>    
+            </div>
+          </div>         
+        </div>          
+
       </div>  
     </section>
 
