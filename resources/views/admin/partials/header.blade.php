@@ -19,20 +19,14 @@
             </div>
             <ul class="navbar-nav  justify-content-end">
                 <li class="nav-item d-flex align-items-center">
-                    <div class="w3-dropdown-hover">
-                        <button class="w3-button"> <i class="fa fa-user me-sm-1"></i></button>
-                        <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                          <form method="POST" action="{{ route('logout') }}">
+                     <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <x-responsive-nav-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                       this.closest('form').submit();">
-                                    <span class ="w3-bar-item w3-button">logout </span>
+                                     <i class="fa fa-user me-sm-1"></i>
                             </x-responsive-nav-link>
                         </form>
-                          <a href="#" class="w3-bar-item w3-button">profile</a>
-                        </div>
-                      </div>
                 </li>
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
