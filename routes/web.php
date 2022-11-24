@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\QuizQuestionController;
 use App\Http\Controllers\Admin\QuizTemplateController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
+use App\Http\Controllers\User\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use App\Http\Controllers\User\DashboardController as UserDashboardController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('users.dashboard');
 });
 
 require __DIR__.'/auth.php';
@@ -41,4 +42,5 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => '
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard/templates', [UserDashboardController::class, 'gettemplates'])->name('dashboard.gettemplates');
     Route::get('/dashboard/questions', [UserDashboardController::class, 'getquestions'])->name('dashboard.getquestions');
+    Route::resource('profiles', ProfileController::class);
 });
