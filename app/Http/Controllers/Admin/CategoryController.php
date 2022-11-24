@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Attachment;
+use Session;
 class CategoryController extends Controller
 {
     /**
@@ -44,6 +45,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',            
         ]);
 
         $category = new Category();
@@ -65,7 +67,8 @@ class CategoryController extends Controller
         $attachment->image()->save($file);
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category created successfully');
+            ->with('success', 'Category created successfully');       
+            
     }
 
     /**
@@ -93,6 +96,7 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $category = Category::find($id);
         $input = $request->all();   
@@ -115,7 +119,7 @@ class CategoryController extends Controller
         }
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category updated successfully');
+            ->with('info', 'Category updated successfully');
     }
 
     /**
@@ -130,6 +134,6 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category deleted successfully');
+            ->with('warning', 'Category deleted successfully');
     }
 }

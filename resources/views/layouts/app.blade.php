@@ -44,6 +44,7 @@
     @include('admin.partials.themeScript')
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
+    <script src= "//unpkg.com/alpinejs" defer></script>
     @stack('js')   
     <!-- Script for flash-message -->
     <script src="/js/app.js"></script>

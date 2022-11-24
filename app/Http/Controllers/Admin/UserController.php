@@ -87,6 +87,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $user = User::find($id);
