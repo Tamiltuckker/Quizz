@@ -43,7 +43,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'  =>  'required|unique:categoris|max:255',
+            'name'  =>  'required|unique:categories|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',            
         ]);
 
@@ -94,7 +94,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:categories|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $category = Category::find($id);
@@ -129,7 +129,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::findOrFail($id);       
+        $category->image()->delete();
         $category->delete();
 
         return redirect()->route('admin.categories.index')

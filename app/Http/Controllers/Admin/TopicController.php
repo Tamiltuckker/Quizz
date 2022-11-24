@@ -140,6 +140,7 @@ class TopicController extends Controller
     public function destroy($id)
     {
         $topic = Topic::findOrFail($id);
+        $topic->image()->delete();
         $topic->delete();
 
         return redirect()->route('admin.topics.index')

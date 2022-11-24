@@ -84,7 +84,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' =>  'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -129,8 +129,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-
+        $user = User::find($id);
+        $user->image()->delete();
+        $user->delete();
+        
         return redirect()->route('admin.users.index')
             ->with('danger', 'Users deleted successfully');
     }
