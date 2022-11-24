@@ -15,20 +15,21 @@ class DashboardController extends Controller
     public function index()
     {
         $categories = Category::all();
-
         return view('users.dashboard',compact('categories'));
     }
 
     public function gettemplates($id)
-    {     
-        $quizTemplates = QuizTemplate::where('category_id', $id)->get();
+    {   
+        $categoryId    =Category::where('name','=',$id)->first();
+        $quizTemplates = QuizTemplate::where('category_id', $categoryId->id)->get();
 
         return view('users.gettemplates',compact('quizTemplates'));
     } 
     
     public function getquestions($id)
     {
-        $quizQuestions = QuizQuestion::where('quiz_template_id', $id)->get();
+        $quizTemplateId =QuizTemplate::where('slug','=',$id)->first();
+        $quizQuestions  = QuizQuestion::where('quiz_template_id',$quizTemplateId->id)->get();
 
         return view('users.getquestions',compact('quizQuestions'));
     }
