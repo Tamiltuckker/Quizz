@@ -58,4 +58,10 @@ class User extends Authenticatable
     {
         return $this->morphOne(Attachment::class, 'attachmentable');
     }
+
+    public function scopeActive($query ,$value = 1)
+    {
+        return $query->where('active', $value);
+    }
+    
 }
