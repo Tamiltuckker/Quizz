@@ -28,9 +28,10 @@ class DashboardController extends Controller
     
     public function getquestions($id)
     {
-        $quizTemplateId =QuizTemplate::where('slug','=',$id)->first();
-        $quizQuestions  = QuizQuestion::where('quiz_template_id',$quizTemplateId->id)->get();
+        $quizTemplateIds =QuizTemplate::where('slug','=',$id)->first();
+        $quizTemplateId =$quizTemplateIds->id;
+        $quizQuestions  = QuizQuestion::where('quiz_template_id',$quizTemplateId)->get();
 
-        return view('users.getquestions',compact('quizQuestions'));
+        return view('users.getquestions',compact('quizQuestions','quizTemplateId'));
     }
 }
