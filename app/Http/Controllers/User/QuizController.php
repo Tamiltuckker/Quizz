@@ -32,6 +32,6 @@ class QuizController extends Controller
             $quizAnswer->save();
         }
 
-        return redirect()->route('users.dashboard.index')->with('info', 'Quiz Complted');
+        return redirect()->route('user.dashboard.index')->with('info', 'Quiz Complted');
     }
 }
