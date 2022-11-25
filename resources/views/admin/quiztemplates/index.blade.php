@@ -19,6 +19,7 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Template</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No. of Questions</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                 </tr>
                             </thead>
@@ -40,6 +41,14 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$quizTemplate->quiz_questions->count()}}</h6>
+                                                </div>
+                                            </div>
+                                        </td>                                       
+                                           
 
                                         <td class="align-middle text-center text-sm">
                                             <form method="POST" action="{{ route('admin.quiztemplates.destroy', $quizTemplate->id) }}">

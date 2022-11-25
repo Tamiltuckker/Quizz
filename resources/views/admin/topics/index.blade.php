@@ -15,10 +15,12 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th 
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Topic Image</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">topic
-                                    </th>
+                                    <th 
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        topic</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Status</th>
@@ -37,7 +39,7 @@
                                                     <img src="{{ asset('/storage/image/' . $topic->image->image) }}"
                                                         class="avatar avatar-sm me-3" alt="topic1">
                                                 @elseif ($topic->image == null)
-                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
+                                                    <img src="../assets/img/user.png" class="avatar avatar-sm me-3"
                                                         alt="topic1">
                                                 @endif
                                             </div>

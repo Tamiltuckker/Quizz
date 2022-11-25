@@ -14,8 +14,8 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User
-                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        User</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Status</th>
@@ -37,7 +37,7 @@
                                                         <img src="{{ asset('/storage/image/' . $user->image->image) }}"
                                                             class="avatar avatar-sm me-3" alt="user1">
                                                     @elseif ($user->image == null)
-                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
+                                                        <img src="../assets/img/user.png" class="avatar avatar-sm me-3"
                                                             alt="user1">
                                                     @endif
                                                 </div>

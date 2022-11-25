@@ -29,8 +29,9 @@ class TopicController extends Controller
     {
         $categories = Category::pluck('name','id');
         $status     = Topic::$status;
-
+       
         return view('admin.topics.create',compact('categories','status'));
+        // return response()->json($data);
     }
 
     /**
@@ -42,7 +43,7 @@ class TopicController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required', 
+            'name' => 'required|unique:topics|max:255', 
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',                
         ]);  
     
@@ -104,7 +105,7 @@ class TopicController extends Controller
     public function update(Request $request, $id)
     {       
         $this->validate($request, [
-            'name' => 'required', 
+            'name' => 'required|unique:topics|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',       
         ]); 
         $topic       =  Topic::find($id);        

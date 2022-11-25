@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\QuizTemplate;
 use App\Models\Attachment;
 class CategoryController extends Controller
 {
@@ -16,6 +17,8 @@ class CategoryController extends Controller
     public function index(Request $request, Category $category)
     {
         $categories = Category::latest()->paginate(5);
+        $quizTemplates = QuizTemplate::withCount('category')->get();       
+        // dd($quizTemplates);
 
         return view('admin.categories.index', compact('categories'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
