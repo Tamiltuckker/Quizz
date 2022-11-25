@@ -14,20 +14,24 @@ class QuizController extends Controller
 {
     public function store(Request $request)
     {
-        $id = $request->quizTemplateId;
-        $quizTemplate  = QuizTemplate::find($id);
-        $optionsid = $request->quizOptionId;
-        $optionid  = QuizOption::find($optionsid);
+        foreach($request->quizanswers as $quizQuestion => $selectedOption) {
+            
+            $id                           = $request->quizTemplateId;
+            $quizTemplate                 = QuizTemplate::find($id);
+            $optionId                     = $selectedOption;
+            $quizOpton                    = QuizOption::find($optionId);
 
-        $question                   = new QuizAnswer();
-        $question->user_id          = Auth::user()->id;
-        $question->category_id      = $quizTemplate->category_id;
-        $question->quiz_template_id = $request->quizTemplateId;
-        $question->quiz_question_id = $request->quizQuestion;    
-        $question->quiz_option_id   = $request->quizOptionId;
-        $question->point            = $optionid->is_correct;
-        $question->save();
+            $quizAnswer                   = new QuizAnswer();
+            $quizAnswer->user_id          = Auth::user()->id;
+            $quizAnswer->category_id      = $quizTemplate->category_id;
+            $quizAnswer->quiz_template_id = $request->quizTemplateId;
+            $quizAnswer->quiz_question_id = $quizQuestion;    
+            $quizAnswer->quiz_option_id   = $selectedOption;
+            $quizAnswer->point            = $quizOpton->is_correct;
 
-        return "succes";
+            $quizAnswer->save();
+        }
+
+        return redirect()->route('users.dashboard.index')->with('info', 'Quiz Complted');
     }
 }

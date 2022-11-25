@@ -14,9 +14,12 @@
                 <div class="row mt-2 ">
                     <div class="card mx-auto text-left col-md-8">
                         <div class="row">
-                            <div class="col-md-10">
-                                <h4 class="mt-2">{{ $quizTemplate->name }} &nbsp;&nbsp;&nbsp;&nbsp; TotalQuestions:{{ count($quizTemplate->quiz_questions) }}</h4>
+                            <div class="col-md-8">
+                                <h4 class="mt-2">{{ $quizTemplate->name }} </h4>
                             </div>
+                            <div class="col-md-2">
+                                <p class="mt-2"> Questions - {{ count($quizTemplate->quiz_questions) }} </p>
+                            </div> 
                             <div class="col-md-2">
                                 <a class="btn btn-warning btn-md mt-1"
                                     href="{{ route('user.dashboard.getquestions', $quizTemplate->slug) }}">Start
