@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Attachment;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -17,16 +17,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UsersDataTable $dataTable)
     {
-        $getUsers =  Role::with('users')->where('name', '!=', 'Admin')->get();
-
-        foreach($getUsers as $getUser)
-        {
-            $users['users'] = $getUser->users;
-        }
-
-        return view('admin.users.index', compact('users'));
+        return $dataTable->render('admin.users.index');
     }
 
     /**
@@ -129,8 +122,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-
-        return redirect()->route('admin.users.index')
-            ->with('danger', 'Users deleted successfully');
     }
 }
