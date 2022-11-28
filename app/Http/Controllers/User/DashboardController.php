@@ -4,25 +4,31 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Illuminate\Foundation\Auth\User;
-use Illuminate\Http\Request;
+use App\Models\QuizQuestion;
+use App\Models\QuizTemplate;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $categories = Category::pluck('name','id');
-
+        $categories = Category::all();
         return view('users.dashboard',compact('categories'));
     }
 
-    public function gettemplates(Category $categories)
-    {       
-        return view('users.gettemplates');
+    public function gettemplates($id)
+    {   
+        $categoryId    = Category::where('name','=',$id)->first();
+        $quizTemplates = QuizTemplate::where('category_id', $categoryId->id)->get();
+
+        return view('users.gettemplates',compact('quizTemplates'));
     } 
     
-    public function getquestions()
+    public function getquestions($id)
     {
-        return view('users.getquestions');
+        $quizTemplateIds = QuizTemplate::where('slug','=',$id)->first();
+        $quizTemplateId =  $quizTemplateIds->id;
+        $quizQuestions  = QuizQuestion::where('quiz_template_id',$quizTemplateId)->get();
+
+        return view('users.getquestions',compact('quizQuestions','quizTemplateId'));
     }
 }

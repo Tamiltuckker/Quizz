@@ -48,10 +48,22 @@ class Category extends Authenticatable
         return $this->hasMany(QuizTemplate::class);
     }
 
-     // relation
-
+    // relation
+    
     public function image()
     {
         return $this->morphOne(Attachment::class, 'attachmentable');
     }
+
+    public function quiz_questions()
+    {
+        return $this->hasManyThrough(
+            QuizQuestion::class,
+            QuizTemplate::class,
+            'category_id', // Foreign key on quiz_template table...
+            'quiz_template_id', // Foreign key on quiz_template table...
+            'id', // Local key on categories table...
+            'id' // Local key on quiz_template table...
+        );
+   }
 }
