@@ -14,8 +14,8 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User
-                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        User</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Status</th>
@@ -37,7 +37,7 @@
                                                         <img src="{{ asset('/storage/image/' . $user->image->image) }}"
                                                             class="avatar avatar-sm me-3" alt="user1">
                                                     @elseif ($user->image == null)
-                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
+                                                        <img src="../assets/img/user.png" class="avatar avatar-sm me-3"
                                                             alt="user1">
                                                     @endif
                                                 </div>
@@ -47,7 +47,6 @@
                                                 </div>
                                             </div>
                                         </td>
-
                                         <td class="align-middle text-center text-sm">
                                             @if ($user->active == \App\Models\User::ACTIVE)
                                                 <span class="badge badge-sm bg-gradient-success">Active</span>
@@ -55,12 +54,10 @@
                                                 <span class="badge badge-sm bg-gradient-danger">InActive</span>
                                             @endif
                                         </td>
-
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold">
                                                 {{ date('d-m-Y', strtotime($user->created_at)) }} </span>
                                         </td>
-
                                         <td class="align-middle text-center text-sm">
                                             <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
                                                 <a href="{{ route('admin.users.edit', $user->id) }}"

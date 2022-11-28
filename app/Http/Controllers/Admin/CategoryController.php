@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\QuizTemplate;
 use App\Models\Attachment;
 class CategoryController extends Controller
 {
@@ -16,7 +17,8 @@ class CategoryController extends Controller
     public function index(Request $request, Category $category)
     {
         $categories = Category::latest()->paginate(5);
-
+        $quizTemplates = QuizTemplate::withCount('category')->get();    
+       
         return view('admin.categories.index', compact('categories'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -43,7 +45,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name'  =>  'required|unique:categories|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',            
         ]);
 
         $category = new Category();
@@ -65,7 +68,8 @@ class CategoryController extends Controller
         $attachment->image()->save($file);
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category created successfully');
+            ->with('success', 'Category created successfully');       
+            
     }
 
     /**
@@ -92,7 +96,8 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:categories|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $category = Category::find($id);
         $input = $request->all();   
@@ -115,7 +120,7 @@ class CategoryController extends Controller
         }
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category updated successfully');
+            ->with('info', 'Category updated successfully');
     }
 
     /**
@@ -126,10 +131,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::findOrFail($id);       
+        $category->image()->delete();
         $category->delete();
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category deleted successfully');
+            ->with('warning', 'Category deleted successfully');
     }
 }

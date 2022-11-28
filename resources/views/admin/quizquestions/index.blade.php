@@ -18,9 +18,7 @@
                         @yield('content')
                         <table class="table align-items-center mb-0">
                             <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Template</th>
+                                <tr>                                   
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Question</th>
                                     <th
@@ -30,14 +28,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($quizQuestions as $quizQuestion)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ @$quizQuestion->quiz_template->name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
+                                    <tr>                                      
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
@@ -45,7 +36,6 @@
                                                 </div>
                                             </div>
                                         </td>
-
                                         <td class="align-middle text-center text-sm">
                                             <form method="POST"
                                                 action="{{ route('admin.quizquestions.destroy', [$quizTemplateId, $quizQuestion->id]) }}">

@@ -29,8 +29,8 @@ class TopicController extends Controller
     {
         $categories = Category::pluck('name','id');
         $status     = Topic::$status;
-
-        return view('admin.topics.create',compact('categories','status'));
+       
+        return view('admin.topics.create',compact('categories','status'));       
     }
 
     /**
@@ -42,7 +42,8 @@ class TopicController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',                    
+            'name' => 'required|unique:topics|max:255', 
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',                
         ]);  
     
         $topic              = new Topic();
@@ -103,7 +104,8 @@ class TopicController extends Controller
     public function update(Request $request, $id)
     {       
         $this->validate($request, [
-            'name' => 'required',          
+            'name' => 'required|unique:topics|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',       
         ]); 
         $topic       =  Topic::find($id);        
         $input = $request->all();  
@@ -138,6 +140,7 @@ class TopicController extends Controller
     public function destroy($id)
     {
         $topic = Topic::findOrFail($id);
+        $topic->image()->delete();
         $topic->delete();
 
         return redirect()->route('admin.topics.index')

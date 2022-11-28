@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\QuizQuestion;
 use Illuminate\Http\Request;
 use App\Models\QuizTemplate;
 class QuizTemplateController extends Controller
@@ -14,10 +15,11 @@ class QuizTemplateController extends Controller
      */
     public function index()
     {
-        $quizTemplates = QuizTemplate::with('category')->get();
-
+        $quizTemplates = QuizTemplate::with('category')->get();        
+        $quizQuestions = QuizQuestion::withCount('quiz_template')->get();  
+            
         return view('admin.quiztemplates.index',compact('quizTemplates'));   
-    }
+    }  
 
     /**
      * Show the form for creating a new resource.

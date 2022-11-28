@@ -1,9 +1,10 @@
-@if ($message = Session::get('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>{{ $message }}</strong>
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div x-data="{ showMessage: true }" x-show="showMessage" x-init="setTimeout(() => showMessage = false, 3000)">
+  @if (session()->has('success'))  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">  
+      {{ session()->get('success') }}
+  </div>
+  @endif
 </div>
-@endif     
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -14,21 +15,23 @@
      @endforeach
     </ul>
 </div>
-@endif
-     
-@if ($message = Session::get('warning'))
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>{{ $message }}</strong>
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+@endif     
+
+<div x-data="{ showMessage: true }" x-show="showMessage" x-init="setTimeout(() => showMessage = false, 3000)">
+  @if (session()->has('warning'))  
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">  
+      {{ session()->get('warning') }}
+  </div>
+  @endif
+</div>     
+
+<div x-data="{ showMessage: true }" x-show="showMessage" x-init="setTimeout(() => showMessage = false, 3000)">
+  @if (session()->has('info'))  
+    <div class="alert alert-info alert-dismissible fade show" role="alert">  
+      {{ session()->get('info') }}
+  </div>
+  @endif
 </div>
-@endif
-     
-@if ($message = Session::get('info'))
-<div class="alert alert-info alert-dismissible fade show" role="alert">
-  <strong>{{ $message }}</strong>
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-@endif
     
 @if ($errors->any())
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
