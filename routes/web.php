@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\QuizQuestionController;
 use App\Http\Controllers\Admin\QuizTemplateController;
+use App\Http\Controllers\Admin\QuizAnsweredController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\QuizController;
 use App\Http\Controllers\User\ProfileController;
@@ -37,6 +38,8 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::ADMIN], 'as' => 
     Route::group(['prefix' => 'quiztemplates/{quiztemplate_id}'], function () {
         Route::resource('quizquestions',QuizQuestionController::class);
     });
+    Route::get('users/getansweredtemplates/{id}', [QuizAnsweredController::class, 'getansweredtemplates'])->name('getansweredtemplates');
+    Route::get('getansweredquestions/{id}', [QuizAnsweredController::class, 'getansweredquestions'])->name('getansweredquestions');
 });
 
 Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => 'user.', 'prefix' => 'user', 'namespace' => 'User'], function() {
