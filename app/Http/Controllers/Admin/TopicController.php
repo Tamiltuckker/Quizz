@@ -30,8 +30,7 @@ class TopicController extends Controller
         $categories = Category::pluck('name','id');
         $status     = Topic::$status;
        
-        return view('admin.topics.create',compact('categories','status'));
-        // return response()->json($data);
+        return view('admin.topics.create',compact('categories','status'));       
     }
 
     /**

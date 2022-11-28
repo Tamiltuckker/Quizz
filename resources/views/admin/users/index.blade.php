@@ -47,7 +47,6 @@
                                                 </div>
                                             </div>
                                         </td>
-
                                         <td class="align-middle text-center text-sm">
                                             @if ($user->active == \App\Models\User::ACTIVE)
                                                 <span class="badge badge-sm bg-gradient-success">Active</span>
@@ -55,12 +54,10 @@
                                                 <span class="badge badge-sm bg-gradient-danger">InActive</span>
                                             @endif
                                         </td>
-
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold">
                                                 {{ date('d-m-Y', strtotime($user->created_at)) }} </span>
                                         </td>
-
                                         <td class="align-middle text-center text-sm">
                                             <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
                                                 <a href="{{ route('admin.users.edit', $user->id) }}"

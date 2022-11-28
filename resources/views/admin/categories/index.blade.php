@@ -19,8 +19,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Category Image</th>
-                                   
+                                        Category Image</th>                                   
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Template-Count</th>
                                     <th
@@ -51,15 +50,13 @@
                                                 </div>
                                             </div>
                                         </td>
-
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $category->quiz_templates->count() }}</h6>
                                                 </div>
                                             </div>
-                                        </td>
-                                      
+                                        </td>                                      
                                           <td class="align-middle text-center text-sm">
                                             @if ($category->active == \App\Models\Category::ACTIVE)
                                                 <span class="badge badge-sm bg-gradient-success">active </span>

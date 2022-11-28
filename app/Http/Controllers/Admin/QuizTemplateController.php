@@ -17,7 +17,7 @@ class QuizTemplateController extends Controller
     {
         $quizTemplates = QuizTemplate::with('category')->get();        
         $quizQuestions = QuizQuestion::withCount('quiz_template')->get();  
-    //    dd($quizQuestions);
+            
         return view('admin.quiztemplates.index',compact('quizTemplates'));   
     }  
 

@@ -36,7 +36,6 @@
                                                 </div>
                                             </div>
                                         </td>
-
                                         <td class="align-middle text-center text-sm">
                                             <form method="POST"
                                                 action="{{ route('admin.quizquestions.destroy', [$quizTemplateId, $quizQuestion->id]) }}">
