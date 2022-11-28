@@ -1,16 +1,38 @@
 @extends('layouts.frontend')
 
 @section('content')
-    <!-- ======= Services Section ======= -->
     <section id="services" class="services">
         <div class="container" data-aos="fade-up">
-
             <div class="section-title">
                 <h2>Quiz Section</h2>
                 <p>Check Your Brain</p>
             </div>
-
             <div class="row">
+            @guest
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                        <h4><a href="{{ route('login') }}">HTML</a></h4>
+                        <p>HTML Quiz templates with Question. Register your account and explore the Quiz</p>
+                    </div>
+                </div> 
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                        <h4><a href="{{ route('login') }}">CSS</a></h4>
+                        <p>CSS Quiz templates with Question. Register your account and explore the Quiz</p>
+                    </div>
+                </div> 
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                        <h4><a href="{{ route('login') }}">PHP</a></h4>
+                        <p>PHP Quiz templates with Question. Register your account and explore the Quiz</p>
+                    </div>
+                </div> 
+            @endguest
+
+            @auth
                 @foreach ($categories as $category)
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                         <div class="icon-box">
@@ -25,7 +47,9 @@
                         </div>
                     </div>
                 @endforeach
+                @endauth
+
             </div>
         </div>
-    </section><!-- End Services Section -->
+    </section>
 @endsection

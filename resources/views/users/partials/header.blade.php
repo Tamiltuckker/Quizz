@@ -20,8 +20,6 @@
                   <li><a href="#">Deep Drop Down 1</a></li>
                   <li><a href="#">Deep Drop Down 2</a></li>
                   <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
                 </ul>
               </li>
               <li><a href="#">Drop Down 2</a></li>
@@ -30,24 +28,32 @@
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li> 
-          <li>
-            <a class="nav-link scrollto" href="#">
-              <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <x-responsive-nav-link :href="route('logout')"
-                    onclick="event.preventDefault();
-                          this.closest('form').submit();">
-                    <span class="d-sm-inline d-none">Log out</span>
-                </x-responsive-nav-link>
-            </form>
-            </a>
-          </li>
-        </ul>
+          @auth
+            <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a href="{{ route('user.profiles.index') }}">Profile</a></li>
+                <li><a href="#">Change Password</a></li>
+                <li><a href="#"><form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <x-responsive-nav-link :href="route('logout')"
+                        onclick="event.preventDefault();
+                              this.closest('form').submit();">
+                        <span class="d-sm-inline d-none">Log out</span>
+                    </x-responsive-nav-link>
+                  </form>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          @endauth
+        </ul> 
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
-      <a href="#about" class="get-started-btn scrollto">Get Started</a>
-
-
+      @guest
+        <a href="{{ route('login') }}" class="get-started-btn scrollto">Login/Register</a>
+      @endguest
+      @auth
+        <a href="{{ route('user.profiles.index') }}" class="get-started-btn scrollto">My Profile</a>
+      @endauth
     </div>
   </header><!-- End Header -->
