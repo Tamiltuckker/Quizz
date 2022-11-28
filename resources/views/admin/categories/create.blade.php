@@ -10,7 +10,7 @@
                         @yield('content')  
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Create Category</p>
-                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('admin.categories.index') }}">Back</a>
+                            <a class="btn btn-primary btn-sm ms-auto " href="{{ route('admin.categories.index') }}">Back</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -31,12 +31,12 @@
                                             name</label>
                                         <input class="form-control" name="name" type="text" placeholder="name">
                                     </div>
-                                </div>
+                                </div>                            
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Status</label>
                                         <div class="form-check form-switch ">
-                                            <input class="form-check-input" type="checkbox" name="active"
+                                            <input class ="form-check-input" type="checkbox" name="active"
                                                 id="flexSwitchCheckDefault" checked data-toggle="toggle" data-on="1"
                                                 data-off="0">
                                         </div>

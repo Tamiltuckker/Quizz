@@ -5,8 +5,8 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <div class="float-right">
-                        <a class="btn btn-sm bg-gradient-success" href="{{ route('admin.topics.create') }}">Create</a>
+                    <div>
+                        <a class="btn bg-gradient-primary font-weight-bold text-xs float-end" href="{{ route('admin.topics.create') }}">Create</a>
                     </div>
                     <h6>Topics Table</h6>
                 </div>

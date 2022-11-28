@@ -26,13 +26,14 @@
                                         <input type="file" name="image" class="form-control form-group"
                                             accept="image/*">
                                     </div>
-                                </div>
+                                </div>                              
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="inputAddress">Categories *</label>
-                                        {{ Form::select('category_id', @$categories, null, ['class' => 'form-control form-control-solid form-select mb-2', 'placeholder' => 'Select Category']) }}
+                                        {{ Form::select('category_id', @$categories, null, ['class' => 'form-control form-control-solid form-select mb-2 single-select2', 'placeholder' => 'Select Category']) }}
                                     </div>
-                                </div>
+                                </div> 
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Topic Name</label>
@@ -64,4 +65,5 @@
             </div>
         </div>
     </div>
+    @include('script')     
 @endsection
