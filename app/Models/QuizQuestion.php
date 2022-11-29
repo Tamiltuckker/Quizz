@@ -28,10 +28,14 @@ class QuizQuestion extends Authenticatable
     {
         return $this->hasMany(QuizOption::class);
     }
-      // relation
  
     public function image()
     {
         return $this->morphOne(Attachment::class, 'attachmentable');
+    }
+
+    public function quiz_answers()
+    {
+        return $this->hasMany(QuizAnswer::class);
     }
 }

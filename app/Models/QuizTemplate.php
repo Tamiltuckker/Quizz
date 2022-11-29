@@ -30,4 +30,9 @@ class QuizTemplate extends Model
         return $this->hasMany(QuizQuestion::class);
     }
 
+    public function quiz_answer()
+    {
+        return $this->hasOne(QuizAnswer::class);
+    }
+
 }

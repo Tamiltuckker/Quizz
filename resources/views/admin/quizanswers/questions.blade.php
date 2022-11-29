@@ -1,45 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <div class="float-right">
-                        {{-- <a class="btn btn-primary btn-sm ms-auto" href="{{ route('admin.getansweredtemplates',$quizTemplateId) }}">Back</a> --}}
-                    </div>
-                    <h6>Answered Questions table</h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        @include('flash-message')
-                        @yield('content')
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>                                   
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                       Answered Questions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($answeredQuestions as $answeredQuestion)
-                                    <tr>                                      
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $answeredQuestion->question }}</h6>
-                                                </div>
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="text-uppercase text-sm">Answered Questions Information</p>
+                        @foreach ($answeredQuestions as $key => $answeredQuestion)
+                            @php 
+                                $answeredQuestionId = $answeredQuestion->id; 
+                                $options            = $answeredQuestion->quiz_options;
+                            @endphp
+                            <div class="container mb-5">
+                                <div class="col-12">
+                                    <p class="fw-bold"> {{ $loop->iteration }}. {{ $answeredQuestion->question }}</p>
+                                    @foreach ($options as $key => $option)
+                                        @php
+                                            $getSelectedAnsweres    = \App\Models\QuizAnswer::where('quiz_option_id', $option->id)
+                                                                    ->where('user_id', $userId)
+                                                                    ->first();
+                                                $bg_color = '';
+                                                if ($getSelectedAnsweres === null) {
+                                                     $bg_color = " ";
+                                                } elseif ($getSelectedAnsweres->point === 1) {
+                                                     $bg_color = "bg-success";
+                                                } else {
+                                                     $bg_color = "bg-danger";
+                                                }
+                                        @endphp
+                                            <div class ={{ $bg_color }} > 
+                                                <input type="radio" name={{ "quizanswers[$answeredQuestionId]"}}  value="{{ $option->id }}"> 
+                                                <label for="one" class="box first">
+                                                    <div class="course">
+                                                        <span class="circle"></span>
+                                                            <span class="">
+                                                                {{ $option->option }}   
+                                                            </span>
+                                                    </div>
+                                                </label>
                                             </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                    @endforeach 
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-   @include('script')  
+    @push('css')
+        <link href="{{ asset('assets/css/radio-options.css') }}" rel="stylesheet" />
+    @endpush
+    @include('script')
 @endsection

@@ -38,8 +38,8 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::ADMIN], 'as' => 
     Route::group(['prefix' => 'quiztemplates/{quiztemplate_id}'], function () {
         Route::resource('quizquestions',QuizQuestionController::class);
     });
-    Route::get('users/getansweredtemplates/{id}', [QuizAnsweredController::class, 'getansweredtemplates'])->name('getansweredtemplates');
-    Route::get('getansweredquestions/{id}', [QuizAnsweredController::class, 'getansweredquestions'])->name('getansweredquestions');
+    Route::get('users/{user_id}/getansweredtemplates', [QuizAnsweredController::class, 'getansweredtemplates'])->name('getansweredtemplates');
+    Route::get('users/{user_id}/getansweredtemplates/{template_id}/getansweredquestions', [QuizAnsweredController::class, 'getansweredquestions'])->name('getansweredquestions');
 });
 
 Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => 'user.', 'prefix' => 'user', 'namespace' => 'User'], function() {

@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 
 class QuizAnsweredController extends Controller
 {
-    public function getansweredtemplates($id)
+    public function getansweredtemplates($userId)
     {
-        $quizAnsweredTemplates = QuizAnswer::where('user_id', $id)
+        $quizAnsweredTemplates = QuizAnswer::where('user_id', $userId)
                                  ->get()
                                  ->groupBy('quiz_template_id');
 
@@ -22,15 +22,15 @@ class QuizAnsweredController extends Controller
            $answeredTemplates[] = QuizTemplate::find($id);
         }
 
-        return view('admin.quizanswers.templates',compact('answeredTemplates'));
+        return view('admin.quizanswers.templates',compact('answeredTemplates','userId'));
     }
-    public function getansweredquestions($quizTemplateId)
+    public function getansweredquestions($userId,$quizTemplateId)
     {
         $answeredQuestions = QuizQuestion::with('quiz_template')
                             ->where('quiz_template_id', $quizTemplateId)
                             ->get();
 
-        return view('admin.quizanswers.questions',compact('answeredQuestions','quizTemplateId'));
+        return view('admin.quizanswers.questions',compact('answeredQuestions','quizTemplateId','userId'));
 
     }
     

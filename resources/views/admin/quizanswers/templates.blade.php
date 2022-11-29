@@ -45,7 +45,7 @@
                                             </div>
                                         </td>             
                                         <td class="align-middle text-center text-sm">
-                                            <a class="btn bg-gradient-warning font-weight-bold text-xs" href="{{ route('admin.getansweredquestions',$answeredTemplate->id) }}">Answered Questions</a>
+                                            <a class="btn bg-gradient-warning font-weight-bold text-xs" href="{{ route('admin.getansweredquestions',[$userId,$answeredTemplate->id]) }}">Answered Questions</a>
                                             @csrf
                                         </td>
                                     </tr>

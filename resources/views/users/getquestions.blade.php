@@ -11,7 +11,6 @@
             <form method="POST" name="quizanswer" action="{{ route('user.dashboard.store') }}">
               @foreach ($quizQuestions as $questionKey => $quizQuestion)
                 @php $questionId = $quizQuestion->id @endphp
-                {{-- <input type="hidden" name="quizQuestionId[]" value={{ $quizQuestion->id }}> --}}
                     @csrf
                     @php $options = $quizQuestion->quiz_options @endphp
                     <h4> Q{{ $quizQuestion->id }}.{{ $quizQuestion->question }}</h4>
