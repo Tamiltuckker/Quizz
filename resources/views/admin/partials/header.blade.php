@@ -9,9 +9,9 @@
             <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">          
-               <ul class="navbar-nav  justify-content-end">
-                   <li class="nav-item d-flex align-items-center">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <ul class="navbar-nav  justify-content-end">
+                    <li class="nav-item d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
                             <i class="fa fa-user me-sm-1"></i>
                             <form method="POST" action="{{ route('logout') }}">
@@ -22,8 +22,8 @@
                                 <span class="d-sm-inline d-none">Log out</span>
                                 </x-responsive-nav-link>
                             </form>
-                         </a>
-                    </li>                
+                        </a>
+                    </li>
                     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                             <div class="sidenav-toggler-inner">
@@ -31,22 +31,23 @@
                                 <i class="sidenav-toggler-line bg-white"></i>
                                 <i class="sidenav-toggler-line bg-white"></i>
                             </div>
-                         </a>
+                        </a>
                     </li>
                     <li class="nav-item px-3 d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-white p-0">
                             <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                         </a>
+                        </a>
                     </li>
-                     <li class="nav-item dropdown pe-2 d-flex align-items-center">                  
-                         <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
+                    <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                        <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
                             aria-labelledby="dropdownMenuButton">
                             <li class="mb-2">
                                 <a class="dropdown-item border-radius-md" href="javascript:;">
                                     <div class="d-flex py-1">
                                         <div class="my-auto">
-                                            <img src="{{ asset('assets/img/team-2.jpg') }}" class="avatar avatar-sm  me-3 ">
-                                         </div>
+                                            <img src="{{ asset('assets/img/team-2.jpg') }}"
+                                                class="avatar avatar-sm  me-3 ">
+                                        </div>
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="text-sm font-weight-normal mb-1">
                                                 <span class="font-weight-bold">New message</span> from Laur
@@ -66,18 +67,18 @@
                                             <img src="{{ asset('assets/img/small-logos/logo-spotify.svg') }}"
                                             class="avatar avatar-sm bg-gradient-dark  me-3 ">
                                         </div>
-                                         <div class="d-flex flex-column justify-content-center">
+                                        <div class="d-flex flex-column justify-content-center">
                                             <h6 class="text-sm font-weight-normal mb-1">
                                                 <span class="font-weight-bold">New album</span> by Travis Scott
-                                             </h6>
+                                            </h6>
                                             <p class="text-xs text-secondary mb-0">
                                                 <i class="fa fa-clock me-1"></i>
-                                                 1 day
+                                                1 day
                                             </p>
                                         </div>
                                     </div>
                                 </a>
-                             </li>
+                            </li>
                             <li>
                                 <a class="dropdown-item border-radius-md" href="javascript:;">
                                     <div class="d-flex py-1">
@@ -98,7 +99,7 @@
                                                                 d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
                                                                 </path>
                                                             </g>
-                                                         </g>
+                                                        </g>
                                                     </g>
                                                 </g>
                                             </svg>
@@ -112,13 +113,13 @@
                                                 2 days
                                             </p>
                                         </div>
-                                     </div>
+                                    </div>
                                 </a>
                             </li>
                         </ul>
-                    </li>               
+                    </li>
                 </ul>
-            </div>     
+            </div>
         </div>
     </div>
 </nav>
