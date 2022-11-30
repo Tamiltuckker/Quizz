@@ -19,12 +19,24 @@
                             </div>
                             <div class="col-md-2">
                                 <p class="mt-2"> Questions - {{ count($quizTemplate->quiz_questions) }} </p>
-                            </div> 
-                            <div class="col-md-2">
-                                <a class="btn btn-warning btn-md mt-1"
-                                    href="{{ route('user.dashboard.getquestions', $quizTemplate->slug) }}">Start
-                                    Quiz</a>
                             </div>
+                            @php
+                                $quizAnswers = \App\Models\QuizAnswer::where('user_id', Auth::user()->id)
+                                    ->where('quiz_template_id', '=', $quizTemplate->id)
+                                    ->get();
+                            @endphp
+                            @if (count($quizAnswers) > 0)
+                                <div class="col-md-2">
+                                    <a class="btn btn-warning btn-md mt-1"
+                                        href="{{ route('user.dashboard.view', $quizTemplate->id) }}">View Answer</a>
+                                </div>
+                            @else
+                                <div class="col-md-2">
+                                    <a class="btn btn-warning btn-md mt-1"
+                                        href="{{ route('user.dashboard.getquestions', $quizTemplate->slug) }}">start
+                                        Quiz</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

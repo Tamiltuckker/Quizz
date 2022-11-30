@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\QuizQuestion;
 use App\Models\QuizTemplate;
-
+use App\Models\QuizAnswer;
 class DashboardController extends Controller
 {
     public function index()
@@ -17,7 +17,7 @@ class DashboardController extends Controller
 
     public function gettemplates($id)
     {   
-        $categoryId    = Category::where('name','=',$id)->first();
+        $categoryId    = Category::where('slug','=',$id)->first();
         $quizTemplates = QuizTemplate::where('category_id', $categoryId->id)->get();
 
         return view('users.gettemplates',compact('quizTemplates'));
@@ -31,4 +31,12 @@ class DashboardController extends Controller
 
         return view('users.getquestions',compact('quizQuestions','quizTemplateId'));
     }
+
+    public function answerview($id)
+    {
+        $quizAnswers = QuizAnswer::where('quiz_template_id','=',$id)->get();
+
+        return view('users.viewanswered',compact('quizAnswers'));
+    }
+    
 }
