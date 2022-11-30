@@ -13,17 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('topics', function (Blueprint $table) {
+        Schema::create('quiz_questions', function (Blueprint $table) {
             $table->id();
-            $table->integer('category_id')->unsigned();
-            $table->string('name');
-            $table->string('slug');  
-            $table->boolean('active')->default(1);
+            $table->foreignId('quiz_template_id')->constrained('quiz_templates');
+            $table->string('question');
+            $table->text('description');  
             $table->timestamps();
-
-            // Foreign Key
-            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('RESTRICT')->onDelete('cascade');
-
         });
     }
 
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topics');
+        Schema::dropIfExists('quiz_questions');
     }
 };
