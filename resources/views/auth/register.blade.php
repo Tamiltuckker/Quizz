@@ -8,7 +8,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5 text-center mx-auto">
                     <h1 class="text-white mb-2 mt-5">Welcome!</h1>
-                    <p class="text-lead text-white">Register Your Account !!!</p>
+                    <p class="text-lead text-white">Don't have an account? Register one !!!</p>
                 </div>
             </div>
         </div>
