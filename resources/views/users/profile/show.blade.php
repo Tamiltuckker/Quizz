@@ -18,7 +18,11 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="{{ asset('/storage/image/' . $user->image->image) }}" class="rounded-circle">
+                    @if ($user->image != null)
+                      <img src="{{ asset('/storage/image/' . $user->image->image) }}" class="rounded-circle">
+                    @elseif ($user->image == null)
+                      <img src="{{ asset('assets/img/team-2.jpg') }}" class="rounded-circle">
+                    @endif
                   </a>
                 </div>
               </div>
