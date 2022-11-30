@@ -67,10 +67,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
-
         return view('admin.users.edit', compact('user'));
     }
 
