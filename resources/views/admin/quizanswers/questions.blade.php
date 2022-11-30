@@ -4,7 +4,12 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">    
+                        <a class="btn btn-primary btn-sm ms-auto float-end"
+                         href="{{ route('admin.getansweredtemplates', $userId) }}">Back
+                        </a>                     
+                    </div>                    
                     <div class="card-body">
                         <p class="text-uppercase text-sm">Answered Questions Information</p>
                         @foreach ($answeredQuestions as $key => $answeredQuestion)
