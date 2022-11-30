@@ -4,8 +4,9 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
+                {!! Breadcrumbs::render() !!}
                 <div class="card">
-                    <div class="card-header pb-0">
+                    <div class="card-header pb-0">                       
                         @include('flash-message')      
                         @yield('content')  
                         <div class="d-flex align-items-center">
