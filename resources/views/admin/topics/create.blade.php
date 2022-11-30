@@ -29,14 +29,14 @@
                                         <input type="file" name="image" class="form-control form-group"
                                             accept="image/*">
                                     </div>
-                                </div>
+                                </div>                              
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="inputAddress">Categories *</label>
-                                        {{ Form::select('category_id', @$categories, null, ['class' => 'js-example-basic-single form-control form-control-solid form-select mb-2', 'placeholder' => 'Select Category']) }}
-                                     
+                                        {{ Form::select('category_id', @$categories, null, ['class' => 'form-control form-control-solid form-select mb-2 single-select2', 'placeholder' => 'Select Category']) }}
                                     </div>
-                                </div>
+                                </div> 
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Topic Name</label>
@@ -68,13 +68,5 @@
             </div>
         </div>
     </div>
-
-    @push('js')
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
-        <script>
-            $(document).ready(function() {
-                $('.js-example-basic-single').select2();
-            });  
-        </script>     
-    @endpush
+    @include('script')     
 @endsection

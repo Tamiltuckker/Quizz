@@ -17,21 +17,19 @@
                         <p class="text-uppercase text-sm">Quiz Template Information</p>
                         <div class="row">
                             <form method="POST" name="quiztemplates" action="{{ route('admin.quiztemplates.store') }}">
-                                @csrf
+                                @csrf                            
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="inputAddress">Categories *</label>
-                                        {{ Form::select('category_id', @$categories, null, ['class' => 'form-control form-control-solid form-select mb-2', 'placeholder' => 'Select Category']) }}
+                                        {{ Form::select('category_id', @$categories, null, ['class' => 'form-control form-control-solid form-select mb-2 single-select2', 'placeholder' => 'Select Category']) }}
                                     </div>
-                                </div>
-                                
+                                </div> 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Template name</label>
                                         <input class="form-control" name="name" type="text" placeholder="name">
                                     </div>
-                                </div>
-                                
+                                </div>                                
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <button type="submit" class="btn bg-gradient-success font-weight-bold text-xs">Save</button>
@@ -45,4 +43,5 @@
             </div>
         </div>
     </div>
+    @include('script') 
 @endsection
