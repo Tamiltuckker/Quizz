@@ -23,4 +23,9 @@ class QuizOption extends Authenticatable
     {
         return $this->belongsTo(QuizQuestion::class);
     }
+ 
+    public function quiz_answers()
+    {
+        return $this->hasMany(QuizAnswer::class);
+    }
 }

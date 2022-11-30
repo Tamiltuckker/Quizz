@@ -47,8 +47,6 @@ class Category extends Authenticatable
     {
         return $this->hasMany(QuizTemplate::class);
     }
-
-    // relation
     
     public function image()
     {
@@ -65,5 +63,10 @@ class Category extends Authenticatable
             'id', // Local key on categories table...
             'id' // Local key on quiz_template table...
         );
+   }
+   
+   public function quiz_answer()
+   {
+       return $this->hasOne(QuizAnswer::class);
    }
 }

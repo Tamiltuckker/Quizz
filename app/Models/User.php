@@ -63,5 +63,10 @@ class User extends Authenticatable
     {
         return $query->where('active', $value);
     }
+
+    public function quiz_answer()
+    {
+        return $this->hasOne(QuizAnswer::class);
+    }
     
 }

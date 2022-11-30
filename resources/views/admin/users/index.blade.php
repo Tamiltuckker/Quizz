@@ -60,6 +60,7 @@
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
+                                                <a class="btn bg-gradient-warning font-weight-bold text-xs" href="{{ route('admin.getansweredtemplates',$user->id) }}">Quiz Answered Templates</a>
                                                 <a href="{{ route('admin.users.edit', $user->id) }}"
                                                     class="btn bg-gradient-info font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
