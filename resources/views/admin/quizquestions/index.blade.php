@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <div class="float-right">
+                <div class="card-header pb-0">                    
+                    <div class="d-flex align-items-center">                        
+                        <a class="btn btn-primary btn-sm ms-auto" href="{{ route('admin.quiztemplates.index') }}">Back</a>&NonBreakingSpace;&NonBreakingSpace;                         
                         <a class="btn bg-gradient-info font-weight-bold text-xs"
-                            href="{{ route('admin.quizquestions.create',$quizTemplateId) }}">Create</a>
-                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('admin.quiztemplates.index') }}">Back</a>
+                        href="{{ route('admin.quizquestions.create',$quizTemplateId) }}">Create</a>
                     </div>
                     <h6>Questions table</h6>
                 </div>
