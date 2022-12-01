@@ -9,20 +9,21 @@
                 <p>Check Your Brain</p>
             </div>
             <form method="POST" name="quizanswer" action="{{ route('user.dashboard.store') }}">
-              @foreach ($quizQuestions as $questionKey => $quizQuestion)
-                @php $questionId = $quizQuestion->id @endphp
+                @foreach ($quizQuestions as $questionKey => $quizQuestion)
+                    @php $questionId = $quizQuestion->id @endphp
                     @csrf
                     @php $options = $quizQuestion->quiz_options @endphp
                     <h4> Q{{ $quizQuestion->id }}.{{ $quizQuestion->question }}</h4>
                     <br>
                     @foreach ($options as $key => $option)
-                        <input type="radio" name={{ "quizanswers[$questionId]"}}  value="{{ $option->id }}"> &nbsp;&nbsp;{{ $option->option }} <br>
-                    @endforeach 
-              @endforeach
+                        <input type="radio" name={{ "quizanswers[$questionId]" }} value="{{ $option->id }}">
+                        &nbsp;&nbsp;{{ $option->option }} <br>
+                    @endforeach
+                @endforeach
                 <input type="hidden" name="quizTemplateId" value="{{ $quizTemplateId }}">
-              <div class="mt-2">
-                <button type="submit" class="btn btn-md btn-info font-weight-bold text-xs">Save</button>
-              </div>
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-md btn-info font-weight-bold text-xs">Save</button>
+                </div>
             </form>
         </div>
     </section>

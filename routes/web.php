@@ -48,4 +48,5 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => '
     Route::get('/dashboard/questions/{slug}', [UserDashboardController::class, 'getquestions'])->name('dashboard.getquestions');
     Route::post('/dashboard/questions/answer', [QuizController::class, 'store'])->name('dashboard.store');
     Route::resource('profiles', ProfileController::class);
+    Route::get('/dashboard/view/{id}', [UserDashboardController::class, 'answerview'])->name('dashboard.view');
 });
