@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\QuizQuestion;
 use App\Models\QuizTemplate;
 use App\Models\QuizAnswer;
+use Illuminate\Support\Facades\Auth;
+
 class DashboardController extends Controller
 {
     public function index()
@@ -25,17 +27,17 @@ class DashboardController extends Controller
     
     public function getquestions($id)
     {
-        $quizTemplateIds = QuizTemplate::where('slug','=',$id)->first();
+        $quizTemplateIds = QuizTemplate::where('slug', '=' ,$id)->first();
         $quizTemplateId =  $quizTemplateIds->id;
         $quizQuestions  = QuizQuestion::where('quiz_template_id',$quizTemplateId)->get();
 
         return view('users.getquestions',compact('quizQuestions','quizTemplateId'));
     }
 
-    public function answerview($id)
+    public function viewquizanswer($id)
     {
-        $quizAnswers = QuizAnswer::where('quiz_template_id','=',$id)->get();
-
+        $quizAnswers = QuizAnswer::where('quiz_template_id','=',$id)->where('user_id', Auth::user()->id)->get();
+        
         return view('users.viewanswered',compact('quizAnswers'));
     }
     
