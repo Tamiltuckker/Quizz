@@ -15,7 +15,7 @@
                     $quizOptions = \App\Models\QuizOption::where('quiz_question_id', '=', $quizAnswer->quiz_question_id)->get();
                 @endphp
 
-                <h4> Q{{ $quizQuestion->id }}.{{ $quizQuestion->question }}</h4>
+                <h4> Q{{$loop->iteration}}.{{ $quizQuestion->question }}</h4>
                 <br>
 
                 @foreach ($quizOptions as $key => $quizOption)
@@ -26,13 +26,13 @@
                     @endphp
 
                     @if ($quizpoint === null)
-                        <input type="radio" name="" value=""> &nbsp;&nbsp;{{ $quizOption->option }}<br>
+                    <input type="radio" name="" value="">{{ $quizOption->option }}<br>
                     @elseif($quizpoint->point === 1)
-                        <span style="background-color:rgb(41, 233, 134);"> <input type="radio" name=""
-                                value=""> &nbsp;&nbsp;{{ $quizOption->option }} </span><br>
+                    <span class="bg-success text-white"><input type="radio" name=""
+                            value="">{{ $quizOption->option }}</span><br>
                     @else
-                        <span style="background-color:rgb(233, 41, 41);"> <input type="radio" name=""
-                                value=""> &nbsp;&nbsp;{{ $quizOption->option }} </span><br>
+                    <span class="bg-danger text-white"><input type="radio" name=""
+                            value="">{{ $quizOption->option }} </span><br>
                     @endif
                 @endforeach
             @endforeach

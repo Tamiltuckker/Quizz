@@ -13,11 +13,10 @@
                     @php $questionId = $quizQuestion->id @endphp
                     @csrf
                     @php $options = $quizQuestion->quiz_options @endphp
-                    <h4> Q{{ $quizQuestion->id }}.{{ $quizQuestion->question }}</h4>
+                    <h4> Q{{$loop->iteration}}.{{ $quizQuestion->question }}</h4>
                     <br>
                     @foreach ($options as $key => $option)
-                        <input type="radio" name={{ "quizanswers[$questionId]" }} value="{{ $option->id }}">
-                        &nbsp;&nbsp;{{ $option->option }} <br>
+                        <input type="radio" name={{ "quizanswers[$questionId]" }} value="{{ $option->id }}">{{ $option->option }} <br>
                     @endforeach
                 @endforeach
                 <input type="hidden" name="quizTemplateId" value="{{ $quizTemplateId }}">
