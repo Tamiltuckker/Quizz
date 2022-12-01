@@ -4,6 +4,7 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
+                {!! Breadcrumbs::render() !!}
                 {!! Form::model($user, ['method' => 'PATCH', 'route' => ['admin.users.update', $user->id], 'files' => true]) !!}
                 <div class="card">
                     <div class="card-header pb-0">
