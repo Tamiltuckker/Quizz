@@ -3,7 +3,7 @@
 
   <div class="main-content">
     <!-- Header -->
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 300px; background-image: url(https://raw.githubusercontent.com/creativetimofficial/argon-dashboard/gh-pages/assets-old/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center">
       <span class="mask bg-gradient-default opacity-8"></span>
       <!-- Header container -->
       <div class="container-fluid d-flex align-items-center">
@@ -70,10 +70,7 @@
               <div class="row align-items-center">
                 <div class="col-8">
                   <h3 class="mb-0">My account</h3>
-                </div>
-                <div class="col-4 text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">Settings</a>
-                </div>
+                </div>  
               </div>
             </div>
             <div class="card-body">
@@ -136,7 +133,7 @@
                 <div class="pl-lg-4">
                   <div class="form-group focused">
                     <button type="submit" class="btn btn-info font-weight-bold text-xs">Update</button>
-                    <a href="#!" class="btn btn-secondary">Back</a>
+                    <a href="{{ route('user.dashboard.index')}}" class="btn btn-secondary">Back</a>
                   </div>
                 </div>
               </form>
