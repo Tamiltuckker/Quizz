@@ -18,6 +18,7 @@
   <link href="{{ asset('frontend/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('frontend/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
   <link href="{{ asset('frontend/assets/css/style.css') }}" rel="stylesheet">
+  @stack('css')
 </head>
 
 <body>
@@ -42,6 +43,7 @@
   <script src="{{ asset('frontend/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('frontend/assets/vendor/php-email-form/validate.js') }}"></script>
   <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
+  @stack('js')
 </body>
 
 </html>
