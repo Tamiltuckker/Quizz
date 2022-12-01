@@ -43,6 +43,16 @@
                             <br>
                             <p> Total Question:{{ count($category->quiz_questions()->get()) }}</p>
                             <br>
+                            <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                            @php $userEmailVerfication = \App\Models\User::where('id', Auth::user()->id)->first();@endphp
+                            
+                            @if ($userEmailVerfication->email_verified_at !== null)
+                                <h4 class="useremail"><a
+                                        href="{{ route('user.dashboard.gettemplates') }}">{{ $category }}</a></h4>
+                            @else
+                                <h4 onclick="userEmail()"><a href="#">{{ $category }}</a></h4>
+                            @endif
+
                             <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
                         </div>
                     </div>
@@ -52,4 +62,6 @@
             </div>
         </div>
     </section>
+    @include('sweetalert');
+    <!-- End Services Section -->
 @endsection
