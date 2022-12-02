@@ -24,7 +24,7 @@ use App\Http\Controllers\User\ProfileController;
 */
 
 Route::get('/', function () {
-    return view('users.dashboard');
+    return  redirect()->route('user.dashboard.index');
 });
 
 require __DIR__.'/auth.php';
@@ -42,8 +42,9 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::ADMIN], 'as' => 
     Route::get('users/{user_id}/getansweredtemplates/{template_id}/getansweredquestions', [QuizAnsweredController::class, 'getansweredquestions'])->name('getansweredquestions');
 });
 
+Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard.index');
+
 Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => 'user.', 'prefix' => 'user', 'namespace' => 'User'], function() {
-    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard/templates/{slug}', [UserDashboardController::class, 'gettemplates'])->name('dashboard.gettemplates');
     Route::get('/dashboard/questions/{slug}', [UserDashboardController::class, 'getquestions'])->name('dashboard.getquestions');
     Route::post('/dashboard/questions/answer', [QuizController::class, 'store'])->name('dashboard.store');
