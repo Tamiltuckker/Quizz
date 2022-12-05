@@ -37,24 +37,13 @@
                 <input type="hidden" name="quizTemplateId" value="{{ $quizTemplateId }}">
                 <div class="mt-2">
                   <button type="submit" class="btn btn-md btn-info font-weight-bold text-xs" >        
-                    <h4><input class="quizTemplateId" type="hidden" value="{{$quizTemplateId}}">Save</h4>
+                    <h4 id ="add_to_me"><input class="quizTemplateId" type="hidden" value="{{$quizTemplateId}}">Save</h4>
                 </button>
                 </div>
             </form>
         </div>
     </section>
     {{-- @include('sweetalert'); --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-     $("h4").click(function(){   
-        alert('hi') ;
-      var getid= $(this).children('.quizTemplateId').val(); 
-        alert(getid); 
-        // var url = "user/dashboard/view/"+getid;
-        // alert(url);
-        location.href = "user/dashboard/view/=" + getid;
-        alert(location.href);
-    });
-        </script>
 @endsection
+
+
