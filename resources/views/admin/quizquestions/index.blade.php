@@ -3,6 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
+            {{ Breadcrumbs::render('quizquestion', $quizTemplateId) }}
             <div class="card mb-4">
                 <div class="card-header pb-0">                    
                     <div class="d-flex align-items-center">                        

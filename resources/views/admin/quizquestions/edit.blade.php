@@ -4,6 +4,7 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
+                {{ Breadcrumbs::render('quizquestions', $quizTemplate->id) }}
                 <div class="card">
                     <div class="card-header pb-0">
                         @include('flash-message')      

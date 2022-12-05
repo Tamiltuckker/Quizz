@@ -62,8 +62,9 @@ class QuizTemplateController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit(QuizTemplate $quizTemplate)
+    public function edit($id)
     {
+        $quizTemplate   = QuizTemplate::find($id);
         $categories   = Category::pluck('name','id');
 
         return view('admin.quiztemplates.edit', compact('quizTemplate','categories'));
