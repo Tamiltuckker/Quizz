@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\TopicController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
@@ -32,8 +31,7 @@ require __DIR__.'/auth.php';
 Route::group(['middleware' => ['auth','role:'.\App\Models\Role::ADMIN], 'as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('categories', CategoryController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('topics', TopicController::class);
+    Route::resource('users', UserController::class);    
     Route::resource('quiztemplates', QuizTemplateController::class);
     Route::group(['prefix' => 'quiztemplates/{quiztemplate_id}'], function () {
         Route::resource('quizquestions',QuizQuestionController::class);
