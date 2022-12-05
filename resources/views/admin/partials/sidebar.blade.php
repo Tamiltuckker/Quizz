@@ -10,7 +10,7 @@
   <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link {{Request::is('admin/dashboard')?'active':''}}" href="{{route('admin.dashboard.index')}}">
+        <a class="nav-link {{Request::is('admin/dashboard')?'active':''}}" href="{{route('admin.dashboard.index')}}">                    {{-- <li class="{{ Request::routeIs('admin/dashboard') ? 'active' : '' }}">...</li> --}}
           <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
           </div>
@@ -18,7 +18,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{Request::is('admin/users')?'active':''}}" href="{{route('admin.users.index')}}">
+        <a class="nav-link {{Request::is('admin/users*')?'active':''}}" href="{{route('admin.users.index')}}">      
           <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             <i class="ni ni-user-run text-warning text-sm opacity-10"></i>
           </div>
@@ -26,7 +26,7 @@
         </a>
       </li>
     <li class="nav-item">         
-        <a class="nav-link {{Request::is('admin/categories')?'active':''}}" href="{{ route('admin.categories.index') }}">
+        <a class="nav-link {{Request::is('admin/categories*')?'active':''}}" href="{{ route('admin.categories.index') }}">
           <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
           </div>
@@ -42,7 +42,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{Request::is('admin/quiz templates')?'active':''}}" href="{{ route('admin.quiztemplates.index') }}">
+        <a class="nav-link {{Request::is('admin/quiztemplates*')?'active':''}}" href="{{ route('admin.quiztemplates.index') }}">
           <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
             <i class="ni ni-app text-info text-sm opacity-10"></i>
           </div>
