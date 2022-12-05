@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\QuizQuestion;
 use App\Models\QuizTemplate;
 use App\Models\QuizAnswer;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -14,7 +15,9 @@ class DashboardController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('users.dashboard',compact('categories'));
+        $route      = Route::currentRouteName();
+
+        return view('users.dashboard',compact('categories','route'));
     }
 
     public function gettemplates($id)
