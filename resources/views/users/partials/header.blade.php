@@ -32,6 +32,9 @@
               <ul>
                 <li><a href="{{ route('user.profiles.index') }}">Profile</a></li>
                 <li><a href="#">Change Password</a></li>
+                @if(session('impersonated_by'))
+                  <li><a href="{{ route('leave-impersonate') }}">Leave Impersonation</a></li>
+                @endif
                 <li><a href="#"><form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <x-responsive-nav-link :href="route('logout')"

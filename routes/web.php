@@ -49,3 +49,8 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => '
     Route::resource('profiles', ProfileController::class);
     Route::get('/dashboard/view/{id}', [UserDashboardController::class, 'viewquizanswer'])->name('dashboard.view');
 });
+
+Route::group(['middleware' => ['auth'], 'namespace' => 'Admin'], function() {
+    Route::get('/impersonate/{user}', [UserController::class, 'impersonate'])->name('impersonate');
+    Route::get('/leave-impersonate', [UserController::class, 'leave_impersonate'])->name('leave-impersonate');
+});

@@ -134,4 +134,18 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')
             ->with('danger', 'Users deleted successfully');
     }
+    // impersonate user
+    public function impersonate(User $user) 
+    {
+        auth()->user()->impersonate($user);
+
+        return redirect()->route('user.dashboard.index');
+    }
+    // leave impersonate
+    public function leave_impersonate() 
+    {
+        auth()->user()->leaveImpersonation();
+
+        return redirect()->route('admin.users.index'); 
+    }
 }
