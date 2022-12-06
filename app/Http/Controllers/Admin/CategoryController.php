@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request, Category $category)
     {
-        $categories = Category::latest()->paginate(5);
+        $categories    = Category::latest()->paginate(5);
         $quizTemplates = QuizTemplate::withCount('category')->get();
 
         return view('admin.categories.index', compact('categories'))
@@ -48,7 +48,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name'  =>  'required|unique:categories|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $category = new Category();
@@ -61,6 +61,7 @@ class CategoryController extends Controller
             $category->active = Category::INACTIVE;
         }
         $category->save();
+        
         $id        = $category->id;
         $attachment  = Category::find($id);
         $file        = new Attachment();
@@ -99,18 +100,18 @@ class CategoryController extends Controller
         $input = $request->all();
         if ($input['name'] != $category['name']) {
             $this->validate($request, [
-                'name' => 'unique:categories|max:255',
+                'name'  => 'unique:categories|max:255',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
         }
-        
-
         if ($request->active == 'on') {
             $input['active'] = Category::ACTIVE;
         } else {
             $input['active'] = Category::INACTIVE;
         }
+
         $category->update($input);
+
         if ($uplaodImage = $request->file('image')) {
             Attachment::where('attachmentable_id', $category->id)->delete();
             $file        = new Attachment();
