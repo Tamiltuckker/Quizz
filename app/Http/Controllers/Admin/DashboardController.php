@@ -8,7 +8,6 @@ use App\Models\QuizQuestion;
 use App\Models\QuizTemplate;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -30,6 +29,20 @@ class DashboardController extends Controller
             $categories[] = $latestCategories;
         }
 
-        return view('admin.dashboard',compact('data','categories'));
+        $userDatas = User::all()->groupBy('created_at');
+
+        $months             = [];
+        $registerUsersCount = [];
+
+        foreach($userDatas as $key => $userData)
+        {
+            $months[]             = $key;
+            $registerUsersCount[] = $userData->count();
+        }
+        $months = implode("','",$months);
+        $months = "'".$months."'";
+        $registerUsersCount = implode(",",$registerUsersCount);
+
+        return view('admin.dashboard',compact('data','categories','months','registerUsersCount'));
     }
 }

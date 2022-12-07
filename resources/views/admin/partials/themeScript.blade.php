@@ -9,9 +9,9 @@ gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
 new Chart(ctx1, {
     type: "line",
     data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels:[{!! $months !!}],
         datasets: [{
-            label: "Mobile apps",
+            label: "User ",
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
@@ -19,7 +19,7 @@ new Chart(ctx1, {
             backgroundColor: gradientStroke1,
             borderWidth: 3,
             fill: true,
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            data: [{{$registerUsersCount}}],
             maxBarThickness: 6
 
         }],
