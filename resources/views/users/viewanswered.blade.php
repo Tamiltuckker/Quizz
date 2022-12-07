@@ -23,32 +23,25 @@
                                         $quizpoint = \App\Models\QuizAnswer::where('quiz_option_id', '=', $quizOption->id)
                                             ->where('user_id', Auth::user()->id)
                                             ->first();
+                                        
+                                        $bgcolour = " ";
+                                        
+                                        if ($quizpoint === null) {
+                                            $bgcolour =" ";
+                                        } elseif ($quizpoint->point === 1) {
+                                            $bgcolour = "bg-success";
+                                        } else {
+                                            $bgcolour ="bg-danger";
+                                        }
                                     @endphp
-                                    @if ($quizpoint === null)
-                                        <input type="radio" name="" value="">
-                                        <label for="one" class="box first">
-                                            <div class="course">
-                                                <span class="circle"></span>
-                                                <span class="subject"> {{ $quizOption->option }}</span>
-                                            </div>
-                                        </label>
-                                    @elseif($quizpoint->point === 1)
-                                        <input type="radio" name="" value="">
-                                        <label for="one" class="box first bg-success text-white">
-                                            <div class="course">
-                                                <span class="circle"></span>
-                                                <span class=" subject">{{ $quizOption->option }}</span>
-                                            </div>
-                                        </label>
-                                    @else
-                                        <input type="radio" name="" value="">
-                                        <label for="one" class="box first bg-danger text-white">
-                                            <div class="course">
-                                                <span class="circle"></span>
-                                                <span class="subject">{{ $quizOption->option }}</span>
-                                            </div>
-                                        </label>
-                                    @endif
+
+                                    <input type="radio" name="" value="">
+                                    <label for="one" class="box first {{ $bgcolour }} text-white">
+                                        <div class="course">
+                                            <span class="circle"></span>
+                                            <span class=" subject">{{ $quizOption->option }}</span>
+                                        </div>
+                                    </label>
                                 @endforeach
                             </div>
                             <br>
