@@ -36,7 +36,7 @@
                 @foreach ($categories as $category)
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                         <div class="icon-box">
-                            {{-- <div><img src="{{ asset('/storage/image/' . $category->image->image) }}" width="50" height="50"></div> --}}
+                            <div><img src="{{ asset('/storage/image/' . $category->image->image) }}" width="50" height="50"></div>
                             <br>
                             @php $userEmailVerfication = \App\Models\User::where('id', Auth::user()->id)->first();@endphp
                              @if ($userEmailVerfication->email_verified_at !== null)
