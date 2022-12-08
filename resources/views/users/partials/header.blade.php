@@ -18,12 +18,12 @@
                                                         ->count();
                                     
                                     $attendUsersCounts[] = $attendUsersCount;
-                                    $sliced_array = array_slice($attendUsersCounts, 0, 5);
+                                    $userCounts = array_slice($attendUsersCounts, 0, 5);
                                     $quizcounts[] = $attendUsersCount;
                                 @endphp
                                 @auth
                                     @php $userEmailVerfication = \App\Models\User::where('id', Auth::user()->id)->first();@endphp
-                                    @if ($sliced_array === $quizcounts)
+                                    @if ($userCounts === $quizcounts && $category->active === 1)
                                         @if ($userEmailVerfication->email_verified_at !== null)
                                             <h4 class="useremail"><a
                                                     href="{{ route('user.dashboard.gettemplates', $category->slug) }}">{{ $category->name }}</a>
@@ -34,7 +34,7 @@
                                     @endif
                                 @endauth
                                 @guest
-                                    @if ($sliced_array === $quizcounts)
+                                    @if ($userCounts === $quizcounts && $category->active === 1)
                                         <li><a href="{{ route('login') }}">{{ $category->name }}</a></li>
                                     @endif
                                 @endguest

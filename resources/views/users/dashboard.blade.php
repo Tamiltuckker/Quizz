@@ -9,6 +9,7 @@
             </div>
             <div class="row">
                 @foreach ($categories as $category)
+                @if($category->active === 1)
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                         <div class="icon-box">
                             <div>
@@ -41,6 +42,7 @@
                             <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p> 
                         </div> 
                     </div>
+                @endif
                 @endforeach
             </div>
         </div>

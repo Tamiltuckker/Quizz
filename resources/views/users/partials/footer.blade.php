@@ -31,11 +31,11 @@
                                      ->count();
                                  
                                  $attendUsersCounts[] = $attendUsersCount;
-                                 $sliced_array = array_slice($attendUsersCounts, 0, 5);
+                                 $userCounts = array_slice($attendUsersCounts, 0, 5);
                                  $quizcounts[] = $attendUsersCount;
                              @endphp
                              <li>
-                                 @if ($sliced_array === $quizcounts)
+                                @if ($userCounts === $quizcounts && $category->active === 1)
                                      @guest
                                          <i class="bx bx-chevron-right"></i><a
                                              href="{{ route('login') }}">{{ $category->name }}</a>
@@ -44,7 +44,7 @@
                                          <i class="bx bx-chevron-right"></i><a
                                              href="{{ route('user.dashboard.gettemplates', $category->slug) }}">{{ $category->name }}</a>
                                      @endauth
-                                 @endif
+                                @endif
                              </li>
                          @endforeach
                      </ul>

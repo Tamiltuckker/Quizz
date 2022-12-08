@@ -18,11 +18,11 @@
                         ->count();
                     
                     $attendUsersCounts[] = $attendUsersCount;
-                    $sliced_array = array_slice($attendUsersCounts, 0, 5);
+                    $userCounts = array_slice($attendUsersCounts, 0, 5);
                     $quizcounts[] = $attendUsersCount;
                 @endphp
 
-                @if ($sliced_array === $quizcounts)
+                @if ($userCounts === $quizcounts && $category->active === 1)
                     <div class="col-xl-2 col-md-4">
                         <div class="icon-box">
                             @if ($category->image !== null)
