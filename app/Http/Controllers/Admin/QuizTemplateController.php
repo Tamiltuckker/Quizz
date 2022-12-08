@@ -17,11 +17,11 @@ class QuizTemplateController extends Controller
     {
         if (request()->has('category_id')) {
             $quizTemplates = QuizTemplate::with('category')->where('category_id', request()->input('category_id'))->get();        
-        }else{
+        } else {
             $quizTemplates = QuizTemplate::with('category')->get();        
         }
         $quizQuestions = QuizQuestion::withCount('quiz_template')->get(); 
-        $categories   = Category::pluck('name','id');
+        $categories    = Category::pluck('name','id');
             
         return view('admin.quiztemplates.index',compact('quizTemplates','categories'));   
     }  
