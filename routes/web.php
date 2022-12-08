@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContentManagementController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\QuizQuestionController;
 use App\Http\Controllers\Admin\QuizTemplateController;
@@ -38,6 +39,7 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::ADMIN], 'as' => 
     });
     Route::get('users/{user_id}/getansweredtemplates', [QuizAnsweredController::class, 'getansweredtemplates'])->name('getansweredtemplates');
     Route::get('users/{user_id}/getansweredtemplates/{template_id}/getansweredquestions', [QuizAnsweredController::class, 'getansweredquestions'])->name('getansweredquestions');
+    Route::resource('contents', ContentController::class);
 });
 
 Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard.index');
