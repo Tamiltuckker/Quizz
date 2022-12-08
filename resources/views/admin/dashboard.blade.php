@@ -145,4 +145,7 @@
             </div>
         </div>
     </div>
+    @push('js')
+        @include('admin.partials.themeScript')
+    @endpush
 @endsection
