@@ -29,11 +29,10 @@ class DashboardController extends Controller
         {
             $categories[] = $latestCategories;
         }
-       
         $quizpoints = QuizAnswer::select(DB::raw("user_id, SUM(point) as count"))
-        -> orderBy('count','DESC')
-        ->groupBy('user_id')
-        ->get();
+                        ->orderBy('count','DESC')
+                        ->groupBy('user_id')
+                        ->get();
         
         return view('admin.dashboard',compact('data','categories','quizpoints'));
     }

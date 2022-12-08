@@ -144,10 +144,7 @@
             </div>
         </div>
     </div>
-    {{-- //top5 users --}}
-    <br>
-    <br>
-    <div class="col-lg-5">
+    <div class="col-lg-5 mt-3">
         <div class="card">
             <div class="card-header pb-0 p-3">
                 <h6 class="mb-0">Users</h6>
@@ -156,10 +153,10 @@
                 <ul class="list-group">
                     @foreach ($quizpoints as $key => $quizpoint)
                         @php
-                            $counts[] = $quizpoint->count;
+                            $counts[]     = $quizpoint->count;
                             $sliced_array = array_slice($counts, 0, 5);
                             $quizcounts[] = $quizpoint->count;
-                            $userlist = \App\Models\User::find($quizpoint->user_id);
+                            $userlist     = \App\Models\User::find($quizpoint->user_id);
                         @endphp
                         @if ($sliced_array === $quizcounts)
                             <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
@@ -178,7 +175,6 @@
                                         <span class="text-xs">Point
                                             <span class="font-weight-bold">{{ $quizpoint->count }}</span>
                                         </span>
-
                                     </div>
                                 </div>
                                 <div class="d-flex">
