@@ -3,6 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
+            {!! Breadcrumbs::render() !!}
             <div class="card mb-4">
                 <div class="card-header pb-0">                                      
                     <a class="btn btn-primary btn-sm ms-auto float-end"
