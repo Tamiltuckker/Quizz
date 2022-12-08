@@ -41,6 +41,14 @@
           <span class="nav-link-text ms-1">Quiz Templates</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link {{Request::is('admin/contents')?'active':''}}" href="{{ route('admin.contents.index') }}">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">CMS</span>
+        </a>
+      </li>
     </ul>
   </div>
   <div class="sidenav-footer mt-3 ">

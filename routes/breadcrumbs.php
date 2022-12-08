@@ -4,6 +4,7 @@ use App\Models\Category;
 use App\Models\QuizQuestion;
 use App\Models\QuizTemplate;
 use App\Models\User;
+use App\Models\Content;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
@@ -67,3 +68,12 @@ Breadcrumbs::for('admin.getansweredtemplates', function (BreadcrumbTrail $trail,
     $trail->parent('admin.users.index');
     $trail->push('Create', route('admin.getansweredtemplates',$userId));
 });
+Breadcrumbs::for('admin.contents.index', function (BreadcrumbTrail $trail): void {
+    $trail->push('Home / Contents', route('admin.contents.index'));
+});
+
+Breadcrumbs::for('admin.contents.edit', function (BreadcrumbTrail $trail, Content $content) {
+    $trail->parent('admin.contents.index');
+    $trail->push('Edit', route('admin.contents.edit',$content));
+});
+
