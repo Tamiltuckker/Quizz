@@ -47,7 +47,6 @@ Breadcrumbs::for('admin.contents.index', function (BreadcrumbTrail $trail): void
     $trail->push('Home / Contents', route('admin.contents.index'));
 });
 
-
 Breadcrumbs::for('admin.contents.edit', function (BreadcrumbTrail $trail, Content $content) {
     $trail->parent('admin.contents.index');
     $trail->push('Edit', route('admin.contents.edit',$content));
