@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request, Category $category)
     {
-        $categories    = Category::latest()->paginate(5);
+        $categories    = Category::all();
         $quizTemplates = QuizTemplate::withCount('category')->get();
 
         return view('admin.categories.index', compact('categories'))
