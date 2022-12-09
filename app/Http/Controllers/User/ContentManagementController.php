@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use App\Models\Content;
+use Illuminate\Http\Request;
+
+
+class ContentManagementController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function gethome()
+    {
+        return view('users.contents.home');
+    }
+
+    public function getabout()
+    {
+        $description= Content::where('slug','about-us')->first();
+
+        return view('users.contents.about',compact('description'));
+    }
+
+
+    public function getcontact(Request $request)
+    {
+        $contact= Content::where('slug','contact')->first();
+        return view('users.contents.contact',compact('contact'));
+    }
+
+}

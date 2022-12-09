@@ -5,8 +5,8 @@
       <h1 class="logo me-auto me-lg-0"><a href="{{ route('user.dashboard.index') }}">Quiz<span>.</span></a></h1>
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="{{ route('user.home') }}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{ route('user.about') }}">About</a></li>
           <li class="dropdown"><a href="#"><span>Categories</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               @if(@$route)
@@ -26,7 +26,7 @@
               @endif
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li> 
+          <li><a class="nav-link scrollto" href="{{ route('user.contact') }}">Contact</a></li> 
           @auth
             <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
               <ul>
