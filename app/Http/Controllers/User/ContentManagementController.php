@@ -20,16 +20,16 @@ class ContentManagementController extends Controller
     }
 
     public function getabout()
-    {
-        $description= Content::where('slug','about-us')->first();
-
-        return view('users.contents.about',compact('description'));
+    {        
+        $about= Content::where('slug','about-us')->first();
+        return view('users.contents.about',compact('about'));
     }
 
 
     public function getcontact(Request $request)
     {
         $contact= Content::where('slug','contact')->first();
+        
         return view('users.contents.contact',compact('contact'));
     }
 

@@ -7,11 +7,10 @@
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-          <h2>About Us</h2>         
+          <h2>{{ $about->title}}</h2>         
         </div>
       </div>
     </section><!-- End Breadcrumbs -->
-
     <!-- ======= About Details Section ======= -->
     <section id="about-details" class="about-details">
       <div class="container">
@@ -37,7 +36,7 @@
             </div>
              <div class="about-description">
               <h2>This is about our concern:</h2>             
-             <p>{{ $description->description}}</p>
+             <p>{{ $about->description}}</p>
             </div>
           </div>
         </div>
