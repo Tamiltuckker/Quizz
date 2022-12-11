@@ -7,7 +7,7 @@
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-          <h2>{{ $about->title}}</h2>         
+          <h2>{{ $about->title}}</h2>    
         </div>
       </div>
     </section><!-- End Breadcrumbs -->
@@ -19,13 +19,7 @@
             <div class="about-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
                 <div class="swiper-slide">
-                  <img src="{{ asset('frontend/assets/img/portfolio/portfolio-1.jpg') }}" alt="">
-                </div>
-                <div class="swiper-slide">
-                  <img src="{{ asset('frontend/assets/img/portfolio/portfolio-2.jpg') }}" alt="">
-                </div>
-                <div class="swiper-slide">
-                  <img src="{{ asset('frontend/assets/img/portfolio/portfolio-3.jpg') }}" alt="">
+                  <img src="{{ asset('frontend/assets/img/'.$about->image->image) }}" alt="sdf">
                 </div>
               </div>
               <div class="swiper-pagination"></div>
