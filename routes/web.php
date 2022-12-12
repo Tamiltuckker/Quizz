@@ -56,3 +56,9 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin'], function() {
     Route::get('/impersonate/{user}', [UserController::class, 'impersonate'])->name('impersonate');
     Route::get('/leave-impersonate', [UserController::class, 'leave_impersonate'])->name('leave-impersonate');
 });
+
+  
+Route::controller(FacebookController::class)->group(function(){
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
+});
