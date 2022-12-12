@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\QuizQuestionController;
 use App\Http\Controllers\Admin\QuizTemplateController;
 use App\Http\Controllers\Admin\QuizAnsweredController;
+use App\Http\Controllers\User\ContentManagementController as UserContentManagementController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\QuizController;
 use App\Http\Controllers\User\ProfileController;
@@ -49,7 +50,10 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => '
     Route::get('/dashboard/questions/{slug}', [UserDashboardController::class, 'getquestions'])->name('dashboard.getquestions');
     Route::post('/dashboard/questions/answer', [QuizController::class, 'store'])->name('dashboard.store');
     Route::resource('profiles', ProfileController::class);
-    Route::get('/dashboard/view/{id}', [UserDashboardController::class, 'viewquizanswer'])->name('dashboard.view');
+    Route::get('/dashboard/view/{id}', [UserDashboardController::class, 'viewquizanswer'])->name('dashboard.view');     
+    Route::get('/contact', [UserContentManagementController::class, 'getcontact'])->name('contact'); 
+    Route::get('/home', [UserContentManagementController::class, 'gethome'])->name('home'); 
+    Route::get('/about', [UserContentManagementController::class, 'getabout'])->name('about'); 
 });
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin'], function() {

@@ -10,37 +10,39 @@
         </div>
 
         <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-            @foreach ($categories as $category)
-                @php
-                    $attendUsersCount = \App\Models\QuizAnswer::where('category_id', $category->id)
-                        ->get()
-                        ->groupBy('user_id')
-                        ->count();
-                    
-                    $attendUsersCounts[] = $attendUsersCount;
-                    $userCounts = array_slice($attendUsersCounts, 0, 5);
-                    $quizcounts[] = $attendUsersCount;
-                @endphp
+            @guest
+                @foreach ($categories as $category)
+                    @php
+                        $attendUsersCount = \App\Models\QuizAnswer::where('category_id', $category->id)
+                            ->get()
+                            ->groupBy('user_id')
+                            ->count();
+                        
+                        $attendUsersCounts[] = $attendUsersCount;
+                        $userCounts = array_slice($attendUsersCounts, 0, 5);
+                        $quizcounts[] = $attendUsersCount;
+                    @endphp
 
-                @if ($userCounts === $quizcounts && $category->active === 1)
-                    <div class="col-xl-2 col-md-4">
-                        <div class="icon-box">
-                            @if ($category->image !== null)
-                                <img src="{{ asset('/storage/image/' . $category->image->image) }}" width="50"
-                                    height="50">
-                            @else
-                                <img src="{{ asset('assets/img/dummy.png') }}" width="50" height="50">
-                            @endif
-                            @guest
-                                <h3><a href="{{ route('login') }}">{{ $category->name }}</a></h3>
-                            @endguest
-                            @auth
-                               <h3><a href="{{ route('user.dashboard.gettemplates', $category->slug) }}">{{ $category->name }}</a></h3>
-                            @endauth
+                    @if ($userCounts === $quizcounts && $category->active === 1)
+                        <div class="col-xl-2 col-md-4">
+                            <div class="icon-box">
+                                @if ($category->image !== null)
+                                    <img src="{{ asset('/storage/image/' . $category->image->image) }}" width="50"
+                                        height="50">
+                                @else
+                                    <img src="{{ asset('assets/img/dummy.png') }}" width="50" height="50">
+                                @endif
+                                @guest
+                                    <h3><a href="{{ route('login') }}">{{ $category->name }}</a></h3>
+                                @endguest
+                                @auth
+                                <h3><a href="{{ route('user.dashboard.gettemplates', $category->slug) }}">{{ $category->name }}</a></h3>
+                                @endauth
+                            </div>
                         </div>
-                    </div>
-                @endif
-            @endforeach
+                    @endif
+                @endforeach
+            @endguest
         </div>
     </div>
 </section><!-- End Hero -->

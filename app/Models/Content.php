@@ -21,6 +21,11 @@ class Content extends Model
         Self::INACTIVE => 'Inactive'
     ];
 
+    public function image()
+    {
+        return $this->morphOne(Attachment::class, 'attachmentable');
+    }
+
     protected function Slug(): Attribute
     {
         return Attribute::make(           
