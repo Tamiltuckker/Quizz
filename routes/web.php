@@ -46,14 +46,14 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::ADMIN], 'as' => 
 Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard.index');
 
 Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => 'user.', 'prefix' => 'user', 'namespace' => 'User'], function() {
-    Route::get('/dashboard/templates/{slug}', [UserDashboardController::class, 'gettemplates'])->name('dashboard.gettemplates');
-    Route::get('/dashboard/questions/{slug}', [UserDashboardController::class, 'getquestions'])->name('dashboard.getquestions');
-    Route::post('/dashboard/questions/answer', [QuizController::class, 'store'])->name('dashboard.store');
+    Route::get('/templates/{slug}', [UserDashboardController::class, 'gettemplates'])->name('dashboard.gettemplates');
+    Route::get('/questions/{slug}', [UserDashboardController::class, 'getquestions'])->name('dashboard.getquestions');
+    Route::post('/questions/answer', [QuizController::class, 'store'])->name('dashboard.store');
     Route::resource('profiles', ProfileController::class);
-    Route::get('/dashboard/view/{id}', [UserDashboardController::class, 'viewquizanswer'])->name('dashboard.view');     
     Route::get('/contact', [UserContentManagementController::class, 'getcontact'])->name('contact'); 
     Route::get('/home', [UserContentManagementController::class, 'gethome'])->name('home'); 
     Route::get('/about', [UserContentManagementController::class, 'getabout'])->name('about'); 
+    Route::get('/view/{id}', [UserDashboardController::class, 'viewquizanswer'])->name('dashboard.view');
 });
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin'], function() {
