@@ -1,5 +1,5 @@
 <!-- ======= Header ======= -->
-<header id="header" class="fixed-top ">
+<header id="header" class="fixed-top bg-dark">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
         <h1 class="logo me-auto me-lg-0"><a href="{{ route('user.dashboard.index') }}">Quiz<span>.</span></a></h1>
@@ -47,20 +47,16 @@
                     <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a href="{{ route('user.profiles.index') }}">Profile</a></li>
-                            <li><a href="#">Change Password</a></li>
                             @if (session('impersonated_by'))
                                 <li><a href="{{ route('leave-impersonate') }}">Leave Impersonation</a></li>
                             @endif
-                            <li><a href="#">
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <x-responsive-nav-link :href="route('logout')"
-                                            onclick="event.preventDefault();
-                              this.closest('form').submit();">
-                                            <span class="d-sm-inline d-none">Log out</span>
-                                        </x-responsive-nav-link>
-                                    </form>
-                                </a>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                                        <span class="d-sm-inline d-none">Log out</span>
+                                    </x-responsive-nav-link>
+                                </form>
                             </li>
                         </ul>
                     </li>
@@ -72,7 +68,12 @@
             <a href="{{ route('login') }}" class="get-started-btn scrollto">Login/Register</a>
         @endguest
         @auth
-            <a href="{{ route('user.profiles.index') }}" class="get-started-btn scrollto">My Profile</a>
+            <form method="POST" class="get-started-btn scrollto" action="{{ route('logout') }}">
+                @csrf
+                <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                    <span class="d-sm-inline d-none">Log out</span>
+                </x-responsive-nav-link>
+            </form>
         @endauth
     </div>
 </header><!-- End Header -->

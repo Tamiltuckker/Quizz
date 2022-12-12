@@ -9,8 +9,7 @@
             </div>
         </div>
 
-        <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-            @guest
+        <div class="row gy-4 mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">           
                 @foreach ($categories as $category)
                     @php
                         $attendUsersCount = \App\Models\QuizAnswer::where('category_id', $category->id)
@@ -42,7 +41,6 @@
                         </div>
                     @endif
                 @endforeach
-            @endguest
         </div>
     </div>
 </section><!-- End Hero -->

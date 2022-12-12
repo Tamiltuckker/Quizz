@@ -1,6 +1,7 @@
 @extends('layouts.frontend')
 
 @section('content')
+@include('users.partials.herosection')
     <section id="services" class="services">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
@@ -10,8 +11,8 @@
             <div class="row">
                 @foreach ($categories as $category)
                 @if($category->active === 1)
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="icon-box">
+                    <div class="col-md-3" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="icon-box mt-3 bg-light border border-white">
                             <div>
                             @if($category->image !== null)
                                 <img src="{{ asset('/storage/image/' . $category->image->image) }}" width="50" height="50">
@@ -34,12 +35,10 @@
                             @endauth
                             @guest
                                 <h4><a href="{{ route('login') }}">{{ $category->name }}</a></h4> 
-                                <p>Users :{{ $attendUsersCount }} </p>
                             @endguest
                             <p> Attend Users :{{ $attendUsersCount }} </p>
                             <p> Total Templates:{{count($category->quiz_templates)}}</p>
                             <p> Total Question:{{ count($category->quiz_questions()->get()) }}</p>
-                            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p> 
                         </div> 
                     </div>
                 @endif
