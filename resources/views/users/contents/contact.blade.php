@@ -15,20 +15,22 @@
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
             <div class="row mt-5">
+                <div class="card-header pb-0">                       
+                    @include('flash-message')      
+                    @yield('content')  
+                </div>
                 <div class="col-lg-4">
                     <div class="info">
                         <div class="address">
                             <i class="bi bi-geo-alt"></i>
                             <h4>Location:</h4>
-                            <p>{{ $contact->description}}</p>
+                            <p>{{ $contact->description }}</p>
                         </div>
                     </div>
-
                 </div>
-
-                <div class="col-lg-8 mt-5 mt-lg-0">
-
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <div class="col-lg-8 mt-5 mt-lg-0">                
+                    <form method="POST" name="email" action="{{ route('user.contact.sendcontact') }}">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <input type="text" name="name" class="form-control" id="name"
