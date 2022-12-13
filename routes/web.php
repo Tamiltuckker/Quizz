@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => '
     Route::get('/home', [UserContentManagementController::class, 'gethome'])->name('home'); 
     Route::get('/about', [UserContentManagementController::class, 'getabout'])->name('about'); 
     Route::get('/view/{id}', [UserDashboardController::class, 'viewquizanswer'])->name('dashboard.view');
+    Route::post('/sendcontact', [UserContentManagementController::class, 'sendcontact'])->name('contact.sendcontact');
 });
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin'], function() {

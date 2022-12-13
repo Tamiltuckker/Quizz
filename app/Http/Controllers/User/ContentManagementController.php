@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactMail;
 use App\Models\Content;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Mail;
 
 class ContentManagementController extends Controller
 {
@@ -33,4 +34,21 @@ class ContentManagementController extends Controller
         return view('users.contents.contact',compact('contact'));
     }
 
+    public function sendcontact(Request $request)
+    {   
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',           
+            'subject' => 'required',
+            'message' => 'required'
+        ]);   
+
+        $details = $request->except('_token');
+
+        $adminEmail = "ud38852@gmail.com";
+        Mail::to($adminEmail)->send(new ContactMail($details));
+        // dd("success");
+        return redirect()->back()
+        ->with(['success' => 'Thank you for contact us. we will contact you shortly.']);
+    }
 }
