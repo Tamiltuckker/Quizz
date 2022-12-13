@@ -6,14 +6,9 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
-
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Home Page</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>            
-          </ol>
+          <h2>Home </h2>         
         </div>
-
       </div>
     </section><!-- End Breadcrumbs -->
 

@@ -36,18 +36,10 @@ class ContentManagementController extends Controller
 
     public function sendcontact(Request $request)
     {   
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',           
-            'subject' => 'required',
-            'message' => 'required'
-        ]);   
-
         $details = $request->except('_token');
-
         $adminEmail = "ud38852@gmail.com";
         Mail::to($adminEmail)->send(new ContactMail($details));
-        // dd("success");
+    
         return redirect()->back()
         ->with(['success' => 'Thank you for contact us. we will contact you shortly.']);
     }
