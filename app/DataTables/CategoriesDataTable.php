@@ -3,13 +3,8 @@
 namespace App\DataTables;
 
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class CategoriesDataTable extends DataTable
@@ -17,23 +12,45 @@ class CategoriesDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
-     * @return \Yajra\DataTables\EloquentDataTable
+     * @param mixed $query Results from query() method.
+     * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function dataTable($query)
     {
-        return (new EloquentDataTable($query))
-            ->addColumn('action', 'categories.action')
-            ->setRowId('id');
+        return datatables()
+            ->eloquent($query)
+            ->editColumn('name', function ($model) {
+                if($model->image !== null) {
+                    $profileImage  = '<img src="../storage/image/' . $model->image->image . '" class="avatar avatar-sm me-3"   alt="category">' . $model->name;
+                } else {
+                    $profileImage  = '<img src= "../assets/img/user.png"  class="avatar avatar-sm me-3"  alt="cat">' . $model->name;
+                }
+                return  $profileImage;
+            })
+            ->editColumn('active', function ($model) {
+                if ($model->active == Category::ACTIVE) {
+                    $btn_class  = '<span class="badge badge-sm bg-gradient-success">Active</span>';
+                } elseif ($model->active == Category::INACTIVE) {
+                    $btn_class    = '<span class="badge badge-sm bg-gradient-danger">InActive</span>';
+                }
+                return $btn_class;
+            })
+            ->addColumn('action', function ($model) {
+                $btn = '';
+                $btn = '<a href="' . route('admin.users.edit', [$model->id]) . '" class="btn bg-gradient-info font-weight-bold text-xs" title="Edit">Edit</a>';
+                $btn .= '&nbsp;<a href="javascript:void(0)" class="btn bg-gradient-danger font-weight-bold text-xs  btn-delete" title="Delete" data-delete-route="' . route('admin.users.destroy', $model->id) . '">Delete</a>';
+                return $btn;
+            })
+            ->escapeColumns([]);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Category $model
+     * @param \App\Models\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Category $model): QueryBuilder
+    public function query(Category $model)
     {
         return $model->newQuery();
     }
@@ -46,39 +63,35 @@ class CategoriesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('categories-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('categories-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('lBfrtip')
+            ->orderBy(1)
+            ->buttons(
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            );
     }
 
     /**
-     * Get the dataTable columns definition.
+     * Get columns.
      *
      * @return array
      */
-    public function getColumns(): array
+    protected function getColumns()
     {
         return [
+            Column::computed('name')
+                ->orderable(true)
+                ->searchable(true),
+            Column::make('active'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 
@@ -87,8 +100,8 @@ class CategoriesDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename(): string
-    {
-        return 'Categories_' . date('YmdHis');
-    }
+    // protected function filename()
+    // {
+    //     return 'Categories_' . date('YmdHis');
+    // }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\CategoriesDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -16,13 +17,17 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Category $category)
-    {
-        $categories    = Category::all();
-        $quizTemplates = QuizTemplate::withCount('category')->get();
+    // public function index(Request $request, Category $category)
+    // {
+    //     $categories    = Category::all();
+    //     $quizTemplates = QuizTemplate::withCount('category')->get();
 
-        return view('admin.categories.index', compact('categories'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+    //     return view('admin.categories.index', compact('categories'))
+    //         ->with('i', (request()->input('page', 1) - 1) * 5);
+    // }
+    public function index(CategoriesDataTable $dataTable)
+    {
+        return $dataTable->render('admin.categories.index');
     }
 
     /**
