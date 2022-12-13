@@ -37,8 +37,8 @@ class CategoriesDataTable extends DataTable
             })
             ->addColumn('action', function ($model) {
                 $btn = '';
-                $btn = '<a href="' . route('admin.users.edit', [$model->id]) . '" class="btn bg-gradient-info font-weight-bold text-xs" title="Edit">Edit</a>';
-                $btn .= '&nbsp;<a href="javascript:void(0)" class="btn bg-gradient-danger font-weight-bold text-xs  btn-delete" title="Delete" data-delete-route="' . route('admin.users.destroy', $model->id) . '">Delete</a>';
+                $btn = '<a href="' . route('admin.caytegories.edit', [$model->id]) . '" class="btn bg-gradient-info font-weight-bold text-xs" title="Edit">Edit</a>';
+                $btn .= '&nbsp;<a href="javascript:void(0)" class="btn bg-gradient-danger font-weight-bold text-xs  btn-delete" title="Delete" data-delete-route="' . route('admin.caytegories.destroy', $model->id) . '">Delete</a>';
                 return $btn;
             })
             ->escapeColumns([]);
