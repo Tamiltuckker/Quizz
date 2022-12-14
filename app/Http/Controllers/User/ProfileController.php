@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\QuizAnswer;
 
 class ProfileController extends Controller
 {
@@ -22,7 +23,15 @@ class ProfileController extends Controller
         $id   = Auth::user()->id;
         $user = User::find($id);
 
-        return view('users.profile.show',compact('user'));
+        $quizAnsweredTemplates = QuizAnswer::where('user_id', $user->id)->get()
+                                 ->groupBy('quiz_template_id');
+
+        $categoryAnsCounts = QuizAnswer::where('user_id', $user->id)->get()
+                             ->groupBy('category_id');
+
+        $quizpoints = QuizAnswer::where('point','=',1)->where('user_id', Auth::user()->id) ->get();
+
+        return view('users.profile.show',compact('user','quizAnsweredTemplates','categoryAnsCounts','quizpoints'));
     }
 
    

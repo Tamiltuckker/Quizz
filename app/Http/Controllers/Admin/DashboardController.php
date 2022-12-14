@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\QuizAnswer;
 use App\Models\QuizQuestion;
 use App\Models\QuizTemplate;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -30,6 +31,24 @@ class DashboardController extends Controller
             $categories[] = $latestCategories;
         }
 
-        return view('admin.dashboard',compact('data','categories'));
+        $userDatas = User::all()->groupBy('created_at');
+
+        $months             = [];
+        $registerUsersCount = [];
+        foreach($userDatas as $key => $userData)
+        {
+            $months[]             = $key;
+            $registerUsersCount[] = $userData->count();
+        }
+        $months = implode("','",$months);
+        $months = "'".$months."'";
+        $registerUsersCount = implode(",",$registerUsersCount);
+
+        $quizpoints = QuizAnswer::select(DB::raw("user_id, SUM(point) as count"))
+                        ->orderBy('count','DESC')
+                        ->groupBy('user_id')
+                        ->get();
+        
+        return view('admin.dashboard',compact('data','categories','months','registerUsersCount','quizpoints')); 
     }
 }

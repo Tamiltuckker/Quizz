@@ -5,7 +5,7 @@
         <div class="col-12">
             {!! Breadcrumbs::render() !!}
             <div class="card mb-4">
-                <div class="card-header pb-0">                   
+                <div class="card-header pb-0">
                     <h6>Users table</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -61,12 +61,24 @@
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
-                                                <a class="btn bg-gradient-warning font-weight-bold text-xs" href="{{ route('admin.getansweredtemplates',$user->id) }}">Quiz Answered Templates</a>
+                                                <a class="btn bg-gradient-primary font-weight-bold text-xs" href="{{ route('impersonate',$user->id) }}">Impersonate</a>
+                                                @php $answeredQuestions = \App\Models\QuizAnswer::where('user_id', $user->id)->first();@endphp
+                                                @if ($answeredQuestions !== null)
+                                                    <a class="btn bg-gradient-warning font-weight-bold text-xs"
+                                                        id="buttonshow"
+                                                        href="{{ route('admin.getansweredtemplates', $user->id) }}">Quiz
+                                                        Answered Templates</a>
+                                                @else
+                                                    <span class="btn bg-gradient-secondary font-weight-bold text-xs">User
+                                                        Not Attend the
+                                                        Quiz</span>
+                                                @endif
                                                 <a href="{{ route('admin.users.edit', $user->id) }}"
                                                     class="btn bg-gradient-info font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>
+
                                                 @csrf
                                                 <input name="_method" type="hidden" value="DELETE">
                                                 <button type="submit"
@@ -83,6 +95,5 @@
             </div>
         </div>
     </div>
-
-    @include('script')  
+    @include('script')
 @endsection

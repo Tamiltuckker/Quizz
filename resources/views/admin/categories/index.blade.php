@@ -1,93 +1,76 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">         
-        <div class="col-12"> 
-            {!! Breadcrumbs::render() !!}          
+    <div class="row">
+        <div class="col-12">
             <div class="card mb-4">
-                <div class="card-header pb-0">                   
-                    <div class="float-right">
-                        <a class="btn bg-gradient-info font-weight-bold text-xs"
-                            href="{{ route('admin.categories.create') }}">Create</a>
-                    </div>
+                <div class="card-header pb-0">
+                <div class="float-left">
+                    <a class="btn bg-gradient-info font-weight-bold text-xs"href="{{ route('admin.categories.create') }}">Create</a>
+                </div>
                     <h6>Categories table</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        @include('flash-message')                             
+                        @include('flash-message')
                         @yield('content')
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Category Image</th>                                   
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Template-Count</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Status</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($categories as $category)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                   @if ($category->image != null)
-                                                       <img src="{{ asset('/storage/image/' . $category->image->image) }}"
-                                                        class="avatar avatar-sm me-3" alt="category1">
-                                                   @elseif ($category->image == null)
-                                                       <img src="../assets/img/user.png" class="avatar avatar-sm me-3"
-                                                        alt="category1">
-                                                   @endif
-                                                </div>                                
-                                            
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $category->name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $category->quiz_templates->count() }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>                                      
-                                          <td class="align-middle text-center text-sm">
-                                            @if ($category->active == \App\Models\Category::ACTIVE)
-                                                <span class="badge badge-sm bg-gradient-success">active </span>
-                                            @else
-                                                <span class="badge badge-sm bg-gradient-danger">inactive</span>
-                                            @endif
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}">
-                                                <a href="{{ route('admin.categories.edit', $category->id) }}"
-                                                    class="btn bg-gradient-info font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-original-title="Edit category">
-                                                    Edit
-                                                </a>
-                                                @csrf
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <button type="submit"
-                                                    class="btn bg-gradient-danger font-weight-bold text-xs show-alert-delete-box"
-                                                    data-toggle="tooltip" title='Delete'>Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        {{$dataTable->table()}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-   @include('script')  
 @endsection
+{{-- @include('script')  --}}
+@push('css')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/5.0.7/sweetalert2.min.css" rel="stylesheet">
+@endpush
+
+@push('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $(document).ready(function(){
+          // over all delete concept
+          $('body').on('click', '.btn-delete', function() {
+            $this = $(this);
+           console.log($this.data('delete-route'));
+            swal({
+            title: "Are you sure you want to delete this record?",
+            text: "If you delete this, it will be gone forever.",
+            icon: "warning",
+            type: "warning",
+            buttons: ["Cancel", "Yes!"],
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        method: 'DELETE',
+                        url: $this.data('delete-route'),
+                        success: function () {
+                            swal({
+                                title: "Deleted!",
+                                text: "Your record has been deleted.",
+                                type: "success",
+                            }).
+                            then(function() {
+                                window.location.reload();
+                            });
+                        },
+                        error: function (jqXhr) {
+                            swalError(jqXhr);
+                        }
+                    });
+                }
+            });
+        });
+    }); 
+</script>
+{{$dataTable->scripts()}}
+@endpush

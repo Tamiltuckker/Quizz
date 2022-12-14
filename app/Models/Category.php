@@ -38,11 +38,6 @@ class Category extends Authenticatable
 
     // Relationship start
     
-    public function topic()
-    {
-        return $this->belongsTo(Topic::class);
-    }
-
     public function quiz_templates()
     {
         return $this->hasMany(QuizTemplate::class);

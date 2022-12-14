@@ -5,6 +5,7 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
+                {{ Breadcrumbs::render('quiztemplate', $quizTemplate->id) }}
                 <div class="card">
                     <div class="card-header pb-0">
                         @include('flash-message')      
@@ -17,7 +18,7 @@
                     <div class="card-body">
                         <p class="text-uppercase text-sm">Edit-Quiz Information</p>
                         <div class="row">
-                            {!! Form::model($quizTemplate, ['method' => 'PATCH', 'route' => ['admin.quiztemplates.update', $quizTemplate->id]]) !!}
+                        {!! Form::model($quizTemplate, ['method' => 'PATCH', 'route' => ['admin.quiztemplates.update', $quizTemplate->id]]) !!}
                                 <div class="col-md-10">
                                     <div class="form-group">
                                         <label for="inputAddress">Categories *</label>

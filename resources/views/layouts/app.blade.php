@@ -9,6 +9,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
     <title>{{ config('app.name', 'Quizz') }}</title>
+    <link rel="canonical" href="https://www.creative-tim.com/learning-lab/bootstrap/datatables/argon-dashboard" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
@@ -16,8 +17,9 @@
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
     @stack('css')
-    <!-- Flash-message Styles -->     
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.js"></script>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -41,10 +43,10 @@
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
-    @include('admin.partials.themeScript')
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
     <script src= "//unpkg.com/alpinejs" defer></script>
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     @stack('js')   
     <!-- Script for flash-message -->
     <script src="/js/app.js"></script>
