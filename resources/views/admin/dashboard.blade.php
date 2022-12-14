@@ -72,7 +72,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Question</p>
+                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Questions</p>
                                 <h5 class="font-weight-bolder">
                                     {{ $data['questionsCount'] }}
                                 </h5>
@@ -89,7 +89,7 @@
         </div>
     </div>
     <div class="row mt-4">
-        <div class="col-lg-7 mb-lg-0 mb-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
             <div class="card z-index-2 h-100">
                 <div class="card-header pb-0 pt-3 bg-transparent">
                     <h6 class="text-capitalize"> Users Registered view</h6>
@@ -105,10 +105,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-5">
+    </div>
+    <div class="row mt-4">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-header pb-0 p-3">
-                    <h6 class="mb-0">Categories</h6>
+                    <h6 class="mb-0">Top Categories</h6>
                 </div>
                 <div class="card-body p-3">
                     <ul class="list-group">
@@ -143,49 +145,49 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-5 mt-3">
-        <div class="card">
-            <div class="card-header pb-0 p-3">
-                <h6 class="mb-0">Users</h6>
-            </div>
-            <div class="card-body p-3">
-                <ul class="list-group">
-                    @foreach ($quizpoints as $key => $quizpoint)
-                        @php
-                            $counts[]     = $quizpoint->count;
-                            $sliced_array = array_slice($counts, 0, 5);
-                            $quizcounts[] = $quizpoint->count;
-                            $userlist     = \App\Models\User::find($quizpoint->user_id);
-                        @endphp
-                        @if ($sliced_array === $quizcounts)
-                            <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                                <div class="d-flex align-items-center">
-                                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                                        @if ($userlist->image != null)
-                                            <img src="{{ asset('/storage/image/' . $userlist->image->image) }}"
-                                                class="avatar avatar-sm me-3" alt="category1">
-                                        @elseif ($userlist->image == null)
-                                            <img src="../assets/img/user.png" class="avatar avatar-sm me-3" alt="category1">
-                                        @endif
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header pb-0 p-3">
+                    <h6 class="mb-0">Top Users</h6>
+                </div>
+                <div class="card-body p-3">
+                    <ul class="list-group">
+                        @foreach ($quizpoints as $key => $quizpoint)
+                            @php
+                                $counts[]     = $quizpoint->count;
+                                $sliced_array = array_slice($counts, 0, 5);
+                                $quizcounts[] = $quizpoint->count;
+                                $userlist     = \App\Models\User::find($quizpoint->user_id);
+                            @endphp
+                            @if ($sliced_array === $quizcounts)
+                                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
+                                            @if ($userlist->image != null)
+                                                <img src="{{ asset('/storage/image/' . $userlist->image->image) }}"
+                                                    class="avatar avatar-sm me-3" alt="category1">
+                                            @elseif ($userlist->image == null)
+                                                <img src="../assets/img/user.png" class="avatar avatar-sm me-3" alt="category1">
+                                            @endif
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <h6 class="mb-1 text-dark text-sm">{{ $userlist->name }}</h6>
+                                            <h6 class="mb-1 text-dark text-sm">{{ $userlist->email }}</h6>
+                                            <span class="text-xs">Point
+                                                <span class="font-weight-bold">{{ $quizpoint->count }}</span>
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="d-flex flex-column">
-                                        <h6 class="mb-1 text-dark text-sm">{{ $userlist->name }}</h6>
-                                        <h6 class="mb-1 text-dark text-sm">{{ $userlist->email }}</h6>
-                                        <span class="text-xs">Point
-                                            <span class="font-weight-bold">{{ $quizpoint->count }}</span>
-                                        </span>
+                                    <div class="d-flex">
+                                        <button
+                                            class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i
+                                                class="ni ni-bold-right" aria-hidden="true"></i></button>
                                     </div>
-                                </div>
-                                <div class="d-flex">
-                                    <button
-                                        class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i
-                                            class="ni ni-bold-right" aria-hidden="true"></i></button>
-                                </div>
-                            </li>
-                        @endif
-                    @endforeach
-                </ul>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
