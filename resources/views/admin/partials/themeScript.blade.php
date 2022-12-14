@@ -1,4 +1,5 @@
 <script>
+// Line - chart
 var ctx1 = document.getElementById("chart-line").getContext("2d");
 
 var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
@@ -78,6 +79,45 @@ new Chart(ctx1, {
                 }
             },
         },
+    },
+});
+
+ // Bar - chart
+var ctx2 = document.getElementById("chart-bar").getContext("2d");
+
+new Chart(ctx2, {
+    type: "bar",
+    data: {
+        labels:[{!! $topUserNames !!}],
+        datasets: [{
+            label: "Points",
+            tension: 0.4,
+            pointRadius: 0,
+            borderColor: [
+                'rgb(153, 102, 255)',
+                'rgb(255, 205, 86)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
+                'rgb(255,0,0)'
+            ],
+            backgroundColor: [
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255,0,0,0.3)',
+            ],
+            borderWidth: 1,
+            data: [{{$topUserPoints}}],
+        }],
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
     },
 });
 </script>
