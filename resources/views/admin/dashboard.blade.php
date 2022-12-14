@@ -92,10 +92,27 @@
         <div class="col-lg-12 mb-lg-0 mb-4">
             <div class="card z-index-2 h-100">
                 <div class="card-header pb-0 pt-3 bg-transparent">
-                    <h6 class="text-capitalize"> Users Registered view</h6>
+                    <h6 class="text-capitalize">Top Rankers</h6>
                     <p class="text-sm mb-0">
                         <i class="fa fa-arrow-up text-success"></i>
-                        <span class="font-weight-bold">4% more</span> in 2021
+                    </p>
+                </div>
+                <div class="card-body p-3">
+                    <div class="chart">
+                        <canvas id="chart-bar" class="chart-canvas" height="150"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+            <div class="card z-index-2 h-100">
+                <div class="card-header pb-0 pt-3 bg-transparent">
+                    <h6 class="text-capitalize"> Users Joining</h6>
+                    <p class="text-sm mb-0">
+                        <i class="fa fa-arrow-up text-success"></i>
+                        <span class="font-weight-bold">4% more</span> in 2022
                     </p>
                 </div>
                 <div class="card-body p-3">
@@ -172,7 +189,6 @@
                                         </div>
                                         <div class="d-flex flex-column">
                                             <h6 class="mb-1 text-dark text-sm">{{ $userlist->name }}</h6>
-                                            <h6 class="mb-1 text-dark text-sm">{{ $userlist->email }}</h6>
                                             <span class="text-xs">Point
                                                 <span class="font-weight-bold">{{ $quizpoint->count }}</span>
                                             </span>

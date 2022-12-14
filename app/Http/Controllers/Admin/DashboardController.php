@@ -48,7 +48,22 @@ class DashboardController extends Controller
                         ->orderBy('count','DESC')
                         ->groupBy('user_id')
                         ->get();
-        
-        return view('admin.dashboard',compact('data','categories','months','registerUsersCount','quizpoints')); 
+
+        foreach ($quizpoints as $key => $quizPoint) {
+            $counts[]     = $quizPoint->count;
+            $sliced_array = array_slice($counts, 0, 5);
+            $quizCounts[] = $quizPoint->count;
+            $userList     = \App\Models\User::find($quizPoint->user_id);
+
+            if ($sliced_array === $quizCounts) {
+                $userName [] = $userList->name;
+                $userPoints[] = $quizPoint->count;
+            }
+        }
+        $topUserNames = implode("','",$userName);
+        $topUserNames = "'".$topUserNames."'";
+        $topUserPoints = implode(",",$userPoints);
+    
+        return view('admin.dashboard',compact('data','categories','months','registerUsersCount','topUserNames','topUserPoints','quizpoints')); 
     }
 }
