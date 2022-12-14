@@ -4,11 +4,9 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
-
             <div class="d-flex justify-content-between align-items-center">
                 <h2>{{ $contact->title }}</h2>
             </div>
-
         </div>
     </section><!-- End Breadcrumbs -->
     <!-- ======= Contact Section ======= -->
@@ -51,11 +49,11 @@
                             <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
                                 required>
                         </div>
+
                         <div class="form-group mt-3">
                             <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                        </div>
+                        </div>                       
                        
-                        {{-- <div class="text-center"><button type="submit">Send Message</button></div> --}}
                         <div class="form-group text-center mt-3">
                             <button class="btn btn-success btn-submit">Send Message</button>
                         </div>
