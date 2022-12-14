@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attachment;
+use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Models\Content;
 
 class RegisteredUserController extends Controller
 {
@@ -63,5 +65,13 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('user.dashboard.index'));
+    }   
+ 
+    public function privacy(Request $request)
+    {
+        $privacy= Content::where('slug','privacy-policy')->first();
+       
+        return view('auth.privacy',compact('privacy'));
     }
+
 }

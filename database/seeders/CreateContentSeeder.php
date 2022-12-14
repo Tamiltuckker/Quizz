@@ -35,7 +35,11 @@ class CreateContentSeeder extends Seeder
             [
                 'slug' => 'privacy-policy',
                 'title' => 'Privacy Policy',
-                'description' => 'Respecting your privacy is critically important to achieving our mission of motivating every student. These are our guiding privacy principles:
+                'description' => 
+                'Processing of your Personal Data
+                We will use your Personal Data only in accordance with our Privacy Policy. 
+                If you do not wish us to continue using your Personal Data in this manner, you can request that your account be deactivated by contacting us as specified in the ?Contact Us? page on this site.                
+                Respecting your privacy is critically important to achieving our mission of motivating every student. These are our guiding privacy principles:
                 *We dont ask you for personal information unless we truly need it.
                 *We dont keep your personal information longer than is necessary to provide our services to you.
                 *We dont share your personal information with anyone except to comply with the law, provide our services, or protect our rights.

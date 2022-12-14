@@ -12,6 +12,7 @@ use App\Http\Controllers\User\ContentManagementController as UserContentManageme
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\QuizController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::group(['middleware' => ['auth','role:'.\App\Models\Role::ADMIN], 'as' => 
 });
 
 Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard.index');
+Route::get('/privacy', [RegisteredUserController::class, 'privacy'])->name('auth.privacy');
 
 Route::group(['middleware' => ['auth','role:'.\App\Models\Role::USER], 'as' => 'user.', 'prefix' => 'user', 'namespace' => 'User'], function() {
     Route::get('/templates/{slug}', [UserDashboardController::class, 'gettemplates'])->name('dashboard.gettemplates');
