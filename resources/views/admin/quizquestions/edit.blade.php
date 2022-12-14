@@ -23,7 +23,7 @@
                                 @method('PUT')
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <label for="inputAddress">Choose Template *</label>
+                                        <label for="inputAddress"> Template </label>
                                         <h4><b> {{ $quizTemplate->name }} </b></h4>
                                     </div>
                                 </div>
