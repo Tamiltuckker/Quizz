@@ -17,7 +17,8 @@ class ContentManagementController extends Controller
      */
     public function gethome()
     {
-        return view('users.contents.home');
+        $home= Content::where('slug','home')->first();
+        return view('users.contents.home',compact('home'));
     }
 
     public function getabout()
@@ -25,7 +26,6 @@ class ContentManagementController extends Controller
         $about= Content::where('slug','about-us')->first();
         return view('users.contents.about',compact('about'));
     }
-
 
     public function getcontact(Request $request)
     {

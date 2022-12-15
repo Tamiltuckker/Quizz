@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
