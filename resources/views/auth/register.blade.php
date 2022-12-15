@@ -112,7 +112,7 @@
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and
-                                        Conditions</a> and <a href="{{ route('auth.privacy') }}" class="text-dark font-weight-bolder">Privacy Policy</a>
+                                        Conditions</a> and <a target="_blank" href="{{ route('auth.privacy') }}" class="text-dark font-weight-bolder">Privacy Policy</a>
                                 </label>                                
                             </div>
                             
