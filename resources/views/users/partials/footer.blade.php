@@ -23,7 +23,7 @@
                      <h4>Our Categories</h4>
                      <ul>
                         @guest
-                            @foreach ($categories as $category)
+                            {{-- @foreach ($categories as $category)
                                 @php
                                     $attendUsersCount = \App\Models\QuizAnswer::where('category_id', $category->id)
                                         ->get()
@@ -46,7 +46,7 @@
                                         @endauth
                                     @endif
                                 </li>
-                            @endforeach
+                            @endforeach --}}
                          @endguest
                      </ul>
                  </div>
