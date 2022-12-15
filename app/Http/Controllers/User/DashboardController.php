@@ -7,14 +7,23 @@ use App\Models\Category;
 use App\Models\QuizQuestion;
 use App\Models\QuizTemplate;
 use App\Models\QuizAnswer;
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         $categories = Category::all();
-        return view('users.dashboard',compact('categories'));
+        $route      = Route::currentRouteName();
+        $quizpoints = QuizAnswer::select(DB::raw("user_id, SUM(point) as count"))
+        -> orderBy('count','DESC')
+        ->groupBy('user_id')
+        ->get();
+
+        return view('users.dashboard',compact('categories','route'));
     }
 
     public function gettemplates($id)

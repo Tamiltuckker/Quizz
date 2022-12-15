@@ -113,7 +113,7 @@ class QuizQuestionController extends Controller
         /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Topic  $topic
+     * @param  \App\Models\QuizQuestion  $quizQuestion
      * @return \Illuminate\Http\Response
      */
     public function destroy($quizTemplateId, $quizQuestionId)

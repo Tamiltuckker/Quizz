@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        return view('admin.users.edit', compact('user'));       
     }
 
     /**
@@ -85,12 +85,11 @@ class UserController extends Controller
             'name' =>  'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $user = User::find($id);
         $input = $request->all();
-
+        
         if (!empty($input['password'])) {
             $input['password'] = Hash::make($input['password']);
         } else {
@@ -112,9 +111,9 @@ class UserController extends Controller
             $imagestore  = $uplaodImage->storeAs('public/image', $imageName);
             $file->image = $imageName;
             $user->image()->save($file);
-        } else {
-            unset($input['image']);
-        }
+        }  else {
+          unset($input['image']);
+        } 
 
         return redirect()->route('admin.users.index')->with('info', 'User updated successfully');
     }
@@ -133,5 +132,19 @@ class UserController extends Controller
         
         return redirect()->route('admin.users.index')
             ->with('danger', 'Users deleted successfully');
+    }
+    // impersonate user
+    public function impersonate(User $user) 
+    {
+        auth()->user()->impersonate($user);
+
+        return redirect()->route('user.dashboard.index');
+    }
+    // leave impersonate
+    public function leave_impersonate() 
+    {
+        auth()->user()->leaveImpersonation();
+
+        return redirect()->route('admin.users.index'); 
     }
 }

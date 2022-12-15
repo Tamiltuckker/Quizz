@@ -17,7 +17,7 @@
 <body class="">
     <main class="main-content  mt-0">
         @yield('content')
-    </main>
+    </main> 
     <!--   Core JS Files   -->
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
@@ -33,7 +33,7 @@
         }
         </script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
+    <script src="{{ asset('assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script> 
 </body>
 
 </html>

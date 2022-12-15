@@ -3,6 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
+            {{ Breadcrumbs::render('quizquestion', $quizTemplateId) }}
             <div class="card mb-4">
                 <div class="card-header pb-0">                    
                     <div class="d-flex align-items-center">                        
@@ -18,7 +19,9 @@
                         @yield('content')
                         <table class="table align-items-center mb-0">
                             <thead>
-                                <tr>                                   
+                                <tr> 
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        No.qn</th>                                
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Question</th>
                                     <th
@@ -27,8 +30,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($quizQuestions as $quizQuestion)
-                                    <tr>                                      
+                                @foreach ($quizQuestions as  $quizQuestion)
+                                    <tr>   
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $loop->iteration }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>                                   
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">

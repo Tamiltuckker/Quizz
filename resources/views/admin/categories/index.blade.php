@@ -20,7 +20,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Category Image</th>                                   
+                                        Category</th>                                   
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Template-Count</th>
                                     <th
