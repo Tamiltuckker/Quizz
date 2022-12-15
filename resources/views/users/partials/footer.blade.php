@@ -5,12 +5,12 @@
              <div class="row">
                  <div class="col-lg-3 col-md-6">
                      <div class="footer-info">
-                         <h3>Quiz<span>.</span></h3>
+                         <h3 class="logo me-auto me-lg-0"><a href="{{ route('user.dashboard.index') }}">Quiz<span>.</span></a></h3>
                      </div>
                  </div>
 
                  <div class="col-lg-2 col-md-6 footer-links">
-                     <h4>Quiz</h4>
+                    <h4 class="logo me-auto me-lg-0"><a href="{{ route('user.dashboard.index') }}">Quiz<span>.</span></a></h1>
                      <ul>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{ route('user.home') }}">Home</a></li>
                          <li><i class="bx bx-chevron-right"></i> <a href="{{ route('user.about') }}">About us</a></li>

@@ -16,10 +16,10 @@
                                          {{ Form::select('category_id', @$categories, request()->input('search'), ['class' => 'form-control form-control-solid form-select mb-2 single-select2', 'placeholder' => 'Select Category']) }}
                                      </div>
                                      <div class="col-md-3">
-                                        {{-- <input type="search" name="search" value="{{ request()->input('search') }}" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Search"> --}}
-                                        <button type='submit' class='btn bg-gradient-secondary ml-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150'>
+                                        <button type='submit' class='btn bg-gradient-success ml-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150'>
                                             {{ __('Search') }}
                                         </button>
+                                        <a class="btn bg-gradient-secondary font-weight-bold text-xs" href="{{ route('admin.quiztemplates.index') }}"> Clear </a>
                                      </div>
                                     </div>
                                  </div>
@@ -38,6 +38,7 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.tmp</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Template</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No. of Questions</th>
@@ -47,6 +48,13 @@
                             <tbody>
                                 @foreach ($quizTemplates as $quizTemplate)
                                     <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $loop->iteration }}</h6>
+                                                </div>
+                                            </div>
+                                        </td> 
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
