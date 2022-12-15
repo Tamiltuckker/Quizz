@@ -17,20 +17,29 @@ class CreateContentSeeder extends Seeder
     {
         $contents = [
             [
+                'slug' => 'home',
+                'title' => 'Home',
+                'description' => 'Quiz Bee is to help students prepare for the Web Developments Exam.
+                Web development is the work that pertains to developing a web site for the internet.
+                We Provide the quiz from the very basic level to more advanced levels.',                
+                'active' => '1',
+                'image'  =>'home.jpg'
+            ],
+            [
                 'slug' => 'about-us',
                 'title' => 'About Us',
-                'description' => 'At Typeform, we help brands treat people like people with thoughtfully-designed tools that turn digital interactions into lasting personal connections.
+                'description' => 'At Quiz Bee, we help brands treat people like people with thoughtfully-designed tools that turn digital interactions into lasting personal connections.
                  Because what do customers, prospects, users, leads, recruits, and employees (the list goes on) all have in common? They’re all people. And people are essential to growth.                
                  With our no-code forms, quizzes, surveys, and asynchronous videos, brands can engage their audience and grow their business with ease.',
                 'active' => '1',
-                'image'  =>'about.jpg'
+                'image'  =>'aboutus.jpg'
             ],
             [
                 'slug' => 'contact',
                 'title' => 'Contact',
                 'description' => 'Quiz Bee,3110 Main St. Building C,New York,90405',
                 'active' => '1',
-                'image'  => 'contact-us-image.jpg'
+                'image'  => 'contactus.jpg'
             ],
             [
                 'slug' => 'privacy-policy',
