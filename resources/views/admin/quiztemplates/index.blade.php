@@ -38,6 +38,7 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.tmp</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Template</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No. of Questions</th>
@@ -47,6 +48,13 @@
                             <tbody>
                                 @foreach ($quizTemplates as $quizTemplate)
                                     <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $loop->iteration }}</h6>
+                                                </div>
+                                            </div>
+                                        </td> 
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
