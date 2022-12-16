@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\QuizAnswer;
 
 class UserController extends Controller
 {
@@ -68,8 +70,18 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    {
-        return view('admin.users.edit', compact('user'));       
+    {        
+        $id   = Auth::user()->id;
+        $user = User::find($id);
+
+        $quizAnsweredTemplates = QuizAnswer::where('user_id', $user->id)->get()
+                                 ->groupBy('quiz_template_id');
+       
+        $categoryAnsCounts = QuizAnswer::where('user_id', $user->id)->get()
+                             ->groupBy('category_id');
+
+        $quizpoints = QuizAnswer::where('point','=',1)->where('user_id', Auth::user()->id) ->get();
+        return view('admin.users.edit', compact('user','quizAnsweredTemplates','categoryAnsCounts','quizpoints'));       
     }
 
     /**
