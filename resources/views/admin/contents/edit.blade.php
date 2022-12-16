@@ -42,7 +42,7 @@
                                     <div class="form-group">
                                         <label for="example-textarea-input" class="form-control-label">
                                             Description</label>
-                                        <textarea class="form-control" name="description" rows="10" cols="70">
+                                        <textarea class="form-control" id="summernote" name="description" rows="10" cols="70">
                                         {{ old('description', $content->description) }}</textarea>
                                     </div>
                                 </div>
@@ -77,5 +77,28 @@
                 </div>
             </div>
         </div>
+        @push('css')
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" />
+    @endpush
+    @push('js')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                    $('body').on('change', '.single-type', function(){
+                        $(".single-type").prop('checked', false);
+                        $(this).prop('checked', true);
+                    });
+                    $('#summernote').summernote({
+                        height: 200,
+                    });
+            });
+        </script>
+    @endpush
+
+
+
+
     </div>
 @endsection
