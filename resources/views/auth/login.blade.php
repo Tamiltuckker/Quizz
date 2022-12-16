@@ -2,8 +2,9 @@
 
 @section('content')
     <section>
+    <div class="classToDefineBackgroundSetCss" style="background-image: url('{{asset('assets/img/vr-bg.jpg')}}');">
         <div class="page-header min-vh-100">
-            <div class="container">
+            <div class="container">                
                 <div class="row">
                     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                         <div class="card card-plain">
@@ -41,6 +42,7 @@
 
                                     </div>
                                 </form>
+    </div>
                             </div>
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                 <p class="mb-4 text-sm mx-auto">
@@ -65,5 +67,6 @@
                 </div>
             </div>
         </div>
+   
     </section>
 @endsection
