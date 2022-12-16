@@ -15,6 +15,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
+             
         $getUsers =  Role::withCount('users')->where('name', '!=', 'Admin')->get();
         foreach($getUsers as $getUser)
         {
@@ -49,20 +50,24 @@ class DashboardController extends Controller
                         ->groupBy('user_id')
                         ->get();
 
-        foreach ($quizpoints as $key => $quizPoint) {
-            $counts[]     = $quizPoint->count;
-            $sliced_array = array_slice($counts, 0, 5);
-            $quizCounts[] = $quizPoint->count;
-            $userList     = \App\Models\User::find($quizPoint->user_id);
-
-            if ($sliced_array === $quizCounts) {
-                $userName [] = $userList->name;
-                $userPoints[] = $quizPoint->count;
+        if($quizpoints->isNotempty()) {
+            foreach ($quizpoints as $key => $quizPoint) {
+                $counts[]     = $quizPoint->count;
+                $sliced_array = array_slice($counts, 0, 5);
+                $quizCounts[] = $quizPoint->count;
+                $userList     = \App\Models\User::find($quizPoint->user_id);
+                if ($sliced_array === $quizCounts || $sliced_array < 1) {
+                    $userName[] = $userList->name;
+                    $userPoints[] = $quizPoint->count;
+                }
             }
-        }
-        $topUserNames = implode("','",$userName);
-        $topUserNames = "'".$topUserNames."'";
-        $topUserPoints = implode(",",$userPoints);
+            $topUserNames = implode("','",$userName);
+            $topUserNames = "'".$topUserNames."'";
+            $topUserPoints = implode(",",$userPoints);
+       } else {
+            $topUserNames = null ;
+            $topUserPoints = null;
+       }
     
         return view('admin.dashboard',compact('data','categories','months','registerUsersCount','topUserNames','topUserPoints','quizpoints')); 
     }
