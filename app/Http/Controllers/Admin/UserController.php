@@ -70,10 +70,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    {        
-        $id   = Auth::user()->id;
-        $user = User::find($id);
-
+    { 
         $quizAnsweredTemplates = QuizAnswer::where('user_id', $user->id)->get()
                                  ->groupBy('quiz_template_id');
        

@@ -152,18 +152,16 @@
                             </h5>
                             <div class="h6 font-weight-300">
                                 <i class="ni location_pin mr-2"></i>{{ $user->email }}
-                            </div>
-                            <div class="h6 mt-4">
-                                <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
-                            </div>
-                            <div>
-                                <i class="ni education_hat mr-2"></i>University of Computer Science
-                            </div>
-                        
+                            </div>                                                  
                         </div>
                     </div>
                 </div>
+                <hr class="my-4">    
             </div>
         </div>
     </div>
+    @push('css')
+        <link href="{{ asset('assets/css/userprofile.css') }}" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    @endpush
 @endsection
