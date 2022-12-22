@@ -54,7 +54,7 @@
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
-                                        <span class="d-sm-inline d-none">Log out</span>
+                                        <span class="d-sm-inline">Log out</span>
                                     </x-responsive-nav-link>
                                 </form>
                             </li>
@@ -71,7 +71,7 @@
             <form method="POST" class="get-started-btn scrollto" action="{{ route('logout') }}">
                 @csrf
                 <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
-                    <span class="d-sm-inline d-none">Log out</span>
+                    <span class="d-sm-inline">Log out</span>
                 </x-responsive-nav-link>
             </form>
         @endauth

@@ -12,8 +12,8 @@
                                  <div class="overflow-hidden flex pl-4">
                                     <p>Advance Category Filter:</p>
                                     <div class ="row">
-                                     <div class="col-md-6">
-                                         {{ Form::select('category_id', @$categories, request()->input('search'), ['class' => 'form-control form-control-solid form-select mb-2 single-select2', 'placeholder' => 'Select Category']) }}
+                                     <div class="col-md-6">                                          
+                                         {{ Form::select('category_id',@$categories,request()->input('category_id'), ['class' => 'form-control form-control-solid form-select mb-2 single-select2', 'placeholder' => 'Select Category']) }}
                                      </div>
                                      <div class="col-md-3">
                                         <button type='submit' class='btn bg-gradient-success ml-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150'>
