@@ -21,8 +21,7 @@
 
                  <div class="col-lg-3 col-md-6 footer-links">
                      <h4>Our Categories</h4>
-                     <ul>
-                        @guest
+                        <ul>                       
                             @foreach ($categories as $category)
                                 @php
                                     $attendUsersCount = \App\Models\QuizAnswer::where('category_id', $category->id)
@@ -46,9 +45,8 @@
                                         @endauth
                                     @endif
                                 </li>
-                            @endforeach
-                         @endguest
-                     </ul>
+                            @endforeach                         
+                        </ul>
                  </div>
              </div>
          </div>
