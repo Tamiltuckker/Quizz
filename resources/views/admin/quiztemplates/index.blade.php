@@ -78,17 +78,19 @@
                                         </td>             
                                         <td class="align-middle text-center text-sm">
                                             <form method="POST" action="{{ route('admin.quiztemplates.destroy', $quizTemplate->id) }}">
-                                                <a class="btn bg-gradient-warning font-weight-bold text-xs" href="{{ route('admin.quizquestions.index',$quizTemplate->id) }}">Manage Questions</a>
+                                                <a class="btn bg-gradient-warning font-weight-bold text-xs" href="{{ route('admin.quizquestions.index',$quizTemplate->id) }}">Manage Questions</a>&nbsp;
                                                 <a href="{{ route('admin.quiztemplates.edit', $quizTemplate->id) }}"
                                                     class="btn bg-gradient-info font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-original-title="Edit category">
-                                                    Edit
-                                                </a>
+                                                    data-toggle="tooltip" data-original-title="Edit category" style="width: 0.5x; height:32px">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>                                                    
+                                                </a> &nbsp;
                                                 @csrf
                                                 <input name="_method" type="hidden" value="DELETE">
                                                 <button type="submit"
                                                     class="btn bg-gradient-danger font-weight-bold text-xs show-alert-delete-box"
-                                                    data-toggle="tooltip" title='Delete'>Delete</button>
+                                                    data-toggle="tooltip" title='Delete' style="width: 0.5x; height:32px">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>                                                    
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

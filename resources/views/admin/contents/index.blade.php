@@ -53,8 +53,8 @@
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <a href="{{ route('admin.contents.edit', $content->id) }}" class="btn bg-gradient-info font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Edit content">
-                                                Edit
+                                                data-toggle="tooltip" data-original-title="Edit content" style="width: 0.5x; height:32px">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>                                                
                                             </a>
                                         </td>
                                     </tr>
