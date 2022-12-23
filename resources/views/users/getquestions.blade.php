@@ -20,6 +20,7 @@
                                     @csrf
                                     @php $options = $quizQuestion->quiz_options @endphp
                                     @foreach ($options as $key => $option)
+                                    <div>
                                         <input type="radio" name={{ "quizanswers[$questionId]" }}
                                             value="{{ $option->id }}" required>{{ $option->option }}<br>
                                         <label for="one" class="box first">
@@ -28,6 +29,7 @@
                                                 {{-- <span class="subject"> {{ $option->option }}</span><br> --}}
                                             </div>
                                         </label>
+                                    </div>
                                     @endforeach
                                 </div>
                                 <br>

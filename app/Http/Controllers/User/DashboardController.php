@@ -28,26 +28,29 @@ class DashboardController extends Controller
 
     public function gettemplates($id)
     {   
+        $categories = Category::all();
         $categoryId    = Category::where('slug','=',$id)->first();
         $quizTemplates = QuizTemplate::where('category_id', $categoryId->id)->get();
 
-        return view('users.gettemplates',compact('quizTemplates'));
+        return view('users.gettemplates',compact('quizTemplates','categories'));
     } 
     
     public function getquestions($id)
     {
+        $categories = Category::all();
         $quizTemplateIds = QuizTemplate::where('slug', '=' ,$id)->first();
         $quizTemplateId =  $quizTemplateIds->id;
         $quizQuestions  = QuizQuestion::where('quiz_template_id',$quizTemplateId)->get();
 
-        return view('users.getquestions',compact('quizQuestions','quizTemplateId'));
+        return view('users.getquestions',compact('quizQuestions','quizTemplateId','categories'));
     }
 
     public function viewquizanswer($id)
     {
+        $categories = Category::all();
         $quizAnswers = QuizAnswer::where('quiz_template_id','=',$id)->where('user_id', Auth::user()->id)->get();
         
-        return view('users.viewanswered',compact('quizAnswers'));
+        return view('users.viewanswered',compact('quizAnswers','categories'));
     }
     
 }
