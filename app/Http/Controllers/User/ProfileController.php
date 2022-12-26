@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Attachment;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        $categories = Category::all();
         $id   = Auth::user()->id;
         $user = User::find($id);
 
@@ -31,7 +33,7 @@ class ProfileController extends Controller
 
         $quizpoints = QuizAnswer::where('point','=',1)->where('user_id', Auth::user()->id) ->get();
 
-        return view('users.profile.show',compact('user','quizAnsweredTemplates','categoryAnsCounts','quizpoints'));
+        return view('users.profile.show',compact('user','quizAnsweredTemplates','categoryAnsCounts','quizpoints','categories'));
     }
 
    
