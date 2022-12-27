@@ -6,16 +6,16 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 <li><a class="nav-link scrollto" href="{{ route('user.home') }}">Home</a></li>
-                <li><a class="nav-link scrollto" href="{{ route('user.about') }}">About</a></li>
+                <li><a class="nav-link scrollto" href="{{ route('user.about') }}">About</a></li>                
                 <li class="dropdown"><a href="#"><span>Categories</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        @if (@$route)
+                        <li>                                
                             @foreach ($categories as $category)
                                 @php
                                     $attendUsersCount = \App\Models\QuizAnswer::where('category_id', $category->id)
-                                                        ->get()
-                                                        ->groupBy('user_id')
-                                                        ->count();
+                                        ->get()
+                                        ->groupBy('user_id')
+                                        ->count();
                                     
                                     $attendUsersCounts[] = $attendUsersCount;
                                     $userCounts = array_slice($attendUsersCounts, 0, 5);
@@ -26,41 +26,41 @@
                                     @if ($userCounts === $quizcounts && $category->active === 1)
                                         @if ($userEmailVerfication->email_verified_at !== null)
                                             <h4 class="useremail"><a
-                                                    href="{{ route('user.dashboard.gettemplates', $category->slug) }}">{{ $category->name }}</a>
+                                                href="{{ route('user.dashboard.gettemplates', $category->slug) }}">{{ $category->name }}</a>
                                             </h4>
                                         @else
                                             <h4 onclick="userEmail()"><a href="#">{{ $category->name }}</a></h4>
-                                        @endif
+                                         @endif
                                     @endif
                                 @endauth
                                 @guest
                                     @if ($userCounts === $quizcounts && $category->active === 1)
                                         <li><a href="{{ route('login') }}">{{ $category->name }}</a></li>
-                                    @endif
+                                     @endif
                                 @endguest
-                            @endforeach
-                        @endif
-                    </ul>
-                </li>
-                <li><a class="nav-link scrollto" href="{{ route('user.contact') }}">Contact</a></li>
-                @auth
-                    <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li><a href="{{ route('user.profiles.index') }}">Profile</a></li>
-                            @if (session('impersonated_by'))
+                            @endforeach                                
+                        </li>
+                    </ul>                                  
+                    <li><a class="nav-link scrollto" href="{{ route('user.contact') }}">Contact</a></li>
+                    @auth
+                        <li class="dropdown"><a href="#"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="{{ route('user.profiles.index') }}">Profile</a></li>
+                                @if (session('impersonated_by'))
                                 <li><a href="{{ route('leave-impersonate') }}">Leave Impersonation</a></li>
-                            @endif
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                                @endif
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
                                         <span class="d-sm-inline">Log out</span>
-                                    </x-responsive-nav-link>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                @endauth
+                                        </x-responsive-nav-link>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @endauth
+                </li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
