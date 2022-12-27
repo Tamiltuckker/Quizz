@@ -4,8 +4,7 @@
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
         <div class="container" data-aos="fade-up">
-            <div class="section-title">
-                <h2>Quiz Section</h2>
+            <div class="section-title">               
                 <p>Check Your Brain</p>
             </div>
             <div class="container mb-5">
