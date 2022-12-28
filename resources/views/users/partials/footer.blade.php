@@ -14,8 +14,7 @@
                     <ul>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{ route('user.home') }}">Home</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{ route('user.about') }}">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('user.contact') }}">Contact</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('user.contact') }}">Contact</a></li>                        
                     </ul>
                 </div>
 
