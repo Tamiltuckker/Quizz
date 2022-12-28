@@ -70,14 +70,15 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    { 
+    {  
         $quizAnsweredTemplates = QuizAnswer::where('user_id', $user->id)->get()
                                  ->groupBy('quiz_template_id');
        
         $categoryAnsCounts = QuizAnswer::where('user_id', $user->id)->get()
                              ->groupBy('category_id');
 
-        $quizpoints = QuizAnswer::where('point','=',1)->where('user_id', Auth::user()->id) ->get();
+        $quizpoints = QuizAnswer::where('point','=',1)->where('user_id', $user->id) ->get();
+        // dd($quizpoints);
         return view('admin.users.edit', compact('user','quizAnsweredTemplates','categoryAnsCounts','quizpoints'));       
     }
 
