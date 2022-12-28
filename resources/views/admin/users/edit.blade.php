@@ -12,7 +12,7 @@
                         @yield('content')
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Edit Profile</p>
-                            <button action="{{ route('admin.users.index') }}" class="btn btn-primary btn-sm ms-auto">Back</button>
+                            <a class="btn btn-primary btn-sm ms-auto" href="{{ route('admin.users.index') }}">Back</a>                            
                         </div>
                     </div>
                     <div class="card-body">
@@ -112,39 +112,56 @@
                     <div class="card-body pt-0">
                         <div class="row">
                             <div class="col">
-                                <div class="d-flex justify-content-center">
-                                    <div class="d-grid text-center">
-                                        <span class="text-lg font-weight-bolder">22</span>
-                                        <span class="text-sm opacity-8">Friends</span>
+                                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                    <div>
+                                        @php $total = 0; @endphp
+                                        @php
+                                        foreach ($categoryAnsCounts as $key => $categoryAnsCount) {
+                                                $anscategoryCount = \App\Models\QuizAnswer::where('category_id', $key)
+                                                    ->get()
+                                                    ->groupBy('quiz_template_id')
+                                                    ->count();
+                                            
+                                                $totalCategorycount = \App\Models\QuizTemplate::where('category_id', '=', $key)
+                                                    ->get()
+                                                    ->count();
+                                            
+                                                if ($anscategoryCount === $totalCategorycount) {
+                                                    $total++;
+                                                }
+                                            }
+                                        @endphp
+                                        <span class="heading"> {{ $total }}</span>
+                                        <span class="description">categories</span>
                                     </div>
-                                    <div class="d-grid text-center mx-4">
-                                        <span class="text-lg font-weight-bolder">10</span>
-                                        <span class="text-sm opacity-8">Photos</span>
+                                    <div>
+                                        <span class="heading">{{ count($quizAnsweredTemplates) }}</span>
+                                        <span class="description">templates</span>
                                     </div>
-                                    <div class="d-grid text-center">
-                                        <span class="text-lg font-weight-bolder">89</span>
-                                        <span class="text-sm opacity-8">Comments</span>
+                                    <div>
+                                        <span class="heading">{{ count($quizpoints) }}</span>
+                                        <span class="description">Points</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                                   
                         <div class="text-center mt-4">
                             <h5>
-                                Mark Davis<span class="font-weight-light">, 35</span>
+                                {{ $user->name }}
                             </h5>
                             <div class="h6 font-weight-300">
-                                <i class="ni location_pin mr-2"></i>Bucharest, Romania
-                            </div>
-                            <div class="h6 mt-4">
-                                <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
-                            </div>
-                            <div>
-                                <i class="ni education_hat mr-2"></i>University of Computer Science
-                            </div>
+                                <i class="ni location_pin mr-2"></i>{{ $user->email }}
+                            </div>                                                  
                         </div>
                     </div>
                 </div>
+                <hr class="my-4">    
             </div>
         </div>
     </div>
+    @push('css')
+        <link href="{{ asset('assets/css/userprofile.css') }}" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    @endpush
 @endsection

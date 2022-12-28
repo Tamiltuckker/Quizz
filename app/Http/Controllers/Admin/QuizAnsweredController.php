@@ -7,6 +7,7 @@ use App\Models\QuizAnswer;
 use App\Models\QuizQuestion;
 use App\Models\QuizTemplate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuizAnsweredController extends Controller
 {
@@ -26,12 +27,23 @@ class QuizAnsweredController extends Controller
     }
     public function getansweredquestions($userId,$quizTemplateId)
     {
-        $answeredQuestions = QuizQuestion::with('quiz_template')
-                            ->where('quiz_template_id', $quizTemplateId)
-                            ->get();
+        $answeredQuestions  = QuizQuestion::with('quiz_template')
+                                ->where('quiz_template_id', $quizTemplateId)
+                                ->get();
 
-        return view('admin.quizanswers.questions',compact('answeredQuestions','quizTemplateId','userId'));
+        $totalTemplatepoints = QuizAnswer::select(DB::raw("user_id, SUM(point) as count"))
+                                ->where('quiz_template_id', $quizTemplateId)
+                                ->where('user_id', $userId)
+                                ->orderBy('count','DESC')
+                                ->groupBy('user_id')
+                                ->first();
+                              
+        $totalWrongTemplatepoints = QuizAnswer::where('point', 0)
+                                ->where('user_id', $userId)
+                                ->where('quiz_template_id', $quizTemplateId)
+                                ->get();
 
+        return view('admin.quizanswers.questions',compact('answeredQuestions','quizTemplateId','userId','totalTemplatepoints','totalWrongTemplatepoints'));
     }
     
 }

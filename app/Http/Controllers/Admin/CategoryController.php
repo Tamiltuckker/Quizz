@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\QuizTemplate;
 use App\Models\Attachment;
+
 class CategoryController extends Controller
 {
     /**
@@ -16,9 +18,9 @@ class CategoryController extends Controller
      */
     public function index(Request $request, Category $category)
     {
-        $categories = Category::latest()->paginate(5);
-        $quizTemplates = QuizTemplate::withCount('category')->get();    
-       
+        $categories    = Category::all();
+        $quizTemplates = QuizTemplate::withCount('category')->get();
+
         return view('admin.categories.index', compact('categories'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -46,7 +48,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name'  =>  'required|unique:categories|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',            
+            'image' =>  'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $category = new Category();
@@ -59,8 +61,9 @@ class CategoryController extends Controller
             $category->active = Category::INACTIVE;
         }
         $category->save();
+        
         $id        = $category->id;
-        $attachment  = Category::find($id);        
+        $attachment  = Category::find($id);
         $file        = new Attachment();
         $imageName   = time() . '.' . $request->image->getClientOriginalExtension();
         $imagestore  = $request->file('image')->storeAs('public/image', $imageName);
@@ -68,8 +71,8 @@ class CategoryController extends Controller
         $attachment->image()->save($file);
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category created successfully');       
-            
+            ->with('success', 'Category created successfully');
+
     }
 
     /**
@@ -93,19 +96,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:categories|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
         $category = Category::find($id);
-        $input = $request->all();   
-
+        $input = $request->all();
+        if ($input['name'] != $category['name']) {
+            $this->validate($request, [
+                'name'  => 'unique:categories|max:255',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+        }
         if ($request->active == 'on') {
             $input['active'] = Category::ACTIVE;
         } else {
             $input['active'] = Category::INACTIVE;
         }
+
         $category->update($input);
+
         if ($uplaodImage = $request->file('image')) {
             Attachment::where('attachmentable_id', $category->id)->delete();
             $file        = new Attachment();
@@ -129,7 +135,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);       
+        $category = Category::findOrFail($id);
         $category->image()->delete();
         $category->delete();
 

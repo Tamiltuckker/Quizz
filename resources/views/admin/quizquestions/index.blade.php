@@ -3,6 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
+            {{ Breadcrumbs::render('quizquestion', $quizTemplateId) }}
             <div class="card mb-4">
                 <div class="card-header pb-0">                    
                     <div class="d-flex align-items-center">                        
@@ -18,7 +19,9 @@
                         @yield('content')
                         <table class="table align-items-center mb-0">
                             <thead>
-                                <tr>                                   
+                                <tr> 
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        No.qn</th>                                
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Question</th>
                                     <th
@@ -27,8 +30,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($quizQuestions as $quizQuestion)
-                                    <tr>                                      
+                                @foreach ($quizQuestions as  $quizQuestion)
+                                    <tr>   
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $loop->iteration }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>                                   
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
@@ -41,14 +51,16 @@
                                                 action="{{ route('admin.quizquestions.destroy', [$quizTemplateId, $quizQuestion->id]) }}">
                                                 <a href="{{ route('admin.quizquestions.edit',  [$quizTemplateId, $quizQuestion->id]) }}"
                                                     class="btn bg-gradient-info font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-original-title="Edit question">
-                                                    Edit
-                                                </a>
+                                                    data-toggle="tooltip" data-original-title="Edit question" style="width: 0.5x; height:32px">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>                                                    
+                                                </a> &nbsp;
                                                 @csrf
                                                 <input name="_method" type="hidden" value="DELETE">
                                                 <button type="submit"
                                                     class="btn bg-gradient-danger font-weight-bold text-xs show-alert-delete-box"
-                                                    data-toggle="tooltip" title='Delete'>Delete</button>
+                                                    data-toggle="tooltip" title='Delete' style="width: 0.5x; height:32px">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>                                                    
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

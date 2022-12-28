@@ -5,7 +5,7 @@
         <div class="col-12">
             {!! Breadcrumbs::render() !!}
             <div class="card mb-4">
-                <div class="card-header pb-0">                   
+                <div class="card-header pb-0">
                     <h6>Users table</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -22,7 +22,7 @@
                                         Status</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Date</th>
+                                       Joining Date</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Actions </th>
@@ -61,17 +61,46 @@
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}">
-                                                <a class="btn bg-gradient-warning font-weight-bold text-xs" href="{{ route('admin.getansweredtemplates',$user->id) }}">Quiz Answered Templates</a>
+                                                @php $answeredQuestions = \App\Models\QuizAnswer::where('user_id', $user->id)->first();@endphp
+                                                @if ($answeredQuestions !== null)
+                                                    <a class="btn bg-gradient-warning font-weight-bold text-xs"
+                                                        id="buttonshow"
+                                                        href="{{ route('admin.getansweredtemplates', $user->id) }}">Quiz
+                                                        Answered Templates</a>
+                                                @else
+                                                    <span class="btn bg-gradient-secondary font-weight-bold text-xs">User
+                                                        Not Attend the
+                                                        Quiz</span>
+                                                @endif &nbsp;
+                                                <a class="btn bg-gradient-primary font-weight-bold text-xs" style="width: 0.5x; height: 32px" href="{{ route('impersonate',$user->id) }}">
+                                                <i class="fa fa-user-secret" aria-hidden="true"></i>
+                                                {{-- Impersonate --}}
+                                                </a> &nbsp;
+                                                {{-- @php $answeredQuestions = \App\Models\QuizAnswer::where('user_id', $user->id)->first();@endphp
+                                                @if ($answeredQuestions !== null)
+                                                    <a class="btn bg-gradient-warning font-weight-bold text-xs"
+                                                        id="buttonshow"
+                                                        href="{{ route('admin.getansweredtemplates', $user->id) }}">Quiz
+                                                        Answered Templates</a>
+                                                @else
+                                                    <span class="btn bg-gradient-secondary font-weight-bold text-xs">User
+                                                        Not Attend the
+                                                        Quiz</span>
+                                                @endif --}}
                                                 <a href="{{ route('admin.users.edit', $user->id) }}"
                                                     class="btn bg-gradient-info font-weight-bold text-xs"
+                                                    style="width: 0.5x; height:32px"
                                                     data-toggle="tooltip" data-original-title="Edit user">
-                                                    Edit
-                                                </a>
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    {{-- Edit --}}
+                                                </a> &nbsp;
                                                 @csrf
                                                 <input name="_method" type="hidden" value="DELETE">
                                                 <button type="submit"
                                                     class="btn bg-gradient-danger font-weight-bold text-xs show-alert-delete-box"
-                                                    data-toggle="tooltip" title='Delete'>Delete</button>
+                                                    data-toggle="tooltip" title='Delete' style="width: 0.5x; height: 32px">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -83,6 +112,5 @@
             </div>
         </div>
     </div>
-
-    @include('script')  
+    @include('script')
 @endsection

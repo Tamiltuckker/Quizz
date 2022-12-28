@@ -4,6 +4,7 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
+                {{ Breadcrumbs::render('quizquestions', $quizTemplate->id) }}
                 <div class="card">
                     <div class="card-header pb-0">
                         @include('flash-message')      
@@ -22,7 +23,7 @@
                                 @method('PUT')
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <label for="inputAddress">Choose Template *</label>
+                                        <label for="inputAddress"> Template </label>
                                         <h4><b> {{ $quizTemplate->name }} </b></h4>
                                     </div>
                                 </div>
@@ -36,7 +37,7 @@
                                 <div class="col-md-10">
                                     <div class="form-group">
                                         <label for="example-textarea-input" class="form-control-label">Description</label>                                       
-                                        <textarea class="form-control" name="description" rows="4" cols="50" placeholder="Description"> {{$quizQuestion->description}} </textarea>
+                                        <textarea class="form-control" name="description" id="summernote" rows="4" cols="50" placeholder="Description"> {{$quizQuestion->description}} </textarea>
                                     </div>
                                 </div>
 
@@ -79,16 +80,24 @@
         </div>
     </div>
 
-@push('js')
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function(){
-            $('body').on('change', '.single-type', function(){
-                $(".single-type").prop('checked', false);
-                $(this).prop('checked', true);
+    @push('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" />
+    @endpush
+    @push('js')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                    $('body').on('change', '.single-type', function(){
+                        $(".single-type").prop('checked', false);
+                        $(this).prop('checked', true);
+                    });
+                    $('#summernote').summernote({
+                        height: 200,
+                    });
             });
-        });
-    </script>
-@endpush
+        </script>
+    @endpush
 @endsection 
 
