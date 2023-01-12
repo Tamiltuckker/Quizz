@@ -15,10 +15,15 @@ class QuizTemplateController extends Controller
      */
     public function index()
     {
-        $quizTemplates = QuizTemplate::with('category')->get();        
-        $quizQuestions = QuizQuestion::withCount('quiz_template')->get();  
+        if (request()->has('category_id')) {
+            $quizTemplates = QuizTemplate::with('category')->where('category_id', request()->input('category_id'))->get();        
+        } else {
+            $quizTemplates = QuizTemplate::with('category')->get();        
+        }
+        $quizQuestions = QuizQuestion::withCount('quiz_template')->get(); 
+        $categories    = Category::pluck('name','id');
             
-        return view('admin.quiztemplates.index',compact('quizTemplates'));   
+        return view('admin.quiztemplates.index',compact('quizTemplates','categories'));   
     }  
 
     /**
@@ -62,8 +67,9 @@ class QuizTemplateController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit(QuizTemplate $quizTemplate)
+    public function edit($id)
     {
+        $quizTemplate   = QuizTemplate::find($id);
         $categories   = Category::pluck('name','id');
 
         return view('admin.quiztemplates.edit', compact('quizTemplate','categories'));

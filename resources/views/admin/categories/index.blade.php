@@ -20,7 +20,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Category Image</th>                                   
+                                        Category</th>                                   
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Template-Count</th>
                                     <th
@@ -65,18 +65,21 @@
                                                 <span class="badge badge-sm bg-gradient-danger">inactive</span>
                                             @endif
                                         </td>
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="align-middle text-center text-sm">                                            
                                             <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}">
                                                 <a href="{{ route('admin.categories.edit', $category->id) }}"
                                                     class="btn bg-gradient-info font-weight-bold text-xs"
+                                                    style="width: 0.5x; height:32px"
                                                     data-toggle="tooltip" data-original-title="Edit category">
-                                                    Edit
-                                                </a>
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>                                                    
+                                                </a> &nbsp;
                                                 @csrf
-                                                <input name="_method" type="hidden" value="DELETE">
+                                                <input name="_method" type="hidden" value="DELETE"> 
                                                 <button type="submit"
                                                     class="btn bg-gradient-danger font-weight-bold text-xs show-alert-delete-box"
-                                                    data-toggle="tooltip" title='Delete'>Delete</button>
+                                                    data-toggle="tooltip" title='Delete' style="width: 0.5x; height: 32px">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>                                                   
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

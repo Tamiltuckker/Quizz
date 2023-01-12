@@ -12,6 +12,8 @@
                     </div>                    
                     <div class="card-body">
                         <p class="text-uppercase text-sm">Answered Questions Information</p>
+                        <span class="text-uppercase text-sm float-end badge bg-danger text-white" style="margin-left: 10px"> Wrong Points: {{ $totalWrongTemplatepoints->count() }}</span>
+                        <span class="text-uppercase text-sm float-end badge bg-success text-white">Total Points: {{ $totalTemplatepoints->count }} </span>
                         @foreach ($answeredQuestions as $key => $answeredQuestion)
                             @php 
                                 $answeredQuestionId = $answeredQuestion->id; 

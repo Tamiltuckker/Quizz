@@ -25,7 +25,6 @@
   {{-- Header --}}
   @include('users.partials.header')
   {{-- Hero Section --}}
-  @include('users.partials.herosection')
   {{-- Main --}}
   <main id="main">
     @yield('content')

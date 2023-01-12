@@ -18,14 +18,7 @@
                         <p class="text-uppercase text-sm">Category Information</p>
                         <div class="row">
                             <form method="POST" name="categories" enctype="multipart/form-data" action="{{ route('admin.categories.store') }}">
-                                @csrf
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Category
-                                            image</label>                                       
-                                        <input type="file" name="image"  class="form-control form-group" accept="image/*">  
-                                    </div>
-                                </div>
+                                @csrf              
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Category
@@ -56,4 +49,14 @@
             </div>
         </div>
     </div> 
+    @push('css')
+    <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">  
+    @endpush
+    @push('js')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
+    <script type="text/javascript">
+        $('.dropify').dropify();
+    </script> 
+    @endpush 
 @endsection

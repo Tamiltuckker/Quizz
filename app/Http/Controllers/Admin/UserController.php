@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\QuizAnswer;
 
 class UserController extends Controller
 {
@@ -68,8 +70,16 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    {
-        return view('admin.users.edit', compact('user'));
+    {  
+        $quizAnsweredTemplates = QuizAnswer::where('user_id', $user->id)->get()
+                                 ->groupBy('quiz_template_id');
+       
+        $categoryAnsCounts = QuizAnswer::where('user_id', $user->id)->get()
+                             ->groupBy('category_id');
+
+        $quizpoints = QuizAnswer::where('point','=',1)->where('user_id', $user->id) ->get();
+        // dd($quizpoints);
+        return view('admin.users.edit', compact('user','quizAnsweredTemplates','categoryAnsCounts','quizpoints'));       
     }
 
     /**
@@ -85,12 +95,11 @@ class UserController extends Controller
             'name' =>  'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $user = User::find($id);
         $input = $request->all();
-
+        
         if (!empty($input['password'])) {
             $input['password'] = Hash::make($input['password']);
         } else {
@@ -112,9 +121,9 @@ class UserController extends Controller
             $imagestore  = $uplaodImage->storeAs('public/image', $imageName);
             $file->image = $imageName;
             $user->image()->save($file);
-        } else {
-            unset($input['image']);
-        }
+        }  else {
+          unset($input['image']);
+        } 
 
         return redirect()->route('admin.users.index')->with('info', 'User updated successfully');
     }
@@ -133,5 +142,19 @@ class UserController extends Controller
         
         return redirect()->route('admin.users.index')
             ->with('danger', 'Users deleted successfully');
+    }
+    // impersonate user
+    public function impersonate(User $user) 
+    {
+        auth()->user()->impersonate($user);
+
+        return redirect()->route('user.dashboard.index');
+    }
+    // leave impersonate
+    public function leave_impersonate() 
+    {
+        auth()->user()->leaveImpersonation();
+
+        return redirect()->route('admin.users.index'); 
     }
 }
