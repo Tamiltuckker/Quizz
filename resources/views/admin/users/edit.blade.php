@@ -32,9 +32,13 @@
                                     <span class="file-input btn-file edit-img-btn">
                                         <i class="ni ni-camera-compact"></i>
                                     </span>
+                                </div>                           
+                                <div class="col-md-12">
+                                    <div class="form-group" style="width:640px;">
+                                        <input name="image" type="file" class="dropify" data-height="100" />
+                                    </div>
                                 </div>
-                                <input type="file" name="image" class="form-control form-group" accept="image/*">
-                            </div>
+                            </div>                            
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Name</label>
@@ -163,5 +167,13 @@
     @push('css')
         <link href="{{ asset('assets/css/userprofile.css') }}" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">        
     @endpush
+    @push('js')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+        <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
+        <script type="text/javascript">
+            $('.dropify').dropify();
+        </script> 
+    @endpush 
 @endsection
