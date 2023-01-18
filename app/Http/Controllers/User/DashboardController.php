@@ -11,6 +11,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Request;
 
 class DashboardController extends Controller
 {
@@ -30,10 +32,14 @@ class DashboardController extends Controller
     {   
         $categories = Category::all();
         $categoryId    = Category::where('slug','=',$id)->first();
-        $quizTemplates = QuizTemplate::where('category_id', $categoryId->id)->get();
 
+        $startDate = Carbon::createFromFormat('Y-m-d', '2022-12-01');        
+        $endDate   = Carbon::createFromFormat('Y-m-d', '2023-01-31');       
+        
+        $quizTemplates = QuizTemplate::where('category_id', $categoryId->id)->whereBetween('published_date',[$startDate, $endDate])->get();               
+        // dd( $quizTemplates);
         return view('users.gettemplates',compact('quizTemplates','categories'));
-    } 
+    }   
     
     public function getquestions($id)
     {

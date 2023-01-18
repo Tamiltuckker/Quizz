@@ -32,6 +32,13 @@
                                             value="{{ old('name', $quizTemplate->name) }}">
                                     </div>
                                 </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Published date</label>
+                                        <input class="form-control" name="date" type="date"
+                                            value="{{ old('date', $quizTemplate->date) }}">
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <button type="submit" class="btn bg-gradient-success font-weight-bold text-xs">Save</button>

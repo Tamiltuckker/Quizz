@@ -40,6 +40,7 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.tmp</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Template</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Published date</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No. of Questions</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
@@ -61,7 +62,14 @@
                                                     <h6 class="mb-0 text-sm">{{ $quizTemplate->name }}</h6>
                                                 </div>
                                             </div>
-                                        </td>                                     
+                                        </td>  
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $quizTemplate->published_date }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>                                          
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">

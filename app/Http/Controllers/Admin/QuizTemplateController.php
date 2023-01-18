@@ -13,16 +13,19 @@ class QuizTemplateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request)
+    {        
         if (request()->has('category_id')) {
             $quizTemplates = QuizTemplate::with('category')->where('category_id', request()->input('category_id'))->get();        
-        } else {
-            $quizTemplates = QuizTemplate::with('category')->get();        
-        }
+        } else {            
+            $quizTemplates = QuizTemplate::with('category')->get();            
+            // dd($quizTemplates);
+            // $QuizTemplate= new QuizTemplate(); 
+            // $QuizTemplate->published_date = $request->published_date;                   
+        }            
         $quizQuestions = QuizQuestion::withCount('quiz_template')->get(); 
-        $categories    = Category::pluck('name','id');
-            
+        $categories    = Category::pluck('name','id'); 
+
         return view('admin.quiztemplates.index',compact('quizTemplates','categories'));   
     }  
 
@@ -53,7 +56,8 @@ class QuizTemplateController extends Controller
         $quizTemplate              = new QuizTemplate();
         $quizTemplate->category_id = $request->category_id;
         $quizTemplate->name        = $request->name;
-        $quizTemplate->slug        = $request->name;       
+        $quizTemplate->slug        = $request->name;  
+        $quizTemplate->published_date  = $request->date;      
         $quizTemplate->save();       
 
         return redirect()->route('admin.quiztemplates.index')
